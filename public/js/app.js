@@ -1,0 +1,1 @@
+angular.module('CalendarApp', ['ngRoute', 'appRoutes', 'MainController', 'SecondPageController', 'UserService']);
