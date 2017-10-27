@@ -1,1 +1,1 @@
-angular.module('CalendarApp', ['ngRoute', 'appRoutes', 'MainController', 'SecondPageController', 'UserService']);
+angular.module('CalendarApp', ['ngRoute', 'appRoutes', 'MainController', 'SecondPageController', 'CalendarController', 'UserService']);
