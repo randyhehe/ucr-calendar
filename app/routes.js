@@ -36,7 +36,7 @@ module.exports = function(app) {
     // Authenticate user with specified email and username. 401 HTTP Response on invalid credentials.
     app.post('/api/users/auth', function(req, res) {
         if (req.body.email && req.body.password) {
-            User.authenticate(req.body.email, req.body.password, function(err, result) {                
+            User.authenticate(req.body.email, req.body.password, function(err, result) {
                 if (err) {
                     return res.send(401);
                 } else {
@@ -48,7 +48,7 @@ module.exports = function(app) {
         }
     });
 
-    app.get('/', function(req, res) {
-        res.sendfile('./public/index.html');
+    app.get('/*', function(req, res) {
+      res.sendfile('./public/index.html');
     });
 }
