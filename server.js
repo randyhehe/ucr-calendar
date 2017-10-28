@@ -5,15 +5,16 @@ let app = express();
 let bodyParser = require('body-parser');
 let methodOverride = require('method-override');
 let mongoose = require('mongoose');
+let routes = require('./app/routes.js');
+let config = require('./config/config');
 
-// mongoDB config 
-let db = require('./config/db');
 // connect to mongoDB database
-mongoose.connect(db.url);
+mongoose.connect(config.databaseUrl);
 
 // app config
 let port = process.env.PORT || 8080;
 app.use(bodyParser.json()); 
+app.listen(port);
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(methodOverride('X-HTTP-Method-Override')); 
@@ -23,9 +24,8 @@ app.use(session({
     resave: true,
     saveUninitialized: false
 }));
-require('./app/routes')(app);
+app.use('/', routes);
 // start app
-app.listen(port);
 console.log('Listening on port: ' + port);
 
 exports = module.exports = app;

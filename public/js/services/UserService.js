@@ -1,7 +1,7 @@
 angular.module('UserService', []).factory('UserService', ['$http', function($http) {
     return {
-        getUser: function(email) {
-            return $http.get('/api/users/' + email);
+        userExists: function(email) {
+            return $http.get('/api/users/exists/' + email);
         },
 
         createUser: function(email, username, password, callback) {
@@ -41,6 +41,11 @@ angular.module('UserService', []).factory('UserService', ['$http', function($htt
             }, function(error) {
                 callback(error, null);
             });
+        },
+
+        getUser: function(token) {
+            return $http.get('/api/users/me', { headers: { "x-access-token": token } });
         }
+        
     }
 }]);

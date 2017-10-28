@@ -34,14 +34,19 @@ angular.module('SecondPageController', []).controller('SecondPageController', fu
 
     function createUser(email, username, password, callback) {
         email = email.toLowerCase();
-        UserService.getUser(email).then(function(response) {
-            // user exists, can't create the account. show this message on the page.
-            console.log("user exists!");
+        UserService.userExists(email).then(function(response) {
+            if (response.data.exists) {
+                // user already exists, do not create the account
+                console.log("user exists");
+            } else {
+                // user does not exist, create the account
+                UserService.createUser(email, username, password, function(res) {
+                    console.log(res);
+                })
+            }
         }, function(error) {
-            // cannot find a user with specified username, create account
-            UserService.createUser(email, username, password, function(res) {
-                console.log(res);
-            });
+            // handle error
+            console.log("Error when trying to create user.");
         });
     }
 });
