@@ -14,6 +14,8 @@ let CalendarEventSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     }
+}, {
+    timestamps: true
 });
 
 let CalendarEvent = mongoose.model('CalendarEvent', CalendarEventSchema);

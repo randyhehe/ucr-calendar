@@ -1,6 +1,6 @@
 angular.module('CalendarEventService', []).factory('CalendarEventService', ['$http', function($http) {
     return {
-        createEvent: function(name, time, description, public, token, callback) {
+        createEvent: function(name, time, description, public, token) {
             let data = {
                 name: name,
                 time: time,
@@ -18,6 +18,10 @@ angular.module('CalendarEventService', []).factory('CalendarEventService', ['$ht
                     "x-access-token": token
                 }
             });
+        },
+        
+        getEvents: function(token) {
+            return $http.get('/api/events/me', {headers: {"x-access-token": token}});
         }
     }
 }]);

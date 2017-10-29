@@ -85,7 +85,7 @@ router.post('/api/users/auth', function(req, res) {
     }
 });
 
-// Returns user information from JWT token.
+// Returns user information from JWT token. This route may not be necessary and can be removed later.
 router.get('/api/users/me', jwtAuthenticator, function(req, res) {
     User.findOne({
         email: req.decoded.email // decode and get the email from the provided token
@@ -93,9 +93,25 @@ router.get('/api/users/me', jwtAuthenticator, function(req, res) {
         if (err) {
             return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});
         } else {
+            user = user.toObject();
+            delete user["_id"];
+            delete user["password"];
             return res.json({success: true, user: user});
         }
     });
+});
+
+// Returns all events from a user defined from a JWT token
+router.get('/api/events/me', jwtAuthenticator, function(req, res) {
+    User.findOne({
+        email: req.decoded.email
+    }, function(err, user) {
+        if (err) {
+            return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});
+        } else {
+            return res.json({success: true, events: user.events})
+        }
+    })
 });
 
 // Create event and assign it to the user specified by the token

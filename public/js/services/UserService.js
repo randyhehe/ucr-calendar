@@ -36,7 +36,7 @@ angular.module('UserService', []).factory('UserService', ['$http', function($htt
         },
 
         getUser: function(token) {
-            return $http.get('/api/users/me', { headers: { "x-access-token": token } });
+            return $http.get('/api/users/me', {headers: {"x-access-token": token}});
         }
         
     }
