@@ -16,8 +16,11 @@ let UserSchema = new mongoose.Schema({
     }, events: {
         type: [CalendarEventSchema],
         required: false
+    }, friends: {
+        type: [String],
+        required: false
     }
-});
+}, {minimize: false});
 
 // prehook using bcrypt to hash and salt passwords 
 UserSchema.pre('save', function(next) {

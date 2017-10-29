@@ -15,13 +15,13 @@ angular.module('CalendarEventService', []).factory('CalendarEventService', ['$ht
                 data: data,
                 timeout: 4000,
                 headers: {
-                    "x-access-token": token
+                    'x-access-token': token
                 }
             });
         },
         
         getEvents: function(token) {
-            return $http.get('/api/events/me', {headers: {"x-access-token": token}});
+            return $http.get('/api/events/me', {headers: {'x-access-token': token}});
         }
     }
 }]);

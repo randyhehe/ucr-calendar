@@ -1,4 +1,4 @@
-angular.module('CalendarController', ['ngCookies']).controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService) {
+angular.module('CalendarController', ['ngCookies']).controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService) {
     $scope.tag = "Calendar!";
     
     let token = $cookies.get('token');
@@ -10,7 +10,6 @@ angular.module('CalendarController', ['ngCookies']).controller('CalendarControll
     UserService.getUser(token).then(function(res) {
         // valid user. populate the calendar UI.
         console.log(res);
-
     }, function(err) {
         $window.location.href = "/";
     });
@@ -33,3 +32,12 @@ angular.module('CalendarController', ['ngCookies']).controller('CalendarControll
 // }, function(err) {
 //     console.log("Event failed to be created!");
 // });    
+
+/*
+ * Example of using API to add friend
+ */ 
+// FriendService.addFriend("email", token).then(function(res) {
+//     console.log(res);
+// }, function(err) {
+//     console.log(err); // email is same as current account, or email is already their friend
+// });
