@@ -1,23 +1,27 @@
-var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+let mongoose = require('mongoose');
+let bcrypt = require('bcrypt');
+let CalendarEventSchema = require('./calendarevent.js').schema;
 
-var UserSchema = new mongoose.Schema({
+let UserSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
-        required: true,
+        required: true
     }, username: {
         type: String,
-        required: true,
+        required: true
     }, password: {
         type: String,
         required: true
+    }, events: {
+        type: [CalendarEventSchema],
+        required: false
     }
 });
 
 // prehook using bcrypt to hash and salt passwords 
 UserSchema.pre('save', function(next) {
-    var user = this;
+    let user = this;
     bcrypt.hash(user.password, 10, function(err, hash) {
         if (err) {
             return next(err);
@@ -34,7 +38,7 @@ UserSchema.statics.authenticate = function(email, password, callback) {
         if (err) {
             return callback(err);
         } else if (!user) {            
-            var err = new Error('User not found.');
+            let err = new Error('User not found.');
             err.status = 401;
             return callback(err);
         }        
@@ -42,7 +46,7 @@ UserSchema.statics.authenticate = function(email, password, callback) {
             if (result === true) {
                 return callback(null, user);
             } else {
-                var err = new Error('Invalid password.');
+                let err = new Error('Invalid password.');
                 err.status = 401;
                 return callback(err);
             }
@@ -50,5 +54,5 @@ UserSchema.statics.authenticate = function(email, password, callback) {
     });
 };
 
-var User = mongoose.model('User', UserSchema);
+let User = mongoose.model('User', UserSchema);
 module.exports = User;

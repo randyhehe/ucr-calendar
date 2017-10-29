@@ -1,4 +1,5 @@
 let User = require('./models/user');
+let CalendarEvent = require('./models/calendarevent');
 let jwt = require('jsonwebtoken');
 let express = require('express');
 let router = express.Router();
@@ -11,9 +12,8 @@ let jwtAuthenticator = function(req, res, next) {
     if (token) {
         jwt.verify(token, config.tokenSecret, function(err, decoded) {
             if (err) {
-                return res.json({success: false, message: 'Failed to authenticate token.'});
+                return res.status(403).send({success: false, message: 'Failed to authenticate token.'});
             } else {
-                console.log(req.decoded);
                 req.decoded = decoded;
                 next();
             }
@@ -28,48 +28,51 @@ let jwtAuthenticator = function(req, res, next) {
 
 // Returns true or false depending on an email with the email already exists.
 router.get('/api/users/exists/:email', function(req, res) {
-    User.find({
+    User.findOne({
         email: req.params.email
-    }, function(err, users) {
-        let userExists = (users.length !== 0);
-        if (!userExists) return res.json({ exists: false });
-        else return res.json({ exists: true });
+    }, function(err, user) {
+        if (err) {
+            return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});
+        } else {
+            return res.json({success: true});
+        }
     });
 });
 
 // Creates a user with the specified email, username, and password.
 router.post('/api/users', function(req, res) {
     if (req.body.email && req.body.username && req.body.password) {
-        var userData = {
+        let userData = {
             email: req.body.email,
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            events: []
         };
 
         User.create(userData, function(err, user) {
             if (err) {
-                return res.send(err);
+                return res.status(500).send({success: false, message: 'Unable to create user.'});
             } else {
-                return res.send(user);
+                return res.send({success: true, user: user});
             }
         });
     } else {
-        return res.send("Error: Invalid body.");
+        return res.send(400).send({success: false, message: 'Invalid body.'});
     }
 });
 
 // Authenticate user with specified email and username. 401 HTTP Response on invalid credentials.
 router.post('/api/users/auth', function(req, res) {
     if (req.body.email && req.body.password) {
-        User.authenticate(req.body.email, req.body.password, function(err, result) {                
+        User.authenticate(req.body.email, req.body.password, function(err, result) {
             if (err) {
                 return res.status(401).send({
-                    succees: false,
+                    success: false,
                     message: "Invalid credentials."
                 });
             } else {
-                var payload = { email: req.body.email };
-                var token = jwt.sign(payload, config.tokenSecret, { expiresIn: '24h' });
+                let payload = {email: req.body.email};
+                let token = jwt.sign(payload, config.tokenSecret, {expiresIn: '24h'});
                 
                 return res.json({
                     success: true,
@@ -78,22 +81,52 @@ router.post('/api/users/auth', function(req, res) {
             }
         });
     } else {
-        return res.send("Error: Invalid body.");
+        return res.send(400).send({success: false, message: 'Invalid body.'});
     }
 });
 
 // Returns user information from JWT token.
 router.get('/api/users/me', jwtAuthenticator, function(req, res) {
-    User.find({
+    User.findOne({
         email: req.decoded.email // decode and get the email from the provided token
     }, function(err, user) {
-        let userExists = (user.length !== 0);
-        if (!userExists) return res.json({ success: false });
-        else return res.json({
-            success: true,
-            user: user
-        })
+        if (err) {
+            return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});
+        } else {
+            return res.json({success: true, user: user});
+        }
     });
+});
+
+// Create event and assign it to the user specified by the token
+router.post('/api/events', jwtAuthenticator, function(req, res) {
+    if (req.body.name, req.body.time, req.body.description, req.body.public) {
+        let newEvent = new CalendarEvent({
+            name: req.body.name,
+            time: req.body.time,
+            description: req.body.description,
+            public: req.body.public
+        });
+
+        User.findOne({
+            email: req.decoded.email
+        }, function(err, user) {
+            if (err) {
+                return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});
+            } else {
+                user.events.push(newEvent);
+                user.save(function(err) {
+                    if (err) {
+                        res.status(500).send({success: false, message: 'Unable to add event.'});
+                    } else {
+                        res.json({success: true});
+                    }
+                });
+            }
+        });
+    } else {
+        return res.send(400).send({success: false, message: 'Invalid body.'});
+    }
 });
 
 router.get('/*', function(req, res) {

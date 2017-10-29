@@ -1,4 +1,4 @@
-angular.module('SecondPageController', []).controller('SecondPageController', function($scope, UserService) {
+angular.module('SecondPageController', []).controller('SecondPageController', function($scope, $window, UserService) {
     $scope.register = function(username, email, firstPassword, secondPassword) {
         let numErrors = 0;
         if (username === undefined || username === '') {
@@ -34,19 +34,15 @@ angular.module('SecondPageController', []).controller('SecondPageController', fu
 
     function createUser(email, username, password, callback) {
         email = email.toLowerCase();
-        UserService.userExists(email).then(function(response) {
-            if (response.data.exists) {
-                // user already exists, do not create the account
-                console.log("user exists");
-            } else {
-                // user does not exist, create the account
-                UserService.createUser(email, username, password, function(res) {
-                    console.log(res);
-                })
-            }
-        }, function(error) {
-            // handle error
-            console.log("Error when trying to create user.");
+
+        UserService.userExists(email).then(function(res) {
+            UserService.createUser(email, username, password).then(function(res) {
+                $window.location.href = '/';
+            }, function(err) {
+                console.log(err);
+            });
+        }, function(err) {
+            console.log(err);
         });
     }
 });
