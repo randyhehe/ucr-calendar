@@ -1,6 +1,6 @@
 angular.module('CalendarController', ['ngCookies']).controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService) {
     $scope.calendarPage = true;
-    
+
     let token = $cookies.get('token');
     console.log(token); // this is the current logged in user
     if (token === undefined) {
@@ -26,18 +26,18 @@ angular.module('CalendarController', ['ngCookies']).controller('CalendarControll
 //     console.log(err);
 // });
 
-/* 
+/*
  * Example of using API to create an event
  */
 // CalendarEventService.createEvent("eventName", "eventTime", "eventDescription", true, token).then(function(res) {
 //     console.log("Event created!");
 // }, function(err) {
 //     console.log("Event failed to be created!");
-// });    
+// });
 
 /*
  * Example of using API to add friend
- */ 
+ */
 // FriendService.addFriend("email", token).then(function(res) {
 //     console.log(res);
 // }, function(err) {
