@@ -1,4 +1,6 @@
-angular.module('CalendarController', ['ngCookies']).controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService) {
+angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, moment) {
+    console.log(moment().format());
+    
     $scope.calendarPage = true;
     
     let token = $cookies.get('token');
