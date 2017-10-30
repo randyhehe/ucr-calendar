@@ -4,7 +4,7 @@ The following command line tools will need to be installed:
 ```
 NodeJS. Verify working by testing out command 'node --version'. This should also come with npm (node package manager), test command 'npm'
 Bower. (this is a npm package and requires npm to install). To install, type 'npm install -g bower'. Test to see if bower is working by running 'bower'
-
+nodemon (npm install -g nodemon)
 node-sass (npm install -g node-sass)
 ```
 
