@@ -1,0 +1,38 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <base href="/">
+
+        <title>Calendar Application</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!-- JS -->
+        <script src="https://use.fontawesome.com/b5af430e33.js"></script>
+        <script src="libs/jquery/dist/jquery.min.js"></script>
+        <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="libs/angular/angular.min.js"></script>
+        <script src="libs/angular-route/angular-route.min.js"></script>
+        <script src="libs/angular-cookies/angular-cookies.js"></script>        
+
+        <!-- ANGULAR SCRIPTS -->
+        <script src="app/controllers/HomeController.js"></script>
+        <script src="app/controllers/LoginController.js"></script>
+        <script src="app/controllers/RegisterController.js"></script>
+        <script src="app/controllers/CalendarController.js"></script>
+        <script src="app/controllers/FeedController.js"></script>        
+        <script src="app/services/UserService.js"></script>
+        <script src="app/services/CalendarEventService.js"></script>
+        <script src="app/services/FriendService.js"></script>
+        <script src="app/services/HeaderService.js"></script>
+        <script src="app/appRoutes.js"></script>
+        <script src="app/app.js"></script>
+    </head>
+    <body ng-app="CalendarApp">
+        <div class="container">
+            <div ng-view></div>
+        </div>
+    </body>
+</html>

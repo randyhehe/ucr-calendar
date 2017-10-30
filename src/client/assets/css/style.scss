@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'avenir-next';
+    src: url('../fonts/avenir-next-regular.woff') format('woff'),
+         url('../fonts/avenir-next-regular.tff') format('truetype');
+}
+
+.container {
+    padding-right:30px;
+    padding-left: 30px;
+    margin-right: 0px;
+    margin-left: 0px;
+    width: initial;
+}
+
+.header-partial {
+    margin-top: 25px;
+
+    .page a {
+        font-family: avenir-next;
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.6);
+        text-decoration: none;
+    }
+    .page a:hover {
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+    }
+    .page .selected a {
+        color: black;
+        border-bottom: 1px solid #000;
+    }
+
+    .user-dropdown  {
+        float: right;
+    }
+
+    .dropdown-menu {
+        margin: 2px -100 0;
+
+        li a:hover {
+            border: none;
+        }
+    }
+
+    .user-button {
+        margin-right: 50px;        
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border:none;
+        cursor: pointer;
+        overflow: hidden;
+        outline: none;
+    }
+}

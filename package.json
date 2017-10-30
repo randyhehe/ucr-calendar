@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build-css": "node-sass src/client/assets/css -o src/client/assets/css",
+    "start": "npm run build-css && node server.js",
+    "start-watch": "nodemon -e scss,js,html -x \"npm run build-css && node server.js\""
   },
   "author": "",
   "license": "ISC",
