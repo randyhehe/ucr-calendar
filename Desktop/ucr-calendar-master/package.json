@@ -1,0 +1,22 @@
+{
+  "name": "calendar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "build-css": "node-sass src/client/assets/css -o src/client/assets/css",
+    "start": "npm run build-css && node server.js",
+    "start-watch": "nodemon -e scss,js,html -x \"npm run build-css && node server.js\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.1.0",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.12.0"
+  }
+}
