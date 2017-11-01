@@ -131,35 +131,24 @@ body {font-family: Verdana, sans-serif;}
 
 /* Days (1-31) */
 .days {
+  float: left;
     padding: 10px 0;
     margin: 0;
 }
 
 .prevDays li {
-    background: #f5f5f5;
-    float: left;
-    list-style-type: none;
-    display: inline-block;
-    width: 13.6%;
-    text-align: left;
-    font-size: 200%;
-    margin-bottom: 5px;
-    font-size:12px;
-    color:#777;
-    height: 120px;
+  display: block;
+  float: left;
+  width:14.342%;
+  padding: 5px;
+  box-sizing:border-box;
+  border: 1px solid #ccc;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  height: 120px;
 }
 
 .days li {
-
-    // list-style-type: none;
-    // display: inline-block;
-    // width: 13.6%;
-    // text-align: left;
-    // font-size: 200%;
-    // font-size:12px;
-    // color:#777;
-    // height: 120px;
-
     display: block;
     float: left;
     width:14.342%;
@@ -172,17 +161,15 @@ body {font-family: Verdana, sans-serif;}
 }
 
 .nextDays li {
-    background: #f5f5f5;
-    float:left;
-    list-style-type: none;
-    display: inline-block;
-    width: 13.6%;
-    text-align: left;
-    font-size: 200%;
-    margin-bottom: 5px;
-    font-size:12px;
-    color:#777;
-    height: 120px;
+  display: block;
+  float: left;
+  width:14.342%;
+  padding: 5px;
+  box-sizing:border-box;
+  border: 1px solid #ccc;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  height: 120px;
 }
 
 /* Highlight the "current" day */
@@ -193,6 +180,18 @@ body {font-family: Verdana, sans-serif;}
 }
 
 .days li:hover {
+  color: #2693ff;
+  background: #e1e1e1;
+  border-top: 1px solid #d0d0d0;
+}
+
+.prevDays li:hover {
+  color: #2693ff;
+  background: #e1e1e1;
+  border-top: 1px solid #d0d0d0;
+}
+
+.nextDays li:hover {
   color: #2693ff;
   background: #e1e1e1;
   border-top: 1px solid #d0d0d0;

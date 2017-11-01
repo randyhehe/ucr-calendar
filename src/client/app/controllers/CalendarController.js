@@ -3,59 +3,70 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
     $scope.yearDate = moment().format('YYYY');
     $scope.currentDate = moment().date(); // used to highlight current date
 
-    var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-    var firstDay = new Date(y, m, 1);
-    var lastDay = new Date(y, m + 1, 0);
+    render() // init render of current month
 
-    var lastMonth = moment().subtract(1,'months').endOf('month').format('DD')
-    var nextMonth = moment().add(1,'months').endOf('month').format('DD')
+    function render() {
 
+      var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+      var firstDay = new Date(y, m, 1);
+      var lastDay = new Date(y, m + 1, 0);
 
-    var firstDay = moment(firstDay).day(); // Returns the first day of the month
-    var lastDay = moment(lastDay).day(); // Returns the last day of the month
-    var numberOfDays = moment(date).daysInMonth(); // Returns number of days
-    var i;
+      var lastMonth = moment().subtract(1,'months').endOf('month').format('DD')
+      var nextMonth = moment().add(1,'months').endOf('month').format('DD')
 
-    for (i = lastMonth; i > lastMonth - firstDay; i--) {
-        var newLI = document.createElement("li"), // create a new li
-          displayDates = document.getElementById("prevDays") // cache the unordered list
-          newContent = document.createTextNode([i]); // grab the spelling list item
+      var firstDay = moment(firstDay).day(); // Returns the first day of the month
+      var lastDay = moment(lastDay).day(); // Returns the last day of the month
+      var numberOfDays = moment(date).daysInMonth(); // Returns number of days
+      var i;
 
-          newLI.appendChild(newContent);
-          displayDates.appendChild(newLI);
+      for (i = moment().subtract(1,'months').daysInMonth() - firstDay; i <= moment().subtract(1,'months').daysInMonth(); i++) {
+          var newPrevLI = document.createElement("li"), // create a new li
+            displayPrevDates = document.getElementById("days") // cache the unordered list
+            newPrevContent = document.createTextNode([i]); // grab the spelling list item
+
+            newPrevLI.appendChild(newPrevContent);
+            displayPrevDates.appendChild(newPrevLI);
+      }
+
+      for (i = 1; i <= numberOfDays; i++) {
+          var newLI = document.createElement("li"), // create a new li
+            displayDates = document.getElementById("days") // cache the unordered list
+            newContent = document.createTextNode([i]); // grab the spelling list item
+
+            if (i == $scope.currentDate) { // highlight the current date in the month
+              var newSpan = document.createElement('span');
+              newSpan.setAttribute('class', 'active');
+              displayDates = document.getElementById("days").appendChild(newSpan);
+              console.log(displayDates)
+            }
+
+            newLI.appendChild(newContent);
+            displayDates.appendChild(newLI);
+      }
+
+      for (i = 1; i <= 42 - numberOfDays - lastDay; i++) {
+          var newNextLI = document.createElement("li"), // create a new li
+            displayNextDates = document.getElementById("days") // cache the unordered list
+            newNextContent = document.createTextNode([i]); // grab the spelling list item
+
+            newNextLI.appendChild(newNextContent);
+            displayNextDates.appendChild(newNextLI);
+
+      }
+
     }
 
-    for (i = 1; i <= numberOfDays; i++) {
-        var newLI = document.createElement("li"), // create a new li
-          displayDates = document.getElementById("days") // cache the unordered list
-          newContent = document.createTextNode([i]); // grab the spelling list item
-
-          newLI.appendChild(newContent);
-          displayDates.appendChild(newLI);
-    }
-
-    for (i = 1; i <= 44 - numberOfDays - lastDay; i++) {
-        var newNextLI = document.createElement("li"), // create a new li
-          displayNextDates = document.getElementById("nextDays") // cache the unordered list
-          newNextContent = document.createTextNode([i]); // grab the spelling list item
-
-          newNextLI.appendChild(newNextContent);
-          displayNextDates.appendChild(newNextLI);
-
-    }
-    var momentVar = moment();
     $scope.next = function(){
-      $scope.monthName = momentVar.add(1,'months').startOf("month").format('MMMM');
-      console.log($scope.monthName)
-      if ($scope.monthName = "December") {
-        console.log("next Year");
+      $scope.monthName = moment().add(1,'months').startOf("month").format('MMMM');
+      if ($scope.monthName == "January") {
+        $scope.yearDate = moment().add(0,'years').format('YYYY');
       }
     }
 
     $scope.previous = function(){
-      $scope.monthName = momentVar.add(1,'months').startOf("month").format('MMMM');
-      if ($scope.monthName = "Janurary") {
-        console.log("prev Year");
+      $scope.monthName = moment().subtract(1,'months').startOf("month").format('MMMM');
+      if ($scope.monthName == "December") {
+        $scope.yearDate = moment().subtract(0,'years').format('YYYY');
       }
     }
 
