@@ -43,9 +43,13 @@ ul {
 body {
   font-family: Verdana, sans-serif; }
 
+.button {
+  outline: none;
+  border: none; }
+
 /* Month header */
 .month {
-  padding: 70px 25px;
+  padding: 50px 25px;
   width: 100%;
   background: #1abc9c;
   text-align: center; }
@@ -64,39 +68,81 @@ body {
 /* Previous button inside month header */
 .month .prev {
   float: left;
+  background: #1abc9c;
+  color: #fff;
   padding-top: 10px; }
+
+.month .prev:hover {
+  background-color: #1abc9c;
+  color: black; }
 
 /* Next button */
 .month .next {
   float: right;
+  background: #1abc9c;
+  color: #fff;
   padding-top: 10px; }
+
+.month .next:hover {
+  background-color: #1abc9c;
+  color: black; }
 
 /* Weekdays (Mon-Sun) */
 .weekdays {
   margin: 0;
   padding: 10px 0;
+  height: 40px;
   background-color: #ddd; }
 
 .weekdays li {
   display: inline-block;
+  text-align: center;
   width: 13.6%;
+  padding: 10px 6px;
   color: #666;
-  text-align: center; }
+  font-size: 13px; }
 
 /* Days (1-31) */
 .days {
   padding: 10px 0;
-  background: #eee;
   margin: 0; }
 
-.days li {
+.prevDays li {
+  background: #f5f5f5;
+  float: left;
   list-style-type: none;
   display: inline-block;
   width: 13.6%;
-  text-align: center;
+  text-align: left;
+  font-size: 200%;
   margin-bottom: 5px;
   font-size: 12px;
-  color: #777; }
+  color: #777;
+  height: 120px; }
+
+.days li {
+  display: block;
+  float: left;
+  width: 14.342%;
+  padding: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  height: 120px; }
+
+.nextDays li {
+  background: #f5f5f5;
+  float: left;
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: left;
+  font-size: 200%;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #777;
+  height: 120px; }
 
 /* Highlight the "current" day */
 .days li .active {
@@ -104,5 +150,7 @@ body {
   background: #1abc9c;
   color: white !important; }
 
-ul > li:hover {
-  color: #2693ff; }
+.days li:hover {
+  color: #2693ff;
+  background: #e1e1e1;
+  border-top: 1px solid #d0d0d0; }

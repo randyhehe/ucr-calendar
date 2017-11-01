@@ -1,60 +1,30 @@
 <ng-include src="'app/views/header.html'"></ng-include>
 
 <p>{{ tagline }}</p>
-<a href="/">Go back to home page</a>
-</div>
+
 
 <div class="month">
 <ul>
-<li class="prev">&#10094;</li>
-<li class="next">&#10095;</li>
+<li> <a href="#" ng-click="previous()" class="prev">&#10094; </a> </li>
+<li> <a href="#" ng-click="next()" class="next">&#10095; </a> </li>
 <li>
-  August<br>
-  <span style="font-size:18px">2017</span>
+  {{monthName}} {{yearDate}}
 </li>
 </ul>
 </div>
 
 <ul class="weekdays">
-<li>Mo</li>
-<li>Tu</li>
-<li>We</li>
-<li>Th</li>
-<li>Fr</li>
-<li>Sa</li>
-<li>Su</li>
+<li>Sunday</li>
+<li>Monday</li>
+<li>Tuesday</li>
+<li>Wednesday</li>
+<li>Thursday</li>
+<li>Friday</li>
+<li>Saturday</li>
 </ul>
 
-<ul class="days">
-<li>1</li>
-<li>2</li>
-<li>3</li>
-<li>4</li>
-<li>5</li>
-<li>6</li>
-<li>7</li>
-<li>8</li>
-<li>9</li>
-<li><span class="active">10</span></li>
-<li>11</li>
-<li>12</li>
-<li>13</li>
-<li>14</li>
-<li>15</li>
-<li>16</li>
-<li>17</li>
-<li>18</li>
-<li>19</li>
-<li>20</li>
-<li>21</li>
-<li>22</li>
-<li>23</li>
-<li>24</li>
-<li>25</li>
-<li>26</li>
-<li>27</li>
-<li>28</li>
-<li>29</li>
-<li>30</li>
+<ul class="days" id = "prevDays"> </ul>
 
-</ul>
+<ul class="days" id = "days"> </ul>
+
+<ul class="days" id = "nextDays"> </ul>
