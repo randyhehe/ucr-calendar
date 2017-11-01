@@ -32,7 +32,7 @@
                 <form name="startDateForm" class="dateform">
                     <md-input-container>
                         <label>Start Date</label>
-                        <md-datepicker md-hide-icons="calendar" ng-model="startDate" name="startDate" md-min-date="minDate" md-max-date="maxDate" ng-blur="testFunc()" equired></md-datepicker>
+                        <md-datepicker md-hide-icons="calendar" ng-model="startDate" name="startDate" md-min-date="minDate" md-max-date="maxDate" ng-blur="testFunc()" required></md-datepicker>
                         <div ng-messages="startDateForm.startDate.$error">
                             <div ng-message="valid">Invalid date!</div>
                             <div ng-message="required">This date is required!</div>
