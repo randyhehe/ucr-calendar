@@ -7,7 +7,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         return m.isValid() ? m.toDate() : new Date(NaN);
     }
 })
-.controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, $mdDialog) {
+.controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, $mdDialog, $mdToast) {
     $scope.calendarPage = true;
     $scope.signOut = HeaderService.signOut;    
     let token = $cookies.get('token');
@@ -106,6 +106,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
                 CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, true, token)
                 .then(function(res) {
                     console.log(res);
+                    $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('top right'));
                     $mdDialog.cancel();
                     
                 }, function(err) {
