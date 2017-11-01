@@ -114,7 +114,7 @@ router.get('/api/events/me', jwtAuthenticator, function(req, res) {
         } else {
             return res.json({success: true, events: user.events})
         }
-    })
+    });
 });
 
 // Create event and assign it to the user specified by the token
@@ -157,46 +157,67 @@ router.post('/api/friends', jwtAuthenticator, function(req, res) {
         }, function(err, currUser) {
             if (err || currUser === null) {
                 return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});                
+            } else if (currUser.friends.includes(req.body.email)) {
+                res.status(400).send({success: false, message: 'Cannot add existing friend.'});
             } else {
-                // check to see if not currently friends and not the same email
                 User.findOne({
-                    friends: req.body.email
-                }, function(err, user) {
-                    if (user !== null) {
-                        res.status(400).send({success: false, message: 'Cannot add existing friend.'})
-                    } else {
-                        User.findOne({
-                            email: req.body.email
-                        }, function(err, otherUser) {
-                            if (err || otherUser === null) {
-                                return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});   
-                            } else {                        
-                                currUser.friends.push(req.body.email);
-                                currUser.save(function(err) {
+                    email: req.body.email
+                }, function(err, otherUser) {
+                    if (err || otherUser === null) {
+                        return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});   
+                    } else {                        
+                        currUser.friends.push(req.body.email);
+                        currUser.save(function(err) {
+                            if (err) {
+                                res.status(500).send({success: false, message: "Unable to add friend."});
+                            } else {
+                                otherUser.friends.push(req.decoded.email);
+                                otherUser.save(function(err) {
                                     if (err) {
                                         res.status(500).send({success: false, message: "Unable to add friend."});
                                     } else {
-                                        otherUser.friends.push(req.decoded.email);
-                                        otherUser.save(function(err) {
-                                            if (err) {
-                                                res.status(500).send({success: false, message: "Unable to add friend."});
-                                            } else {
-                                                res.json({success: true});
-                                            }
-                                        });  
+                                        res.json({success: true});
                                     }
-                                }); 
+                                });  
                             }
-                        });
+                        }); 
                     }
-                });
-            }
+                });   
+            }   
         });
     } else if (req.body.email && (req.body.email === req.decoded.email)) {
         return res.status(400).send({success: false, message:  'Cannot add own account as friend.'});
     } else {
         return res.status(400).send({success: false, message: 'Invalid body.'});
     }
+});
+
+router.get('/api/friends/events', jwtAuthenticator, function(req, res) {
+    User.findOne({
+        email: req.decoded.email
+    }, function(err, user) {
+        if (err || user === null) {
+            return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});
+        } else {
+            User.find({
+                email: {$in: user.friends}
+            }, function(err, users) {
+                if (err) {
+                    return res.status(400).send({success: false, message: 'Unable to find user with the specified emails.'});
+                } else {
+                    let events = [];
+                    for (let i = 0; i < users.length; i++) {
+                        events.push(...users[i].events);
+                    }
+    
+                    events.sort(function(eventA , eventB) {
+                        return new Date(eventA.createdAt) - new Date(eventB.createdAt);
+                    });
+                    return res.json({success: true, events: events});
+                }
+            });
+        }
+    });
 });
 
 router.get('/*', function(req, res) {

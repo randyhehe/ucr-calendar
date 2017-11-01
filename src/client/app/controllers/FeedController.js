@@ -1,4 +1,4 @@
-angular.module('FeedController', ['ngCookies']).controller('FeedController', function($scope, $cookies, $window, UserService, HeaderService) {
+angular.module('FeedController', ['ngCookies']).controller('FeedController', function($scope, $cookies, $window, UserService, HeaderService, FriendService) {
     $scope.feedPage = true;
     $scope.signOut = HeaderService.signOut;    
 
@@ -15,3 +15,12 @@ angular.module('FeedController', ['ngCookies']).controller('FeedController', fun
         $window.location.href = "/";
     });
 });
+
+/*
+ * Example of using API to get friend events in order of creation time
+ */
+// FriendService.getEvents(token).then(function(res) {
+//     console.log(res);
+// }, function(err) {
+//     // handle error here
+// });

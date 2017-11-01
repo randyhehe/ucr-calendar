@@ -15,6 +15,10 @@ angular.module('FriendService', []).factory('FriendService', ['$http', function(
                     'x-access-token': token
                 }
             });
+        },
+
+        getEvents: function(token) {
+            return $http.get('/api/friends/events', {headers: {"x-access-token": token}});
         }
     }
 }]);
