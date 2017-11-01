@@ -119,10 +119,11 @@ router.get('/api/events/me', jwtAuthenticator, function(req, res) {
 
 // Create event and assign it to the user specified by the token
 router.post('/api/events', jwtAuthenticator, function(req, res) {
-    if (req.body.name, req.body.time, req.body.description, req.body.public) {
+    if (req.body.name, req.body.startTime, req.body.endTime, req.body.description, req.body.public) {
         let newEvent = new CalendarEvent({
             name: req.body.name,
-            time: req.body.time,
+            startTime: req.body.startTime,
+            endTime: req.body.endTime,
             description: req.body.description,
             public: req.body.public
         });

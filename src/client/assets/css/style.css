@@ -36,3 +36,39 @@
     cursor: pointer;
     overflow: hidden;
     outline: none; }
+
+#create-event-dialog .toText {
+  position: relative;
+  top: -8px;
+  margin-left: 13px;
+  margin-right: 13px; }
+
+#create-event-dialog .eventnameform {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 30px !important;
+  width: auto;
+  display: block; }
+
+#create-event-dialog .eventtimeform {
+  margin-left: 20px;
+  margin-right: 20px; }
+  #create-event-dialog .eventtimeform .timepicker {
+    margin-left: 20px;
+    position: relative;
+    top: -8px;
+    width: 90px; }
+  #create-event-dialog .eventtimeform .dateform {
+    display: inline-block; }
+
+#create-event-dialog .eventdescription {
+  margin-left: 20px;
+  margin-right: 20px;
+  top: -35px; }
+
+#create-event-dialog .create-button {
+  margin-right: 15px; }
+
+#create-event-dialog .create-event-error {
+  text-align: center;
+  color: #dd2c00; }
