@@ -7,7 +7,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
     var lastDay = new Date(y, m + 1, 0);
     var currMoment = moment();
 
-    console.log(currMoment)
     render(currMoment) // init render of current month
 
 
@@ -26,16 +25,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
       var i;
 
       for (i = moment().subtract(1,'months').daysInMonth() - firstDay + 1; i <= moment().subtract(1,'months').daysInMonth(); i++) {
-          // var newPrevLI = document.createElement("li"), // create a new li
-          //   displayPrevDates = document.getElementById("days"), // cache the unordered list
-          //   newPrevSpan = document.createElement('span'); // add span
-          //   newPrevContent = document.createTextNode([i]); // grab the spelling list item
-          //
-          //
-          // newPrevSpan.setAttribute('class', 'prevDates');
-          // newPrevSpan.appendChild(newPrevContent);
-          // newPrevLI.appendChild(newPrevSpan);
-          // displayPrevDates.appendChild(newPrevLI);
           var z = 0;
           if (firstDay != 0) {
             rowPosition = "col" + z;
@@ -51,18 +40,18 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
         if (i == $scope.currentDate) {
           var newSpan = document.createElement('span');
           newSpan.setAttribute('class', 'active');
+          document.getElementById(rowPosition).innerHTML = "<span class="active">" + i + "</span"
+
         }
-        document.getElementById(rowPosition).innerHTML = i
+        else {
+            document.getElementById(rowPosition).innerHTML = i
+        }
+
       }
-      // for (i = 1; i <= 43 - numberOfDays - lastDay; i++) {
-      //     var newNextLI = document.createElement("li"), // create a new li
-      //       displayNextDates = document.getElementById("days") // cache the unordered list
-      //       newNextContent = document.createTextNode([i]); // grab the spelling list item
-      //
-      //       newNextLI.appendChild(newNextContent);
-      //       displayNextDates.appendChild(newNextLI);
-      //
-      // }
+
+      for (i = numberOfDays; i <= 42 - numberOfDays - firstDay; i++) {
+        rowPosition = "col" + numberOfDays
+      }
 
     }
 
