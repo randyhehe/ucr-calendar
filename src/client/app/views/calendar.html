@@ -1,5 +1,6 @@
 <ng-include src="'app/views/header.html'"></ng-include>
 
+<<<<<<< HEAD
 <p>{{ tagline }}</p>
 
 
@@ -86,3 +87,83 @@
 </table>
 
 <!-- <ul class="nextDays" id = "nextDays"> </ul> !-->
+=======
+<md-button class="md-primary md-raised" ng-click="createEvent($event)">
+    create event
+</md-button>
+
+<script type="text/ng-template" id="create-event-dialog.html">
+    <md-dialog aria-label="Create Event" id="create-event-dialog">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+              <h2>Create Event</h2>
+              <span flex></span>
+              <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="../assets/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+              </md-button>
+            </div>
+        </md-toolbar>
+      
+        <md-dialog-content>
+            <form name="eventNameForm">
+                <md-input-container class="eventnameform">
+                    <label>Event Name</label>
+                    <input name="eventName" ng-model="eventName" required>
+                    <div ng-messages="eventNameForm.eventName.$error">
+                        <div ng-message="required">This is required!</div>
+                    </div>
+                </md-input-container>
+            </form>
+                    
+            <div class="eventtimeform">
+                <form name="startDateForm" class="dateform">
+                    <md-input-container>
+                        <label>Start Date</label>
+                        <md-datepicker md-hide-icons="calendar" ng-model="startDate" name="startDate" md-min-date="minDate" md-max-date="maxDate" ng-blur="testFunc()" required></md-datepicker>
+                        <div ng-messages="startDateForm.startDate.$error">
+                            <div ng-message="valid">Invalid date!</div>
+                            <div ng-message="required">This date is required!</div>
+                            <div ng-message="mindate">Invalid date!</div>
+                            <div ng-message="maxdate">Invalid date!</div>
+                        </div>
+                    </md-input-container>
+                    <input class="timepicker" ui-timepicker="timePickerOptions" ng-model="startTime" ng-change="startTimeChange()">
+                </form>
+                <span class="toText">to</span>
+                <form name="endDateForm" class="dateform">
+                    <md-input-container>
+                        <label>End Date</label>
+                        <md-datepicker md-hide-icons="calendar" ng-model="endDate" name="endDate" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
+                        <div ng-messages="endDateForm.endDate.$error">
+                            <div ng-message="valid">Invalid date!</div>
+                            <div ng-message="required">This date is required!</div>
+                            <div ng-message="mindate">Invalid date!</div>
+                            <div ng-message="maxdate">Invalid date!</div>
+                        </div>
+                    </md-input-container>
+                    <input class="timepicker" ui-timepicker="timePickerOptions" ng-model="endTime" ng-change="endTimeChange()">
+                </form>
+            </div>
+                    
+            <md-input-container class="md-block eventdescription">
+                <label>Event Description</label>
+                <textarea ng-model="description" md-maxlength="1000" rows="4" md-select-on-focus=""></textarea>
+            </md-input-container>
+
+            <div class="create-event-error">{{createEventError}}</div>
+        </md-dialog-content>
+      
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">
+                close
+            </md-button>
+            <span flex></span>
+            <md-button ng-click="createEvent()" class="create-button">
+                create
+            </md-button>
+        </md-dialog-actions>
+    </form>
+    </md-dialog>
+</script>
+>>>>>>> c73ca102401f2228efbf4f308550e24d26d3be41

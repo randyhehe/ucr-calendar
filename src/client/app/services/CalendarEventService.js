@@ -1,9 +1,10 @@
 angular.module('CalendarEventService', []).factory('CalendarEventService', ['$http', function($http) {
     return {
-        createEvent: function(name, time, description, public, token) {
+        createEvent: function(name, startTime, endTime, description, public, token) {
             let data = {
                 name: name,
-                time: time,
+                startTime: startTime,
+                endTime: endTime,
                 description: description,
                 public: public
             };
