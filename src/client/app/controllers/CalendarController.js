@@ -39,7 +39,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
           var z = 0;
           if (firstDay != 0) {
             rowPosition = "col" + z;
-            
+
             document.getElementById(rowPosition).innerHTML = i
           }
       }

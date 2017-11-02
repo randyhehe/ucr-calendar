@@ -131,29 +131,29 @@ body {font-family: Verdana, sans-serif;}
 
 /* Days (1-31) */
 .days {
-  float: left;
+    float: left;
     padding: 10px 0;
     margin: 0;
+    width: 100%;
 }
 
+// .days tr {
+//   padding: 10px 0;
+//   margin: 0;
+//   width: 100%;
+// }
 
 .days td {
-    // display: block;
-    // float: left;
-    // width:14.342%;
-    // padding: 10px;
-    // box-sizing:border-box;
-    // border: 1px solid #ccc;
-    // margin-right: -1px;
-    // margin-bottom: -1px;
-    // height: 120px;
-    list-style-type: none;
-   display: inline-block;
-   width: 13.6%;
-   text-align: center;
-   margin-bottom: 5px;
-   font-size:12px;
-   color:#777;
+    display: block;
+    float: left;
+    padding: 10px;
+    width:14.369%;
+    box-sizing:border-box;
+    border: 1px solid #ccc;
+    margin-right: -1px;
+    margin-bottom: -1px;
+    height: 120px;
+
 }
 
 /* Highlight the "current" day */
