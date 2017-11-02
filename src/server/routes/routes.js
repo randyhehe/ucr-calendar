@@ -120,20 +120,23 @@ router.get('/api/events/me', jwtAuthenticator, function(req, res) {
 // Create event and assign it to the user specified by the token
 router.post('/api/events', jwtAuthenticator, function(req, res) {
     if (req.body.name, req.body.startTime, req.body.endTime, req.body.description, req.body.public) {
-        let newEvent = new CalendarEvent({
-            name: req.body.name,
-            startTime: req.body.startTime,
-            endTime: req.body.endTime,
-            description: req.body.description,
-            public: req.body.public
-        });
-
         User.findOne({
             email: req.decoded.email
         }, function(err, user) {
             if (err || user === null) {
                 return res.status(400).send({success: false, message: 'Unable to find user with the specified email.'});
             } else {
+
+                console.log(user.username);
+                let newEvent = new CalendarEvent({
+                    name: req.body.name,
+                    user: user.username,
+                    startTime: req.body.startTime,
+                    endTime: req.body.endTime,
+                    description: req.body.description,
+                    public: req.body.public,
+                });
+
                 user.events.push(newEvent);
                 user.save(function(err) {
                     if (err) {

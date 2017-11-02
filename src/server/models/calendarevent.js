@@ -4,6 +4,9 @@ let CalendarEventSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    }, user: {
+        type: String,
+        required: true
     }, startTime: {
         type: String,
         required: true

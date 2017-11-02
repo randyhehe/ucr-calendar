@@ -72,3 +72,37 @@
 #create-event-dialog .create-event-error {
   text-align: center;
   color: #dd2c00; }
+
+.feed-card {
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: avenir-next; }
+  .feed-card .scrollable {
+    max-height: calc(95vh - 96px);
+    overflow: scroll;
+    word-wrap: break-word;
+    background-color: white; }
+  .feed-card .has-description {
+    padding-top: 15px;
+    padding-bottom: 13px; }
+  .feed-card .list-item {
+    margin-bottom: 0px !important; }
+  .feed-card .feed-item-createdtime {
+    font-size: 14px;
+    color: darkslategray; }
+  .feed-card .feed-item-user {
+    font-weight: 600; }
+  .feed-card .feed-item-name {
+    overflow: initial;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    font-size: 20px !important; }
+  .feed-card .feed-item-eventtime {
+    font-size: 14px !important;
+    color: darkslategray !important; }
+  .feed-card .feed-item-description {
+    font-size: 16px !important; }
+  .feed-card .no-padding {
+    padding: 0px; }
