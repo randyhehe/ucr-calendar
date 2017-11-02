@@ -2,77 +2,84 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
     $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
     $scope.yearDate = moment().format('YYYY');
     $scope.currentDate = moment().date(); // used to highlight current date
+    var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+    var firstDay = new Date(y, m, 1);
+    var lastDay = new Date(y, m + 1, 0);
+    var currMoment = moment();
 
-    render() // init render of current month
+    console.log(currMoment)
+    render(currMoment) // init render of current month
 
-    function render() {
 
-      var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-      var firstDay = new Date(y, m, 1);
-      var lastDay = new Date(y, m + 1, 0);
+    function render(currMoment) {
 
-      var lastMonth = moment().subtract(1,'months').endOf('month').format('DD')
-      var nextMonth = moment().add(1,'months').endOf('month').format('DD')
+      var lastMonth = currMoment.subtract(1,'months').endOf('month').format('DD');
+      var nextMonth = currMoment.add(1,'months').endOf('month').format('DD');
 
-      var firstDay = moment(firstDay).day(); // Returns the first day of the month
-      var lastDay = moment(lastDay).day(); // Returns the last day of the month
+      var firstDay = currMoment.startOf('month').day(); // Returns the first day of the month
+      firstDay = parseInt(firstDay);
+      var lastDay = currMoment.endOf('month').day(); // Returns the last day of the month
+      lastDay = parseInt(lastDay);
+
       var numberOfDays = moment(date).daysInMonth(); // Returns number of days
+
       var i;
 
       for (i = moment().subtract(1,'months').daysInMonth() - firstDay + 1; i <= moment().subtract(1,'months').daysInMonth(); i++) {
-          var newPrevLI = document.createElement("li"), // create a new li
-            displayPrevDates = document.getElementById("days") // cache the unordered list
-            newPrevContent = document.createTextNode([i]); // grab the spelling list item
-
-            newPrevLI.appendChild(newPrevContent);
-            displayPrevDates.appendChild(newPrevLI);
+          // var newPrevLI = document.createElement("li"), // create a new li
+          //   displayPrevDates = document.getElementById("days"), // cache the unordered list
+          //   newPrevSpan = document.createElement('span'); // add span
+          //   newPrevContent = document.createTextNode([i]); // grab the spelling list item
+          //
+          //
+          // newPrevSpan.setAttribute('class', 'prevDates');
+          // newPrevSpan.appendChild(newPrevContent);
+          // newPrevLI.appendChild(newPrevSpan);
+          // displayPrevDates.appendChild(newPrevLI);
+          var z = 0;
+          if (firstDay != 0) {
+            rowPosition = "col" + z;
+            
+            document.getElementById(rowPosition).innerHTML = i
+          }
       }
 
       for (i = 1; i <= numberOfDays; i++) {
-        var newLI = document.createElement("li") // create a new li
-        displayDates = document.getElementById("days"), // cache the unordered list
-        newContent = document.createTextNode([i]); // grab the spelling list item
+        rowPosition = "col" + firstDay;
+        firstDay = firstDay + 1;
 
-
-        if (i == $scope.currentDate) { // highlight the current date in the month
+        if (i == $scope.currentDate) {
           var newSpan = document.createElement('span');
           newSpan.setAttribute('class', 'active');
-          var t = document.createTextNode([i]);
-          newSpan.appendChild(t);
-          newLI.appendChild(newSpan);
         }
-
-        else {
-          newLI.appendChild(newContent);
-        }
-
-          displayDates.appendChild(newLI);
+        document.getElementById(rowPosition).innerHTML = i
       }
-
-      for (i = 1; i <= 43 - numberOfDays - lastDay; i++) {
-          var newNextLI = document.createElement("li"), // create a new li
-            displayNextDates = document.getElementById("days") // cache the unordered list
-            newNextContent = document.createTextNode([i]); // grab the spelling list item
-
-            newNextLI.appendChild(newNextContent);
-            displayNextDates.appendChild(newNextLI);
-
-      }
+      // for (i = 1; i <= 43 - numberOfDays - lastDay; i++) {
+      //     var newNextLI = document.createElement("li"), // create a new li
+      //       displayNextDates = document.getElementById("days") // cache the unordered list
+      //       newNextContent = document.createTextNode([i]); // grab the spelling list item
+      //
+      //       newNextLI.appendChild(newNextContent);
+      //       displayNextDates.appendChild(newNextLI);
+      //
+      // }
 
     }
 
     $scope.next = function(){ // next toggle button
-      $scope.monthName = moment().add(1,'months').startOf("month").format('MMMM');
+      $scope.monthName = currMoment.add(1,'months').startOf("month").format('MMMM');
       if ($scope.monthName == "January") {
-        $scope.yearDate = moment().add(0,'years').format('YYYY');
+        $scope.yearDate = currMoment.add(0,'years').format('YYYY');
       }
+      render(currMoment)
     }
 
     $scope.previous = function(){ // prev toggle button
-      $scope.monthName = moment().subtract(1,'months').startOf("month").format('MMMM');
+      $scope.monthName = currMoment.subtract(1,'months').startOf("month").format('MMMM');
       if ($scope.monthName == "December") {
-        $scope.yearDate = moment().subtract(0,'years').format('YYYY');
+        $scope.yearDate = currMoment.subtract(0,'years').format('YYYY');
       }
+      render(currMoment)
     }
 
     $scope.calendarPage = true;
