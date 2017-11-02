@@ -2,17 +2,9 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
     $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
     $scope.yearDate = moment().format('YYYY');
     $scope.currentDate = moment().date(); // used to highlight current date
-    var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-    var firstDay = new Date(y, m, 1);
-    var lastDay = new Date(y, m + 1, 0);
     var currMoment = moment();
 
-<<<<<<< HEAD
-=======
-    //console.log(currMoment)
->>>>>>> 657ed7981a2337662c513f16ae18dbc938b885c2
     render(currMoment) // init render of current month
-
 
     function render(currMoment) {
 
@@ -24,19 +16,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
       var lastDay = currMoment.endOf('month').day(); // Returns the last day of the month
       lastDay = parseInt(lastDay);
 
-<<<<<<< HEAD
-      var numberOfDays = moment(date).daysInMonth(); // Returns number of days
-
-      var i;
-
-      for (i = moment().subtract(1,'months').daysInMonth() - firstDay + 1; i <= moment().subtract(1,'months').daysInMonth(); i++) {
-          var z = 0;
-          if (firstDay != 0) {
-            rowPosition = "col" + z;
-
-            document.getElementById(rowPosition).innerHTML = i
-          }
-=======
       var numberOfDays = currMoment.daysInMonth(); // Returns number of days
       var i,tempFirstDay;
       //console.log(lastMonth);
@@ -44,9 +23,8 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
       var x = lastMonth;
       for (i = firstDay-1; i >= 0; --i) {
         rowPosition = "col" + i;
-        document.getElementById(rowPosition).innerHTML = x;
+        document.getElementById(rowPosition).innerHTML = "<span class=notRealMonth>" + x + "</span>";
         x = x - 1;
->>>>>>> 657ed7981a2337662c513f16ae18dbc938b885c2
       }
       tempFirstDay = firstDay;
       for (i = 1; i <= numberOfDays; i++) {
@@ -56,11 +34,11 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
         if (i == $scope.currentDate) {
           var newSpan = document.createElement('span');
           newSpan.setAttribute('class', 'active');
-          document.getElementById(rowPosition).innerHTML = "<span class="active">" + i + "</span"
+          document.getElementById(rowPosition).innerHTML = "<span class=active>" + i + "</span>"
 
         }
         else {
-            document.getElementById(rowPosition).innerHTML = i
+            document.getElementById(rowPosition).innerHTML = "<span class=notRealMonth>" + i + "</span>";
         }
 
       }
@@ -68,8 +46,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
       for (i = numberOfDays; i <= 42 - numberOfDays - firstDay; i++) {
         rowPosition = "col" + numberOfDays
       }
-<<<<<<< HEAD
-=======
       //console.log(tempFirstDay);
 
       for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) {
@@ -77,7 +53,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
         tempFirstDay = tempFirstDay + 1;
          document.getElementById(rowPosition).innerHTML = i;
       }
->>>>>>> 657ed7981a2337662c513f16ae18dbc938b885c2
 
     }
 

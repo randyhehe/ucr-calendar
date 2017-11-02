@@ -161,26 +161,10 @@ body {font-family: Verdana, sans-serif;}
     padding: 5px;
     background: #1abc9c;
     color: white !important;
+    height: 120px
 }
-
-.days td .prevDates {
-    padding: 5px;
-}
-
 
 .days td:hover {
-  color: #2693ff;
-  background: #e1e1e1;
-  border-top: 1px solid #d0d0d0;
-}
-
-.prevDays li:hover {
-  color: #2693ff;
-  background: #e1e1e1;
-  border-top: 1px solid #d0d0d0;
-}
-
-.nextDays li:hover {
   color: #2693ff;
   background: #e1e1e1;
   border-top: 1px solid #d0d0d0;
