@@ -133,81 +133,80 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         }
     }
 
-    angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, moment) {
-        $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
-        $scope.yearDate = moment().format('YYYY');
-        $scope.currentDate = moment().date(); // used to highlight current date
-        var currMoment = moment();
+    $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
+    $scope.yearDate = moment().format('YYYY');
+    $scope.currentDate = moment().date(); // used to highlight current date
+    var currMoment = moment();
 
-        render(currMoment) // init render of current month
+    render(currMoment) // init render of current month
 
-        function render(currMoment) {
+    function render(currMoment) {
 
-          var lastMonth = currMoment.subtract(1,'months').endOf('month').format('DD');
-          var nextMonth = currMoment.add(1,'months').endOf('month').format('DD');
+      var lastMonth = currMoment.subtract(1,'months').endOf('month').format('DD');
+      var nextMonth = currMoment.add(1,'months').endOf('month').format('DD');
 
-          var firstDay = currMoment.startOf('month').day(); // Returns the first day of the month
-          firstDay = parseInt(firstDay);
-          var lastDay = currMoment.endOf('month').day(); // Returns the last day of the month
-          lastDay = parseInt(lastDay);
+      var firstDay = currMoment.startOf('month').day(); // Returns the first day of the month
+      firstDay = parseInt(firstDay);
+      var lastDay = currMoment.endOf('month').day(); // Returns the last day of the month
+      lastDay = parseInt(lastDay);
 
-          var numberOfDays = currMoment.daysInMonth(); // Returns number of days
-          var i,tempFirstDay;
-          //console.log(lastMonth);
-          //console.log(firstDay);
-          var x = lastMonth;
-          for (i = firstDay-1; i >= 0; --i) {
-            rowPosition = "col" + i;
-            document.getElementById(rowPosition).innerHTML = "<span class=notRealMonth>" + x + "</span>";
-            x = x - 1;
-          }
-          tempFirstDay = firstDay;
-          for (i = 1; i <= numberOfDays; i++) {
-            rowPosition = "col" + tempFirstDay;
-            tempFirstDay = tempFirstDay + 1;
+      var numberOfDays = currMoment.daysInMonth(); // Returns number of days
+      var i,tempFirstDay;
+      //console.log(lastMonth);
+      //console.log(firstDay);
+      var x = lastMonth;
+      for (i = firstDay-1; i >= 0; --i) {
+        rowPosition = "col" + i;
+        document.getElementById(rowPosition).innerHTML = "<span class=notRealMonth>" + x + "</span>";
+        x = x - 1;
+      }
+      tempFirstDay = firstDay;
+      for (i = 1; i <= numberOfDays; i++) {
+        rowPosition = "col" + tempFirstDay;
+        tempFirstDay = tempFirstDay + 1;
 
-            if (i == $scope.currentDate) {
-              var newSpan = document.createElement('span');
-              newSpan.setAttribute('class', 'active');
-              document.getElementById(rowPosition).innerHTML = "<span class=active>" + i + "</span>"
-
-            }
-            else {
-                document.getElementById(rowPosition).innerHTML = "<span class=notRealMonth>" + i + "</span>";
-            }
-
-          }
-
-          for (i = numberOfDays; i <= 42 - numberOfDays - firstDay; i++) {
-            rowPosition = "col" + numberOfDays
-          }
-          //console.log(tempFirstDay);
-
-          for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) {
-            rowPosition = "col" + tempFirstDay;
-            tempFirstDay = tempFirstDay + 1;
-             document.getElementById(rowPosition).innerHTML = i;
-          }
+        if (i == $scope.currentDate) {
+          var newSpan = document.createElement('span');
+          newSpan.setAttribute('class', 'active');
+          document.getElementById(rowPosition).innerHTML = "<span class=active>" + i + "</span>"
 
         }
-
-        $scope.next = function(){ // next toggle button
-          $scope.monthName = currMoment.add(1,'months').startOf("month").format('MMMM');
-          if ($scope.monthName == "January") {
-            $scope.yearDate = currMoment.add(0,'years').format('YYYY');
-          }
-          render(currMoment)
+        else {
+            document.getElementById(rowPosition).innerHTML = "<span class=notRealMonth>" + i + "</span>";
         }
 
-        $scope.previous = function(){ // prev toggle button
-          $scope.monthName = currMoment.subtract(1,'months').startOf("month").format('MMMM');
-          if ($scope.monthName == "December") {
-            $scope.yearDate = currMoment.subtract(0,'years').format('YYYY');
-          }
-          render(currMoment)
-        }
+      }
 
-        $scope.calendarPage = true;
+      for (i = numberOfDays; i <= 42 - numberOfDays - firstDay; i++) {
+        rowPosition = "col" + numberOfDays
+      }
+      //console.log(tempFirstDay);
+
+      for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) {
+        rowPosition = "col" + tempFirstDay;
+        tempFirstDay = tempFirstDay + 1;
+         document.getElementById(rowPosition).innerHTML = i;
+      }
+
+    }
+
+    $scope.next = function(){ // next toggle button
+      $scope.monthName = currMoment.add(1,'months').startOf("month").format('MMMM');
+      if ($scope.monthName == "January") {
+        $scope.yearDate = currMoment.add(0,'years').format('YYYY');
+      }
+      render(currMoment)
+    }
+
+    $scope.previous = function(){ // prev toggle button
+      $scope.monthName = currMoment.subtract(1,'months').startOf("month").format('MMMM');
+      if ($scope.monthName == "December") {
+        $scope.yearDate = currMoment.subtract(0,'years').format('YYYY');
+      }
+      render(currMoment)
+    }
+
+    $scope.calendarPage = true;
 });
 
 /*

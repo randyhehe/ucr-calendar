@@ -1,6 +1,5 @@
 <ng-include src="'app/views/header.html'"></ng-include>
 
-<<<<<<< HEAD
 <p>{{ tagline }}</p>
 
 
@@ -86,8 +85,6 @@
     </tr>
 </table>
 
-<!-- <ul class="nextDays" id = "nextDays"> </ul> !-->
-=======
 <md-button class="md-primary md-raised" ng-click="createEvent($event)">
     create event
 </md-button>
@@ -104,7 +101,7 @@
               </md-button>
             </div>
         </md-toolbar>
-      
+
         <md-dialog-content>
             <form name="eventNameForm">
                 <md-input-container class="eventnameform">
@@ -115,7 +112,7 @@
                     </div>
                 </md-input-container>
             </form>
-                    
+
             <div class="eventtimeform">
                 <form name="startDateForm" class="dateform">
                     <md-input-container>
@@ -145,7 +142,7 @@
                     <input class="timepicker" ui-timepicker="timePickerOptions" ng-model="endTime" ng-change="endTimeChange()">
                 </form>
             </div>
-                    
+
             <md-input-container class="md-block eventdescription">
                 <label>Event Description</label>
                 <textarea ng-model="description" md-maxlength="1000" rows="4" md-select-on-focus=""></textarea>
@@ -153,7 +150,7 @@
 
             <div class="create-event-error">{{createEventError}}</div>
         </md-dialog-content>
-      
+
         <md-dialog-actions layout="row">
             <md-button ng-click="cancel()">
                 close
@@ -166,4 +163,3 @@
     </form>
     </md-dialog>
 </script>
->>>>>>> c73ca102401f2228efbf4f308550e24d26d3be41
