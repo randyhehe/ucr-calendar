@@ -94,8 +94,8 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
             }
 
             // make sure the events are in the right other
-            let startMoment = moment(startDate + ' ' + startTime, 'MM/DD/YYYY h:ma');
-            let endMoment = moment(endDate + ' ' + endTime, 'MM/DD/YYYY h:ma');
+            let startMoment = moment(startDate + ' ' + startTime, 'MM/DD/YYYY h:mma');
+            let endMoment = moment(endDate + ' ' + endTime, 'MM/DD/YYYY h:mma');
             if (endMoment.isSameOrBefore(startMoment)) {
                 if (!error) $scope.createEventError = "Event end date must be after start date.";
                 error =  true;

@@ -219,3 +219,56 @@ body {font-family: Verdana, sans-serif;}
   background: #e1e1e1;
   border-top: 1px solid #d0d0d0;
 }
+
+.feed-card {
+    margin-top: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: avenir-next;
+
+    .scrollable {
+        max-height: calc(95vh - 96px);
+        overflow: scroll;
+        word-wrap: break-word;
+        background-color: white;
+    }
+
+    .has-description {
+        padding-top: 15px;
+        padding-bottom: 13px;
+    }
+
+    .list-item {
+        margin-bottom: 0px !important;
+    }
+
+    .feed-item-createdtime {
+        font-size: 14px;
+        color: darkslategray;
+    }
+
+    .feed-item-user {
+        font-weight: 600;
+    }
+
+    .feed-item-name {
+        overflow: initial;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+        font-size: 20px !important;
+    }
+
+    .feed-item-eventtime {
+        font-size: 14px !important;
+        color: darkslategray !important;
+    }
+
+    .feed-item-description {
+        font-size: 16px !important;
+    }
+
+    .no-padding {
+        padding: 0px;
+    }
+}
