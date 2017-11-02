@@ -136,23 +136,12 @@ body {font-family: Verdana, sans-serif;}
     margin: 0;
 }
 
-.prevDays li {
-  display: block;
-  float: left;
-  width:14.342%;
-  padding: 5px;
-  box-sizing:border-box;
-  border: 1px solid #ccc;
-  margin-right: -1px;
-  margin-bottom: -1px;
-  height: 120px;
-}
 
 .days li {
     display: block;
     float: left;
     width:14.342%;
-    padding: 5px;
+    padding: 10px;
     box-sizing:border-box;
     border: 1px solid #ccc;
     margin-right: -1px;
@@ -160,23 +149,11 @@ body {font-family: Verdana, sans-serif;}
     height: 120px;
 }
 
-.nextDays li {
-  display: block;
-  float: left;
-  width:14.342%;
-  padding: 5px;
-  box-sizing:border-box;
-  border: 1px solid #ccc;
-  margin-right: -1px;
-  margin-bottom: -1px;
-  height: 120px;
-}
-
 /* Highlight the "current" day */
 .days li .active {
     padding: 5px;
     background: #1abc9c;
-    color: white !important
+    color: white !important;
 }
 
 .days li:hover {
