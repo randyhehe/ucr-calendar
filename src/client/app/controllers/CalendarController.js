@@ -7,7 +7,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
     var lastDay = new Date(y, m + 1, 0);
     var currMoment = moment();
 
-    console.log(currMoment)
+    //console.log(currMoment)
     render(currMoment) // init render of current month
 
 
@@ -21,32 +21,20 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
       var lastDay = currMoment.endOf('month').day(); // Returns the last day of the month
       lastDay = parseInt(lastDay);
 
-      var numberOfDays = moment(date).daysInMonth(); // Returns number of days
-
-      var i;
-
-      for (i = moment().subtract(1,'months').daysInMonth() - firstDay + 1; i <= moment().subtract(1,'months').daysInMonth(); i++) {
-          // var newPrevLI = document.createElement("li"), // create a new li
-          //   displayPrevDates = document.getElementById("days"), // cache the unordered list
-          //   newPrevSpan = document.createElement('span'); // add span
-          //   newPrevContent = document.createTextNode([i]); // grab the spelling list item
-          //
-          //
-          // newPrevSpan.setAttribute('class', 'prevDates');
-          // newPrevSpan.appendChild(newPrevContent);
-          // newPrevLI.appendChild(newPrevSpan);
-          // displayPrevDates.appendChild(newPrevLI);
-          var z = 0;
-          if (firstDay != 0) {
-            rowPosition = "col" + z;
-
-            document.getElementById(rowPosition).innerHTML = i
-          }
+      var numberOfDays = currMoment.daysInMonth(); // Returns number of days
+      var i,tempFirstDay;
+      //console.log(lastMonth);
+      //console.log(firstDay);
+      var x = lastMonth;
+      for (i = firstDay-1; i >= 0; --i) {
+        rowPosition = "col" + i;
+        document.getElementById(rowPosition).innerHTML = x;
+        x = x - 1;
       }
-
+      tempFirstDay = firstDay;
       for (i = 1; i <= numberOfDays; i++) {
-        rowPosition = "col" + firstDay;
-        firstDay = firstDay + 1;
+        rowPosition = "col" + tempFirstDay;
+        tempFirstDay = tempFirstDay + 1;
 
         if (i == $scope.currentDate) {
           var newSpan = document.createElement('span');
@@ -54,15 +42,13 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
         }
         document.getElementById(rowPosition).innerHTML = i
       }
-      // for (i = 1; i <= 43 - numberOfDays - lastDay; i++) {
-      //     var newNextLI = document.createElement("li"), // create a new li
-      //       displayNextDates = document.getElementById("days") // cache the unordered list
-      //       newNextContent = document.createTextNode([i]); // grab the spelling list item
-      //
-      //       newNextLI.appendChild(newNextContent);
-      //       displayNextDates.appendChild(newNextLI);
-      //
-      // }
+      //console.log(tempFirstDay);
+
+      for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) {
+        rowPosition = "col" + tempFirstDay;
+        tempFirstDay = tempFirstDay + 1;
+         document.getElementById(rowPosition).innerHTML = i;
+      }
 
     }
 
