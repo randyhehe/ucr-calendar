@@ -55,7 +55,54 @@ $error-color: rgb(221, 44, 0);
     }
 }
 
-<<<<<<< HEAD
+#create-event-dialog {
+    .toText {
+        position: relative;
+        top: -8px;
+        margin-left: 13px;
+        margin-right: 13px;
+    }
+
+    .eventnameform {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 30px !important;
+        width: auto;
+        display: block;
+    }
+
+    .eventtimeform {
+        margin-left: 20px;
+        margin-right: 20px;
+
+        .timepicker {
+            margin-left: 20px;
+            position: relative;
+            top: -8px;
+            width: 90px;
+        }
+
+        .dateform {
+            display: inline-block;
+        }
+    }
+
+    .eventdescription {
+        margin-left: 20px;
+        margin-right: 20px;
+        top: -35px;
+    }
+
+    .create-button {
+        margin-right: 15px;
+    }
+
+    .create-event-error {
+        text-align: center;
+        color: $error-color;
+    }
+}
+
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
 
@@ -172,52 +219,3 @@ body {font-family: Verdana, sans-serif;}
   background: #e1e1e1;
   border-top: 1px solid #d0d0d0;
 }
-=======
-#create-event-dialog {
-    .toText {
-        position: relative;
-        top: -8px;
-        margin-left: 13px;
-        margin-right: 13px;
-    }
-    
-    .eventnameform {
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-top: 30px !important;
-        width: auto;
-        display: block;
-    }
-    
-    .eventtimeform {
-        margin-left: 20px;
-        margin-right: 20px;
-        
-        .timepicker {
-            margin-left: 20px;
-            position: relative;
-            top: -8px;
-            width: 90px;
-        }
-    
-        .dateform {
-            display: inline-block;
-        }
-    }
-    
-    .eventdescription {
-        margin-left: 20px;
-        margin-right: 20px;
-        top: -35px;
-    }
-
-    .create-button {
-        margin-right: 15px;
-    }
-
-    .create-event-error {
-        text-align: center;
-        color: $error-color;
-    }
-}
->>>>>>> c73ca102401f2228efbf4f308550e24d26d3be41
