@@ -7,6 +7,10 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
     var lastDay = new Date(y, m + 1, 0);
     var currMoment = moment();
 
+<<<<<<< HEAD
+=======
+    //console.log(currMoment)
+>>>>>>> 657ed7981a2337662c513f16ae18dbc938b885c2
     render(currMoment) // init render of current month
 
 
@@ -20,6 +24,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
       var lastDay = currMoment.endOf('month').day(); // Returns the last day of the month
       lastDay = parseInt(lastDay);
 
+<<<<<<< HEAD
       var numberOfDays = moment(date).daysInMonth(); // Returns number of days
 
       var i;
@@ -31,11 +36,22 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
 
             document.getElementById(rowPosition).innerHTML = i
           }
+=======
+      var numberOfDays = currMoment.daysInMonth(); // Returns number of days
+      var i,tempFirstDay;
+      //console.log(lastMonth);
+      //console.log(firstDay);
+      var x = lastMonth;
+      for (i = firstDay-1; i >= 0; --i) {
+        rowPosition = "col" + i;
+        document.getElementById(rowPosition).innerHTML = x;
+        x = x - 1;
+>>>>>>> 657ed7981a2337662c513f16ae18dbc938b885c2
       }
-
+      tempFirstDay = firstDay;
       for (i = 1; i <= numberOfDays; i++) {
-        rowPosition = "col" + firstDay;
-        firstDay = firstDay + 1;
+        rowPosition = "col" + tempFirstDay;
+        tempFirstDay = tempFirstDay + 1;
 
         if (i == $scope.currentDate) {
           var newSpan = document.createElement('span');
@@ -52,6 +68,16 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment']).controller(
       for (i = numberOfDays; i <= 42 - numberOfDays - firstDay; i++) {
         rowPosition = "col" + numberOfDays
       }
+<<<<<<< HEAD
+=======
+      //console.log(tempFirstDay);
+
+      for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) {
+        rowPosition = "col" + tempFirstDay;
+        tempFirstDay = tempFirstDay + 1;
+         document.getElementById(rowPosition).innerHTML = i;
+      }
+>>>>>>> 657ed7981a2337662c513f16ae18dbc938b885c2
 
     }
 
