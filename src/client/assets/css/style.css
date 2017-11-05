@@ -75,9 +75,8 @@
 
 .feed-card {
   margin-top: 40px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  display: inline-block;
+  width: calc(100vw - 400px);
   font-family: avenir-next; }
   .feed-card .scrollable {
     max-height: calc(95vh - 96px);
@@ -106,3 +105,24 @@
     font-size: 16px !important; }
   .feed-card .no-padding {
     padding: 0px; }
+
+.friends-list {
+  font-family: avenir-next;
+  width: 276px;
+  margin-top: 40px;
+  float: right;
+  box-shadow: none;
+  border-left: thin solid rgba(0, 0, 0, 0.2); }
+  .friends-list .scrollable {
+    background-color: white;
+    overflow: scroll;
+    height: calc(100vh - 180px); }
+  .friends-list .add-friend-footer {
+    padding-left: 10px; }
+  .friends-list .add-friend-btn {
+    min-width: initial;
+    position: relative;
+    top: -13px; }
+  .friends-list md-card-content {
+    padding-top: 0px;
+    padding-bottom: 0px; }

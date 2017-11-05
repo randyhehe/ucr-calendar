@@ -105,9 +105,8 @@ $error-color: rgb(221, 44, 0);
 
 .feed-card {
     margin-top: 40px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    display:inline-block;
+    width: calc(100vw - 400px);
     font-family: avenir-next;
 
     .scrollable {
@@ -154,4 +153,35 @@ $error-color: rgb(221, 44, 0);
     .no-padding {
         padding: 0px;
     }    
+}
+
+.friends-list {
+    font-family: avenir-next;
+    width: 276px;
+    margin-top: 40px;
+    float: right;    
+    box-shadow: none;
+    border-left: thin solid rgba(0,0,0,0.2);
+
+    .scrollable {
+        background-color: white;
+        overflow: scroll;
+        height: calc(100vh - 180px);
+    }
+
+    .add-friend-footer {
+        padding-left: 10px;
+    }
+
+    .add-friend-btn {
+        min-width: initial;
+        position: relative;
+        top: -13px;
+    }
+
+    md-card-content {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
 }

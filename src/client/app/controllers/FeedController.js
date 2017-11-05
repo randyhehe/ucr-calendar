@@ -1,4 +1,4 @@
-angular.module('FeedController', ['ngCookies']).controller('FeedController', function($scope, $cookies, $window, UserService, HeaderService, FriendService) {
+angular.module('FeedController', ['ngCookies']).controller('FeedController', function($scope, $cookies, $window, UserService, HeaderService, FriendService, $mdToast) {
     $scope.feedPage = true;
     $scope.signOut = HeaderService.signOut;    
 
@@ -29,14 +29,25 @@ angular.module('FeedController', ['ngCookies']).controller('FeedController', fun
             // do someething with thee error
         });
 
-        // FriendService.getFriends(token).then(function(friends) {
-        //     $scope.friends = [];
-        //     for (let i = 0; i < friends.length; i++) {
-        //         $scope.friends.push(friends[i].username);
-        //     }
-        // });
+        FriendService.getFriends(token).then(function(friends) {
+            $scope.friends = friends;
+        });
 
     }, function(err) {
         $window.location.href = "/";
     });
+
+    $scope.addFriend = function() {
+        const friendName = $scope.addFriendInput;
+        FriendService.addFriend(friendName, token).then(function(res) {
+            console.log("it worked!");
+            $mdToast.show($mdToast.simple().textContent('Friend added.').position('top right'));
+            
+        }, function(err) {
+            // username is same as current account, or username is already their friend
+            $mdToast.show($mdToast.simple().textContent('Unable to add friend.').position('top right'));
+            
+        });
+        
+    }
 });
