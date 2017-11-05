@@ -22,9 +22,9 @@ let UserSchema = new mongoose.Schema({
     }
 }, {minimize: false});
 
-// authenticate email and password using bcrypt
-UserSchema.statics.authenticate = function(email, password, callback) {
-    User.findOne({ email: email })
+// authenticate email and password using bcrypt. Case sensitive username, casing does not matter for emails
+UserSchema.statics.authenticate = function(loginUser, loginPassword, callback) {
+    User.findOne({$or: [{email: loginUser.toLowerCase()}, {username: loginUser}]})
     .exec(function(err, user) {
         if (err) {
             return callback(err);
@@ -34,7 +34,7 @@ UserSchema.statics.authenticate = function(email, password, callback) {
             return callback(err);
         }
         
-        bcrypt.compare(password, user.password, function(err, result) {
+        bcrypt.compare(loginPassword, user.password, function(err, result) {
             if (result) {
                 return callback(null, user);
             } else {

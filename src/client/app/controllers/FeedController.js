@@ -9,14 +9,12 @@ angular.module('FeedController', ['ngCookies']).controller('FeedController', fun
     }
 
     UserService.getUser(token).then(function(res) {
-        // valid user. populate the feeds UI.
-        console.log(res);
+        FriendService.getEvents(token).then(function(events) {
+            console.log(events);
 
-        FriendService.getEvents(token).then(function(res) {
-
-            $scope.todos = [];            
-            for (let i = res.data.events.length - 1; i >= 0; i--) {
-                let calEvent = res.data.events[i];
+            $scope.friendEvents = [];
+            for (let i = events.length - 1; i >= 0; i--) {
+                let calEvent = events[i];
                 let formattedEvent  = {
                     user: calEvent.user,
                     name: calEvent.name,
@@ -25,11 +23,19 @@ angular.module('FeedController', ['ngCookies']).controller('FeedController', fun
                     startTime: moment(calEvent.startTime, 'x').format('MM/DD/YYYY h:mma'),
                     endTime: moment(calEvent.endTime, 'x').format('MM/DD/YYYY h:mma')
                 }
-                $scope.todos.push(formattedEvent);
+                $scope.friendEvents.push(formattedEvent);
             }
-        }, function(err) {
-            console.log(err);
+        }).catch(function(error) {
+            // do someething with thee error
         });
+
+        // FriendService.getFriends(token).then(function(friends) {
+        //     $scope.friends = [];
+        //     for (let i = 0; i < friends.length; i++) {
+        //         $scope.friends.push(friends[i].username);
+        //     }
+        // });
+
     }, function(err) {
         $window.location.href = "/";
     });

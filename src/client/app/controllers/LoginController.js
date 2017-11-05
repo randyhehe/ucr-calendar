@@ -1,9 +1,8 @@
 angular.module('LoginController', ['ngCookies']).controller('LoginController', function($scope, $window, $cookies, UserService) {
-    $scope.myFunction = function(email, password) {
-        // have a check for email and password, nonempty
+    $scope.myFunction = function(user, password) {
+        // have a check for user field and password, nonempty
         
-        email = email.toLowerCase();
-        UserService.authenticateUser(email, password).then(function(res) {
+        UserService.authenticateUser(user, password).then(function(res) {
             $cookies.put('token', res.data.token);
             $window.location.href = '/calendar';
         }, function(err) {

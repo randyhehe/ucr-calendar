@@ -4,7 +4,7 @@
     <md-card-content class="no-padding">
         <md-content class="scrollable">
                 <md-list class="no-padding">
-                    <md-list-item class="md-3-line md-long-text list-item" ng-repeat="item in todos">
+                    <md-list-item class="md-3-line md-long-text list-item" ng-repeat="item in friendEvents">
                         <div class="md-list-item-text" ng-class="(item.description !== '') ? 'has-description' : ''">
                             <h3><span class="feed-item-user">{{item.user}}</span> <span class="feed-item-createdtime">{{item.createdTime}}</span></h3>
                             <h4 class="feed-item-name">{{item.name}}</h4>
@@ -17,3 +17,20 @@
                 </md-content>
     </md-card-content>
 </md-card>
+
+<!-- <md-card class="friends-list>
+    <md-card-title>
+        <md-card-title-text>
+            <span class="md-headline">Friends</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content class="no-padding">
+        <md-content class="scrollable">
+            <md-list class="no-padding">
+                <md-list-item ng-repeat="friend in friends">
+                    <span>{{friend}}</span>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-card-content>
+</md-card> -->

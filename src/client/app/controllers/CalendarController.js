@@ -155,8 +155,8 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 /*
  * Example of using API to add friend
  */ 
-// FriendService.addFriend("email", token).then(function(res) {
+// FriendService.addFriend("username", token).then(function(res) {
 //     console.log(res);
 // }, function(err) {
-//     console.log(err); // email is same as current account, or email is already their friend
+//     console.log(err); // username is same as current account, or username is already their friend
 // });
