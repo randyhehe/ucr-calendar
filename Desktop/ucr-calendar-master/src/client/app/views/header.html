@@ -3,15 +3,29 @@
         <span class="col-sm-4 col-xs-3"></span>
         <span class="calendar col-sm-2 col-xs-3 text-center" ng-class="(calendarPage) ? 'selected' : ''"><a href="/calendar">Calendar</a></span>
         <span class="feed col-sm-2 col-xs-3 text-center" ng-class="(feedPage) ? 'selected': ''"><a href="/feed">Feed</a></span>
-        
-        <div class="dropdown user-dropdown">
-            <button class="user-button dropdown-toggle" type="button" data-toggle="dropdown">
-                <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Settings</a></li>
-                <li><a href="#" ng-click="signOut()">Sign Out</a></li>
-            </ul>
+
+        <div class="right-header">
+            <span class="dropdown">
+                <button class="header-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                    <i class="fa fa-bell-o fa-lg" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <span ng-if="notifications.length === 0">You have no notifications.</span>
+                    <li ng-repeat="item in notifications">
+
+                    </li>
+                </ul>
+            </span>
+
+            <span class="dropdown">
+                <button class="header-btn dropdown-toggle" type="button" data-toggle="dropdown">
+                    <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#" ng-click="signOut()">Sign Out</a></li>
+                </ul>
+            </span>
         </div>
     </div>
 </div>

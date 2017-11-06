@@ -22,17 +22,112 @@
   .header-partial .page .selected a {
     color: black;
     border-bottom: 1px solid #000; }
-  .header-partial .user-dropdown {
+  .header-partial .right-header {
+    margin-right: 40px;
+    margin-top: 1px;
     float: right; }
-  .header-partial .dropdown-menu {
-    margin: 2px -100 0; }
-    .header-partial .dropdown-menu li a:hover {
-      border: none; }
-  .header-partial .user-button {
-    margin-right: 50px;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none; }
+    .header-partial .right-header .header-btn {
+      margin-right: 10px;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      outline: none; }
+    .header-partial .right-header .dropdown-menu {
+      margin: 10px -120 0; }
+      .header-partial .right-header .dropdown-menu li a:hover {
+        border: none; }
+    .header-partial .right-header .fa-lg {
+      line-height: initial;
+      font-size: 1.5em; }
+
+#create-event-dialog .toText {
+  position: relative;
+  top: -8px;
+  margin-left: 13px;
+  margin-right: 13px; }
+
+#create-event-dialog .eventnameform {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 30px !important;
+  width: auto;
+  display: block; }
+
+#create-event-dialog .eventtimeform {
+  margin-left: 20px;
+  margin-right: 20px; }
+  #create-event-dialog .eventtimeform .timepicker {
+    margin-left: 20px;
+    position: relative;
+    top: -8px;
+    width: 90px; }
+  #create-event-dialog .eventtimeform .dateform {
+    display: inline-block; }
+
+#create-event-dialog .eventdescription {
+  margin-left: 20px;
+  margin-right: 20px;
+  top: -35px; }
+
+#create-event-dialog .create-button {
+  margin-right: 15px; }
+
+#create-event-dialog .create-event-error {
+  text-align: center;
+  color: #dd2c00; }
+
+.feed-card {
+  margin-top: 40px;
+  display: inline-block;
+  width: calc(100vw - 400px);
+  font-family: avenir-next; }
+  .feed-card .scrollable {
+    max-height: calc(95vh - 96px);
+    overflow: scroll;
+    word-wrap: break-word;
+    background-color: white; }
+  .feed-card .has-description {
+    padding-top: 15px;
+    padding-bottom: 13px; }
+  .feed-card .list-item {
+    margin-bottom: 0px !important; }
+  .feed-card .feed-item-createdtime {
+    font-size: 14px;
+    color: darkslategray; }
+  .feed-card .feed-item-user {
+    font-weight: 600; }
+  .feed-card .feed-item-name {
+    overflow: initial;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    font-size: 20px !important; }
+  .feed-card .feed-item-eventtime {
+    font-size: 14px !important;
+    color: darkslategray !important; }
+  .feed-card .feed-item-description {
+    font-size: 16px !important; }
+  .feed-card .no-padding {
+    padding: 0px; }
+
+.friends-list {
+  font-family: avenir-next;
+  width: 276px;
+  margin-top: 40px;
+  float: right;
+  box-shadow: none;
+  border-left: thin solid rgba(0, 0, 0, 0.2); }
+  .friends-list .scrollable {
+    background-color: white;
+    overflow: scroll;
+    height: calc(100vh - 180px); }
+  .friends-list .add-friend-footer {
+    padding-left: 10px; }
+  .friends-list .add-friend-btn {
+    min-width: initial;
+    position: relative;
+    top: -13px; }
+  .friends-list md-card-content {
+    padding-top: 0px;
+    padding-bottom: 0px; }

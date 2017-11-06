@@ -7,6 +7,7 @@ let methodOverride = require('method-override');
 let mongoose = require('mongoose');
 let routes = require('./src/server/routes/routes.js');
 let config = require('./src/server/config/config.js');
+let jwt = require('jsonwebtoken');
 
 // connect to mongoDB database
 mongoose.connect(config.databaseUrl);
@@ -14,7 +15,6 @@ mongoose.connect(config.databaseUrl);
 // app config
 let port = process.env.PORT || 8080;
 app.use(bodyParser.json()); 
-app.listen(port);
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(methodOverride('X-HTTP-Method-Override')); 
@@ -25,8 +25,13 @@ app.use(session({
     saveUninitialized: false
 }));
 app.use('/', routes);
-// start app
+
+// start server
+let server = app.listen(port);
 console.log('Listening on port: ' + port);
+
+// start socket connection
+require('./src/server/socket.js')(server);
 
 exports = module.exports = app;
 

@@ -19,6 +19,11 @@
     "angular-route": "^1.6.6",
     "angular-cookies": "^1.6.6",
     "jquery": "^3.2.1",
-    "angular-moment": "^1.1.0"
+    "angular-moment": "^1.1.0",
+    "angular-messages": "^1.6.6",
+    "angular-material": "^1.1.5",
+    "angular-jquery-timepicker": "^0.13.1",
+    "angular-socket-io": "^0.7.0",
+    "socket.io-client": "^2.0.4"
   }
 }

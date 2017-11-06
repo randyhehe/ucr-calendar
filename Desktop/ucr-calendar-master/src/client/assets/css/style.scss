@@ -4,6 +4,8 @@
          url('../fonts/avenir-next-regular.tff') format('truetype');
 }
 
+$error-color: rgb(221, 44, 0);
+
 .container {
     padding-right:30px;
     padding-left: 30px;
@@ -30,25 +32,163 @@
         border-bottom: 1px solid #000;
     }
 
-    .user-dropdown  {
-        float: right;
-    }
+    .right-header {
+        margin-right: 40px;
+        margin-top: 1px;
+        float:right;
 
-    .dropdown-menu {
-        margin: 2px -100 0;
+        .header-btn {
+            margin-right: 10px;        
+            background-color: transparent;
+            background-repeat: no-repeat;
+            border:none;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+        }
 
-        li a:hover {
-            border: none;
+        .dropdown-menu {
+            margin: 10px -120 0;
+    
+            li a:hover {
+                border: none;
+            }
+        }
+        
+        .fa-lg {
+            line-height: initial;
+            font-size: 1.5em;
         }
     }
+}
 
-    .user-button {
-        margin-right: 50px;        
-        background-color: transparent;
-        background-repeat: no-repeat;
-        border:none;
-        cursor: pointer;
-        overflow: hidden;
-        outline: none;
+#create-event-dialog {
+    .toText {
+        position: relative;
+        top: -8px;
+        margin-left: 13px;
+        margin-right: 13px;
     }
+    
+    .eventnameform {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 30px !important;
+        width: auto;
+        display: block;
+    }
+    
+    .eventtimeform {
+        margin-left: 20px;
+        margin-right: 20px;
+        
+        .timepicker {
+            margin-left: 20px;
+            position: relative;
+            top: -8px;
+            width: 90px;
+        }
+    
+        .dateform {
+            display: inline-block;
+        }
+    }
+    
+    .eventdescription {
+        margin-left: 20px;
+        margin-right: 20px;
+        top: -35px;
+    }
+
+    .create-button {
+        margin-right: 15px;
+    }
+
+    .create-event-error {
+        text-align: center;
+        color: $error-color;
+    }
+}
+
+.feed-card {
+    margin-top: 40px;
+    display:inline-block;
+    width: calc(100vw - 400px);
+    font-family: avenir-next;
+
+    .scrollable {
+        max-height: calc(95vh - 96px);
+        overflow: scroll;
+        word-wrap: break-word;
+        background-color: white;
+    }
+
+    .has-description {
+        padding-top: 15px;
+        padding-bottom: 13px;
+    }
+    
+    .list-item {
+        margin-bottom: 0px !important;
+    }
+    
+    .feed-item-createdtime {
+        font-size: 14px;
+        color: darkslategray;
+    }
+    
+    .feed-item-user {
+        font-weight: 600;
+    }
+    
+    .feed-item-name {
+        overflow: initial;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+        font-size: 20px !important;
+    }
+    
+    .feed-item-eventtime {
+        font-size: 14px !important;
+        color: darkslategray !important;
+    }
+    
+    .feed-item-description {
+        font-size: 16px !important;
+    }
+
+    .no-padding {
+        padding: 0px;
+    }    
+}
+
+.friends-list {
+    font-family: avenir-next;
+    width: 276px;
+    margin-top: 40px;
+    float: right;    
+    box-shadow: none;
+    border-left: thin solid rgba(0,0,0,0.2);
+
+    .scrollable {
+        background-color: white;
+        overflow: scroll;
+        height: calc(100vh - 180px);
+    }
+
+    .add-friend-footer {
+        padding-left: 10px;
+    }
+
+    .add-friend-btn {
+        min-width: initial;
+        position: relative;
+        top: -13px;
+    }
+
+    md-card-content {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
 }
