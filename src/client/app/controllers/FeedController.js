@@ -1,4 +1,4 @@
-angular.module('FeedController', ['ngCookies']).controller('FeedController', function($scope, $cookies, $window, UserService, HeaderService, FriendService, $mdToast) {
+angular.module('FeedController', ['ngCookies', 'btford.socket-io']).controller('FeedController', function($scope, $cookies, $window, UserService, HeaderService, FriendService, SocketService, $mdToast, socket) {
     $scope.feedPage = true;
     $scope.signOut = HeaderService.signOut;    
 
@@ -9,6 +9,13 @@ angular.module('FeedController', ['ngCookies']).controller('FeedController', fun
     }
 
     UserService.getUser(token).then(function(res) {
+        console.log(res.data.user.username);    
+
+        SocketService.initSocket(socket, res.data.user.username, $scope);
+        socket.on('hi', function(data) {
+            console.log(data);
+        });
+
         FriendService.getEvents(token).then(function(events) {
             console.log(events);
 
@@ -48,6 +55,5 @@ angular.module('FeedController', ['ngCookies']).controller('FeedController', fun
             $mdToast.show($mdToast.simple().textContent('Unable to add friend.').position('top right'));
             
         });
-        
     }
 });

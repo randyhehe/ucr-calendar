@@ -1,4 +1,4 @@
-angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial', 'ngMessages', 'ui.timepicker'])
+angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial', 'ngMessages', 'ui.timepicker', 'btford.socket-io'])
 .config(function($mdDateLocaleProvider) {
     // Overwrites the default format with 'l' -> MM/DD/YYYY' flexible (month/day can have one digit)
     $mdDateLocaleProvider.parseDate = function(dateString) {
@@ -7,7 +7,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         return m.isValid() ? m.toDate() : new Date(NaN);
     }
 })
-.controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, $mdDialog, $mdToast) {
+.controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, SocketService, $mdDialog, $mdToast, socket) {
     $scope.calendarPage = true;
     $scope.signOut = HeaderService.signOut;    
     let token = $cookies.get('token');
@@ -18,8 +18,12 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
     }
 
     UserService.getUser(token).then(function(res) {
-        // valid user. populate the calendar UI.
-        console.log(res);
+        // valid user. actions here.
+        SocketService.initSocket(socket, res.data.user.username, $scope);
+        socket.on('hi', function(data) {
+            console.log(data);
+        });
+
     }, function(err) {
         $window.location.href = "/";
     });
