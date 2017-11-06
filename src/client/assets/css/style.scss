@@ -32,26 +32,33 @@ $error-color: rgb(221, 44, 0);
         border-bottom: 1px solid #000;
     }
 
-    .user-dropdown  {
-        float: right;
-    }
+    .right-header {
+        margin-right: 40px;
+        margin-top: 1px;
+        float:right;
 
-    .dropdown-menu {
-        margin: 2px -100 0;
-
-        li a:hover {
-            border: none;
+        .header-btn {
+            margin-right: 10px;        
+            background-color: transparent;
+            background-repeat: no-repeat;
+            border:none;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
         }
-    }
 
-    .user-button {
-        margin-right: 50px;        
-        background-color: transparent;
-        background-repeat: no-repeat;
-        border:none;
-        cursor: pointer;
-        overflow: hidden;
-        outline: none;
+        .dropdown-menu {
+            margin: 10px -120 0;
+    
+            li a:hover {
+                border: none;
+            }
+        }
+        
+        .fa-lg {
+            line-height: initial;
+            font-size: 1.5em;
+        }
     }
 }
 

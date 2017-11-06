@@ -22,20 +22,25 @@
   .header-partial .page .selected a {
     color: black;
     border-bottom: 1px solid #000; }
-  .header-partial .user-dropdown {
+  .header-partial .right-header {
+    margin-right: 40px;
+    margin-top: 1px;
     float: right; }
-  .header-partial .dropdown-menu {
-    margin: 2px -100 0; }
-    .header-partial .dropdown-menu li a:hover {
-      border: none; }
-  .header-partial .user-button {
-    margin-right: 50px;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none; }
+    .header-partial .right-header .header-btn {
+      margin-right: 10px;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      border: none;
+      cursor: pointer;
+      overflow: hidden;
+      outline: none; }
+    .header-partial .right-header .dropdown-menu {
+      margin: 10px -120 0; }
+      .header-partial .right-header .dropdown-menu li a:hover {
+        border: none; }
+    .header-partial .right-header .fa-lg {
+      line-height: initial;
+      font-size: 1.5em; }
 
 #create-event-dialog .toText {
   position: relative;
