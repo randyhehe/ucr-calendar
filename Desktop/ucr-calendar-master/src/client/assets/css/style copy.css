@@ -1,0 +1,136 @@
+@font-face {
+  font-family: 'avenir-next';
+  src: url("../fonts/avenir-next-regular.woff") format("woff"), url("../fonts/avenir-next-regular.tff") format("truetype"); }
+
+.container {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+  width: initial;
+  opacity: 100; }
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%; }
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px; }
+
+.a {
+  position: absolute;
+  top: 50%; }
+
+.parallax {
+  /* The image used */
+  background-image: url("./images/Sierra.jpg");
+  /* Full height */
+  height: 200%;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 50px; }
+
+.btn {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #847F7F;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 500px;
+  transition: all 0.2s;
+  cursor: pointer;
+  margin: 5px; }
+
+.btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.2s; }
+
+.btn span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.2s; }
+
+.btn:hover span {
+  padding-right: 25px; }
+
+.btn:hover span:after {
+  opacity: 1;
+  right: 0; }
+
+.header-partial {
+  margin-top: 25px; }
+  .header-partial .page a {
+    font-family: avenir-next;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: none; }
+  .header-partial .page a:hover {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6); }
+  .header-partial .page .selected a {
+    color: black;
+    border-bottom: 1px solid #000; }
+  .header-partial .user-dropdown {
+    float: right; }
+  .header-partial .dropdown-menu {
+    margin: 2px -100 0; }
+    .header-partial .dropdown-menu li a:hover {
+      border: none; }
+  .header-partial .user-button {
+    margin-right: 50px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none; }
+
+#myBtn {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Fixed/sticky position */
+  bottom: 20px;
+  /* Place the button at the bottom of the page */
+  right: 30px;
+  /* Place the button 30px from the right */
+  z-index: 99;
+  /* Make sure it does not overlap */
+  border: none;
+  /* Remove borders */
+  outline: none;
+  /* Remove outline */
+  background-color: red;
+  /* Set a background color */
+  color: white;
+  /* Text color */
+  cursor: pointer;
+  /* Add a mouse pointer on hover */
+  padding: 15px;
+  /* Some padding */
+  border-radius: 10px;
+  /* Rounded corners */ }
+
+#myBtn:hover {
+  background-color: #555;
+  /* Add a dark-grey background on hover */ }
