@@ -32,18 +32,22 @@ $error-color: rgb(221, 44, 0);
         border-bottom: 1px solid #000;
     }
 
-    .user-dropdown  {
-        float: right;
-    }
+    .right-header {
+        margin-right: 40px;
+        margin-top: 1px;
+        float:right;
 
-    .dropdown-menu {
-        margin: 2px -100 0;
-
-        li a:hover {
-            border: none;
+        .header-btn {
+            margin-right: 10px;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            border:none;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
         }
-    }
 
+<<<<<<< HEAD
     .user-button {
         margin-right: 50px;
         background-color: transparent;
@@ -52,6 +56,20 @@ $error-color: rgb(221, 44, 0);
         cursor: pointer;
         overflow: hidden;
         outline: none;
+=======
+        .dropdown-menu {
+            margin: 10px -120 0;
+
+            li a:hover {
+                border: none;
+            }
+        }
+
+        .fa-lg {
+            line-height: initial;
+            font-size: 1.5em;
+        }
+>>>>>>> 95992bb31d5a166909c746bcaf2607d17d4237d5
     }
 }
 
@@ -215,9 +233,8 @@ body {font-family: Verdana, sans-serif;}
 
 .feed-card {
     margin-top: 40px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    display:inline-block;
+    width: calc(100vw - 400px);
     font-family: avenir-next;
 
     .scrollable {
@@ -264,4 +281,38 @@ body {font-family: Verdana, sans-serif;}
     .no-padding {
         padding: 0px;
     }
+}
+=======
+    }
+}
+
+.friends-list {
+    font-family: avenir-next;
+    width: 276px;
+    margin-top: 40px;
+    float: right;
+    box-shadow: none;
+    border-left: thin solid rgba(0,0,0,0.2);
+
+    .scrollable {
+        background-color: white;
+        overflow: scroll;
+        height: calc(100vh - 180px);
+    }
+
+    .add-friend-footer {
+        padding-left: 10px;
+    }
+
+    .add-friend-btn {
+        min-width: initial;
+        position: relative;
+        top: -13px;
+    }
+
+    md-card-content {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
 }

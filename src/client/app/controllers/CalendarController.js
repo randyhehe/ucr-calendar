@@ -1,4 +1,4 @@
-angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial', 'ngMessages', 'ui.timepicker'])
+angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial', 'ngMessages', 'ui.timepicker', 'btford.socket-io'])
 .config(function($mdDateLocaleProvider) {
     // Overwrites the default format with 'l' -> MM/DD/YYYY' flexible (month/day can have one digit)
     $mdDateLocaleProvider.parseDate = function(dateString) {
@@ -7,7 +7,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         return m.isValid() ? m.toDate() : new Date(NaN);
     }
 })
-.controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, $mdDialog, $mdToast) {
+.controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, SocketService, $mdDialog, $mdToast, socket) {
     $scope.calendarPage = true;
     $scope.signOut = HeaderService.signOut;
     let token = $cookies.get('token');
@@ -17,9 +17,16 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         $window.location.href = "/";
     }
 
-    UserService.getUser(token).then(function(res) {
-        // valid user. populate the calendar UI.
-        console.log(res);
+    $scope.username = '';
+    UserService.getUser(token).then(function(user) {
+        // valid user. actions here.
+        $scope.username = user.username;
+        console.log("username");
+        console.log($scope.username);
+        SocketService.initSocket(socket, user.username, $scope);
+        socket.on('hi', function(data) {
+            console.log(data);
+        });
     }, function(err) {
         $window.location.href = "/";
     });
@@ -100,19 +107,32 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
                 if (!error) $scope.createEventError = "Event end date must be after start date.";
                 error =  true;
             }
+            let public = true;
 
             if (!error) {
                 // should have a way to toggle private and public... do this later
-                CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, true, token)
-                .then(function(res) {
+                CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, public, token)
+                 .then(function(res) {
                     console.log(res);
                     $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('top right'));
                     $mdDialog.cancel();
 
-                }, function(err) {
-                    // handle error
+                    return UserService.getUser(token);
+                }).then(function(user) {
+                    let event = {
+                        eventName: eventName,
+                        user: user.username,
+                        startTime: startMoment.valueOf(),
+                        endTime: endMoment.valueOf(),
+                        description: eventDescription,
+                        public: public
+                    }
+                    console.log(event);
+                    socket.emit('event', event);
+
+                }).catch(function(err) {
                     console.log(err);
-                });;
+                });
             } else {
                 // show the error message
             }
@@ -132,6 +152,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
             return moment;
         }
     }
+<<<<<<< HEAD
 
     $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
     $scope.yearDate = moment().format('YYYY');
@@ -236,3 +257,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 // }, function(err) {
 //     console.log(err); // email is same as current account, or email is already their friend
 // });
+=======
+});
+>>>>>>> 95992bb31d5a166909c746bcaf2607d17d4237d5

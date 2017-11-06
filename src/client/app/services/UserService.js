@@ -1,7 +1,9 @@
 angular.module('UserService', []).factory('UserService', ['$http', function($http) {
     return {
-        userExists: function(email) {
-            return $http.get('/api/users/exists/' + email);
+        userExists: function(user) {
+            return $http.get('/api/users/exists/' + user).then(function(res) {
+                return res.data.exists;
+            });
         },
 
         createUser: function(email, username, password) {
@@ -20,9 +22,9 @@ angular.module('UserService', []).factory('UserService', ['$http', function($htt
             });
         },
 
-        authenticateUser: function(email, password) {
+        authenticateUser: function(user, password) {
             let data = {
-                email: email,
+                user: user,
                 password: password
             };
             data = JSON.stringify(data);
@@ -36,7 +38,9 @@ angular.module('UserService', []).factory('UserService', ['$http', function($htt
         },
 
         getUser: function(token) {
-            return $http.get('/api/users/me', {headers: {"x-access-token": token}});
+            return $http.get('/api/users/me', {headers: {"x-access-token": token}}).then(function(res) {
+                return res.data.user;
+            });
         }
         
     }

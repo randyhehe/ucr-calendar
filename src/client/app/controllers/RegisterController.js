@@ -6,6 +6,13 @@ angular.module('RegisterController', []).controller('RegisterController', functi
             console.log("username is empty");
             numErrors++;
         } 
+
+        const usernameRegex = /^[a-zA-Z0-9]+$/;
+        if (!usernameRegex.test(username)) {
+            console.log('Username can only have characters from a-z, A-Z, and 0-9');
+            numErrors++;
+        }
+
         if (email === undefined || email === '') {
             // email is empty, output error onto screen
             console.log('email is empty');
@@ -25,7 +32,7 @@ angular.module('RegisterController', []).controller('RegisterController', functi
             // passwords don't match, output error onto screen
             console.log("passwords don't match");
             numErrors++;
-        } 
+        }
         
         if (numErrors === 0) {
             createUser(email, username, firstPassword);
@@ -34,15 +41,17 @@ angular.module('RegisterController', []).controller('RegisterController', functi
 
     function createUser(email, username, password, callback) {
         email = email.toLowerCase();
-
-        UserService.userExists(email).then(function(res) {
-            UserService.createUser(email, username, password).then(function(res) {
-                $window.location.href = '/';
-            }, function(err) {
-                console.log(err);
-            });
-        }, function(err) {
-            console.log(err);
+        
+        UserService.userExists(username).then(function(exists) {
+            if (exists) throw new Error("Username exists!");
+            return UserService.userExists(email);
+        }).then(function(exists) {
+            if (exists) throw new Error("Email exists!");
+            return UserService.createUser(email, username, password);
+        }).then(function(res) {
+            $window.location.href = '/';
+        }).catch(function(err) {
+            console.log(err.message);
         });
     }
 });

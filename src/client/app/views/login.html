@@ -3,15 +3,15 @@
 	
 	<form>
 	    <div class="form-group">
-		    <label>Email</label>
-		    <input type="email" class="form-control" ng-model="email">
+		    <label>Username/Email</label>
+		    <input type="text" class="form-control" ng-model="user">
 	    </div>
 	    <div class="form-group">
 		    <label>Password</label>
 		    <input type="password" class="form-control" ng-model="password">
 		</div>
 
-	    <button type="submit" ng-click="myFunction(email, password)" class="btn btn-warning btn-lg">Login</button>
+	    <button type="submit" ng-click="myFunction(user, password)" class="btn btn-warning btn-lg">Login</button>
     </form>
     <p>Need an account? Register <a href="/register">here</a>.</p>
 </div>

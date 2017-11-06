@@ -1,4 +1,4 @@
-angular.module('FeedController', ['ngCookies']).controller('FeedController', function($scope, $cookies, $window, UserService, HeaderService, FriendService) {
+angular.module('FeedController', ['ngCookies', 'btford.socket-io']).controller('FeedController', function($scope, $cookies, $window, UserService, HeaderService, FriendService, SocketService, $mdToast, socket) {
     $scope.feedPage = true;
     $scope.signOut = HeaderService.signOut;    
 
@@ -8,15 +8,20 @@ angular.module('FeedController', ['ngCookies']).controller('FeedController', fun
         $window.location.href = "/";
     }
 
-    UserService.getUser(token).then(function(res) {
-        // valid user. populate the feeds UI.
-        console.log(res);
+    UserService.getUser(token).then(function(user) {
+        console.log(user.username);    
 
-        FriendService.getEvents(token).then(function(res) {
+        SocketService.initSocket(socket, user.username, $scope);
+        socket.on('event', function(data) {
+            console.log(data);
+        });
 
-            $scope.todos = [];            
-            for (let i = res.data.events.length - 1; i >= 0; i--) {
-                let calEvent = res.data.events[i];
+        FriendService.getEvents(token).then(function(events) {
+            console.log(events);
+
+            $scope.friendEvents = [];
+            for (let i = events.length - 1; i >= 0; i--) {
+                let calEvent = events[i];
                 let formattedEvent  = {
                     user: calEvent.user,
                     name: calEvent.name,
@@ -25,12 +30,30 @@ angular.module('FeedController', ['ngCookies']).controller('FeedController', fun
                     startTime: moment(calEvent.startTime, 'x').format('MM/DD/YYYY h:mma'),
                     endTime: moment(calEvent.endTime, 'x').format('MM/DD/YYYY h:mma')
                 }
-                $scope.todos.push(formattedEvent);
+                $scope.friendEvents.push(formattedEvent);
             }
-        }, function(err) {
-            console.log(err);
+        }).catch(function(error) {
+            // do someething with thee error
         });
+
+        FriendService.getFriends(token).then(function(friends) {
+            $scope.friends = friends;
+        });
+
     }, function(err) {
         $window.location.href = "/";
     });
+
+    $scope.addFriend = function() {
+        const friendName = $scope.addFriendInput;
+        FriendService.addFriend(friendName, token).then(function(res) {
+            console.log("it worked!");
+            $mdToast.show($mdToast.simple().textContent('Friend added.').position('top right'));
+            
+        }, function(err) {
+            // username is same as current account, or username is already their friend
+            $mdToast.show($mdToast.simple().textContent('Unable to add friend.').position('top right'));
+            
+        });
+    }
 });
