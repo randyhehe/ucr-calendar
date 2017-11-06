@@ -135,7 +135,8 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 
     $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
     $scope.yearDate = moment().format('YYYY');
-    $scope.currentDate = moment().date(); // used to highlight current date
+    $scope.currentDate = moment(); // used to highlight current date
+    console.log($scope.currentDate)
     var currMoment = moment();
 
     render(currMoment) // init render of current month
