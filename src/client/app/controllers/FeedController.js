@@ -8,11 +8,11 @@ angular.module('FeedController', ['ngCookies', 'btford.socket-io']).controller('
         $window.location.href = "/";
     }
 
-    UserService.getUser(token).then(function(res) {
-        console.log(res.data.user.username);    
+    UserService.getUser(token).then(function(user) {
+        console.log(user.username);    
 
-        SocketService.initSocket(socket, res.data.user.username, $scope);
-        socket.on('hi', function(data) {
+        SocketService.initSocket(socket, user.username, $scope);
+        socket.on('event', function(data) {
             console.log(data);
         });
 

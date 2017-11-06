@@ -25,26 +25,13 @@ app.use(session({
     saveUninitialized: false
 }));
 app.use('/', routes);
+
+// start server
 let server = app.listen(port);
-
-// reuse server for socket.io
-let io = require('socket.io').listen(server);
-
-io.on('connection', function(socket) {
-    socket.on('subscribe', function(username) {
-        console.log(username);
-        socket.join(username);
-    });
-});
-
-setInterval(function() {
-    io.in('birdkicker').emit('hi', 'works');
-}, 1000);
-// test end for socket.io
-
-
-// start app
 console.log('Listening on port: ' + port);
+
+// start socket connection
+require('./src/server/socket.js')(server);
 
 exports = module.exports = app;
 

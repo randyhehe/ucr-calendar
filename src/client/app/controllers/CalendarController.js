@@ -17,13 +17,16 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         $window.location.href = "/";
     }
 
-    UserService.getUser(token).then(function(res) {
+    $scope.username = '';
+    UserService.getUser(token).then(function(user) {
         // valid user. actions here.
-        SocketService.initSocket(socket, res.data.user.username, $scope);
+        $scope.username = user.username;
+        console.log("username");
+        console.log($scope.username);
+        SocketService.initSocket(socket, user.username, $scope);
         socket.on('hi', function(data) {
             console.log(data);
         });
-
     }, function(err) {
         $window.location.href = "/";
     });
@@ -104,19 +107,32 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
                 if (!error) $scope.createEventError = "Event end date must be after start date.";
                 error =  true;
             }
+            let public = true;
 
             if (!error) {
                 // should have a way to toggle private and public... do this later
-                CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, true, token)
-                .then(function(res) {
+                CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, public, token)
+                 .then(function(res) {
                     console.log(res);
                     $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('top right'));
                     $mdDialog.cancel();
-                    
-                }, function(err) {
-                    // handle error
+
+                    return UserService.getUser(token);         
+                }).then(function(user) {
+                    let event = {
+                        eventName: eventName,
+                        user: user.username,
+                        startTime: startMoment.valueOf(),
+                        endTime: endMoment.valueOf(),
+                        description: eventDescription,
+                        public: public
+                    }
+                    console.log(event);
+                    socket.emit('event', event);
+
+                }).catch(function(err) {
                     console.log(err);
-                });;
+                });
             } else {
                 // show the error message
             }
@@ -137,30 +153,3 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         }
     }
 });
-
-/*
- * Example of using API to get all events
- */
-// CalendarEventService.getEvents(token).then(function(res) {
-//     console.log(res.data.events);
-// }, function(err) {
-//     console.log(err);
-// });
-
-/* 
- * Example of using API to create an event
- */
-// CalendarEventService.createEvent("eventName", "eventTime", "eventDescription", true, token).then(function(res) {
-//     console.log("Event created!");
-// }, function(err) {
-//     console.log("Event failed to be created!");
-// });    
-
-/*
- * Example of using API to add friend
- */ 
-// FriendService.addFriend("username", token).then(function(res) {
-//     console.log(res);
-// }, function(err) {
-//     console.log(err); // username is same as current account, or username is already their friend
-// });
