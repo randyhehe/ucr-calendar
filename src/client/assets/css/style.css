@@ -90,7 +90,7 @@ body {
 
 /* Month header */
 .month {
-  padding: 50px 25px;
+  padding: 25px 25px;
   width: 100%;
   background: #1abc9c;
   text-align: center; }
@@ -154,18 +154,23 @@ body {
   display: block;
   float: left;
   padding: 10px;
-  width: 14.369%;
+  width: 14.35%;
   box-sizing: border-box;
   border: 1px solid #ccc;
   margin-right: -1px;
   margin-bottom: -1px;
-  height: 120px; }
+  height: 95px; }
 
 /* Highlight the "current" day */
 .days td .active {
   padding: 5px;
   background: #1abc9c;
   color: white !important; }
+
+.days td .notRealMonth {
+  margin: 0;
+  padding: 0;
+  color: #808080; }
 
 .days td:hover {
   color: #2693ff;

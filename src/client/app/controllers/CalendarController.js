@@ -152,12 +152,10 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
             return moment;
         }
     }
-<<<<<<< HEAD
 
     $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
     $scope.yearDate = moment().format('YYYY');
     $scope.currentDate = moment(); // used to highlight current date
-    console.log($scope.currentDate)
     var currMoment = moment();
 
     render(currMoment) // init render of current month
@@ -174,8 +172,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 
       var numberOfDays = currMoment.daysInMonth(); // Returns number of days
       var i,tempFirstDay;
-      //console.log(lastMonth);
-      //console.log(firstDay);
       var x = lastMonth;
       for (i = firstDay-1; i >= 0; --i) {
         rowPosition = "col" + i;
@@ -183,31 +179,33 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         x = x - 1;
       }
       tempFirstDay = firstDay;
+
+
       for (i = 1; i <= numberOfDays; i++) {
         rowPosition = "col" + tempFirstDay;
         tempFirstDay = tempFirstDay + 1;
 
-        if (i == $scope.currentDate) {
+
+
+        if (i == $scope.currentDate.format('D') && currMoment.format("M")
+        == $scope.currentDate.format("M") &&
+        currMoment.format("YY") == $scope.currentDate.format("YY")) {
+
           var newSpan = document.createElement('span');
           newSpan.setAttribute('class', 'active');
           document.getElementById(rowPosition).innerHTML = "<span class=active>" + i + "</span>"
 
         }
         else {
-            document.getElementById(rowPosition).innerHTML = "<span class=notRealMonth>" + i + "</span>";
+            document.getElementById(rowPosition).innerHTML = i;
         }
 
       }
 
-      for (i = numberOfDays; i <= 42 - numberOfDays - firstDay; i++) {
-        rowPosition = "col" + numberOfDays
-      }
-      //console.log(tempFirstDay);
-
       for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) {
         rowPosition = "col" + tempFirstDay;
         tempFirstDay = tempFirstDay + 1;
-         document.getElementById(rowPosition).innerHTML = i;
+         document.getElementById(rowPosition).innerHTML = "<span class=notRealMonth>" + i + "</span>";
       }
 
     }
@@ -257,6 +255,3 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 // }, function(err) {
 //     console.log(err); // email is same as current account, or email is already their friend
 // });
-=======
-});
->>>>>>> 95992bb31d5a166909c746bcaf2607d17d4237d5
