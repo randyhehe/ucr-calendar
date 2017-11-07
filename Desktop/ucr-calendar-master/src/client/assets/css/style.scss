@@ -11,6 +11,10 @@
 h1 {color:black;}
 h4 {color:black;}
 
+.input{
+  width:200px;
+}
+
 // .leaf{
 //   list-style-image: url('./images/calendar.jpg');
 //   background-size: 10px;
@@ -55,12 +59,19 @@ ul li:before {
     font-family: 'avenir-next';
 }
 
-.cent
-{
-    height: 50px;
-    width: 50px;
-    background-color: black;
+.container2 {
+
+  text-align: center;
+  background-image: url('./images/sierra.jpg');
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
+
+
 
 .left-half {
     width: 50%;
@@ -95,6 +106,7 @@ ul li:before {
   cursor: pointer;
   margin: 5px;
   border-radius: 12px;
+  max-width: 90%;
 
 }
 

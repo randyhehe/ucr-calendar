@@ -11,6 +11,9 @@ h1 {
 h4 {
   color: black; }
 
+.input {
+  width: 200px; }
+
 ul {
   list-style-type: none; }
 
@@ -34,10 +37,15 @@ ul li:before {
   background-image: url("./images/sierra.jpg");
   font-family: 'avenir-next'; }
 
-.cent {
-  height: 50px;
-  width: 50px;
-  background-color: black; }
+.container2 {
+  text-align: center;
+  background-image: url("./images/sierra.jpg");
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0; }
 
 .left-half {
   width: 50%;
@@ -65,7 +73,8 @@ ul li:before {
   transition: all 0.2s;
   cursor: pointer;
   margin: 5px;
-  border-radius: 12px; }
+  border-radius: 12px;
+  max-width: 90%; }
 
 .btn span {
   cursor: pointer;
