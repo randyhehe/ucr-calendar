@@ -26,7 +26,15 @@ module.exports = function(server) {
                 }
             });
         });
+
+        socket.on('addFriendRequest', function(friendName, username) {
+            io.in(friendName).emit('addFriendRequest', username);
+        });
     });
+
+    function notifyOnFriendRequest(err, user) {
+        
+    }
 
     // setInterval(function() {
     //     io.in('birdkicker').emit('hi', 'works');

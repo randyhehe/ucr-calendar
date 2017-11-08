@@ -1,5 +1,5 @@
-angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial', 'ngMessages', 'ui.timepicker', 'btford.socket-io'])
-.config(function($mdDateLocaleProvider) {
+angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial', 'ngMessages', 'ui.timepicker'])
+.config(($mdDateLocaleProvider) => {
     // Overwrites the default format with 'l' -> MM/DD/YYYY' flexible (month/day can have one digit)
     $mdDateLocaleProvider.parseDate = function(dateString) {
         let format = 'l';
@@ -7,30 +7,10 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         return m.isValid() ? m.toDate() : new Date(NaN);
     }
 })
-.controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, SocketService, $mdDialog, $mdToast, socket) {
-    $scope.calendarPage = true;
-    $scope.signOut = HeaderService.signOut;    
-    let token = $cookies.get('token');
+.controller('CalendarController', CalendarController);
+
+function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
     
-    console.log(token); // this is the current logged in user
-    if (token === undefined) {
-        $window.location.href = "/";
-    }
-
-    $scope.username = '';
-    UserService.getUser(token).then(function(user) {
-        // valid user. actions here.
-        $scope.username = user.username;
-        console.log("username");
-        console.log($scope.username);
-        SocketService.initSocket(socket, user.username, $scope);
-        socket.on('hi', function(data) {
-            console.log(data);
-        });
-    }, function(err) {
-        $window.location.href = "/";
-    });
-
     $scope.createEvent = function(ev) {
         $mdDialog.show({
           controller: CreateEventController,
@@ -39,16 +19,16 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
           targetEvent: ev,
           clickOutsideToClose:true,
           focusOnOpen: false,
-          fullscreen: $scope.customFullscreen
+          fullscreen: $scope.customFullscreen,
+          token: $scope.token
         });
     };
 
-    function CreateEventController($scope, $mdDialog) {
+    function CreateEventController($scope, $mdDialog, token) {
         $scope.timePickerOptions = {
             scrollDefault: 'now',
             asMoment: true
         }
-
         $scope.eventName = "Untitled Event";
 
         let currDate = new Date();
@@ -152,4 +132,4 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
             return moment;
         }
     }
-});
+}

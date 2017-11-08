@@ -6,13 +6,11 @@ angular.module('CalendarApp', [
     'RegisterController', 
     'CalendarController', 
     'FeedController', 
+    'AppController',
     'UserService', 
     'CalendarEventService', 
     'FriendService', 
-    'HeaderService',
-    'SocketService',
     'btford.socket-io',
-    'ngCookies'
 ]).factory('socket', function(socketFactory) {
     let socket = socketFactory();
     return socket;
