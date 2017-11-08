@@ -14,7 +14,7 @@
                     <li ng-repeat="item in notifications">
                         <span>{{item}}</span>
                         <md-button class="md-primary md-raised delete-notif-btn" ng-click="acceptFriendRequest(item)">Confirm</md-button>
-                        <md-button class="md-raised confirm-notif-btn">Delete</md-button>
+                        <md-button class="md-raised confirm-notif-btn" ng-click="deleteFriendRequest(item)">Delete</md-button>
                     </li>
                 </ul>
             </span>

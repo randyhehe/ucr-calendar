@@ -29,6 +29,17 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         });
     }
 
+    $scope.deleteFriendRequest = function(friendName) {
+        FriendService.deleteFriendRequest(friendName, $scope.token)
+        .then(() => {
+            UserService.getUser($scope.token).then(initNotifications).catch(redirectUser);   
+            $mdToast.show($mdToast.simple().textContent('Friend request removed.').position('top right'));
+        }).catch((err) => {
+            console.log(err);
+            // handle error
+        })
+    }
+
     function init() {
         routeHandler();
         $scope.token = $cookies.get('token');

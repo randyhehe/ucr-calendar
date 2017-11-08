@@ -40,12 +40,27 @@ angular.module('FriendService', []).factory('FriendService', ['$http', function(
             };
             data = JSON.stringify(data);
 
-            console.log('blah');
-            console.log(data);
-
             return $http({
                 method: 'DELETE',
                 url: '/api/friends',
+                data: data,
+                timeout: 4000,
+                headers: {
+                    'x-access-token': token,
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        },
+
+        deleteFriendRequest: function(username, token) {
+            let data = {
+                username: username
+            };
+            data = JSON.stringify(data);
+
+            return $http({
+                method: 'DELETE',
+                url: '/api/friendRequests',
                 data: data,
                 timeout: 4000,
                 headers: {

@@ -2,6 +2,9 @@
   font-family: 'avenir-next';
   src: url("../fonts/avenir-next-regular.woff") format("woff"), url("../fonts/avenir-next-regular.tff") format("truetype"); }
 
+body {
+  background-color: initial; }
+
 .container {
   padding-right: 30px;
   padding-left: 30px;
@@ -171,9 +174,7 @@
   font-family: avenir-next;
   width: 276px;
   margin-top: 40px;
-  float: right;
-  box-shadow: none;
-  border-left: thin solid rgba(0, 0, 0, 0.05); }
+  float: right; }
   .friends-list .scrollable {
     background-color: white;
     overflow: scroll;

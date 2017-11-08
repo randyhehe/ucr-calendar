@@ -269,14 +269,13 @@ router.delete('/api/friends', jwtAuthenticator, function(req, res) {
     if (!req.body.username) {
         return res.status(400).send({success: false, message: 'Invalid body.'});
     }
-
     User.findOne({
         username: req.decoded.username
     }, function(err, currUser) {
         if (err || currUser == null)
             return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});                            
         else if (!currUser.friends.includes(req.body.username))
-            return res.status(400).send({success: false, message: 'Cannot delete nonexistant friend.'});            
+            return res.status(400).send({success: false, message: 'Cannot delete nonexistant friend.'});
 
         User.findOne({
            username: req.body.username 
@@ -306,6 +305,42 @@ router.delete('/api/friends', jwtAuthenticator, function(req, res) {
                     else res.json({success: true});
                 });  
             })
+        });
+    });
+});
+
+router.delete('/api/friendRequests', jwtAuthenticator, function(req, res) {
+    if (!req.body.username) {
+        return res.status(400).send({success: false, message: 'Invalid body.'});
+    }
+    User.findOne({
+        username: req.decoded.username
+    }, function(err, currUser) {
+        if (err || currUser == null)
+            return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});                            
+        User.findOne({
+            username: req.body.username
+        }, function(err, otherUser) {
+            // have to find the request to delete
+            for (let i = 0; i < currUser.friendRequests.length; i++) {
+                if (currUser.friendRequests[i].sender === req.body.username) {
+                    currUser.friendRequests.splice(i, 1);
+                    break;
+                }
+            }
+            currUser.save(function(err) {
+                if (err) return res.status(500).send({success: false, message: "Unable to delete friend request."});
+                for (let i = 0; i < otherUser.friendRequests.length; i++) {
+                    if (otherUser.friendRequests[i].receiver === req.decoded.username) {
+                        otherUser.friendRequests.splice(i, 1);
+                        break;
+                    }
+                }
+                otherUser.save(function(err) {
+                    if (err) res.status(500).send({success: false, message: "Unable to delete friend request."});
+                    else return res.json({success: true});
+                });
+            });
         });
     });
 });
