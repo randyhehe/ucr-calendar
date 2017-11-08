@@ -4,6 +4,7 @@
 	    <div class="form-group">
 		    <label>Username</label>
 		    <input type="text" class="form-control" ng-model="username">
+        <span id='username_message'></span>
 	    </div>
 	    <div class="form-group">
 		    <label>Email</label>
@@ -22,5 +23,6 @@
         </div>
 	    <button type="submit" ng-click="register(username, email, firstPassword, secondPassword)" class="btn">Sign up!</button>
     </form>
-    <a href="/login" color:"black">Already have an account?</a>
+    <!--<a href="/login">Already have an account?</a>-->
+    <p style="text-align:center; color:black">Have an account? Login <a href="/login" style="color:navy">here</a>.</p>
 </div>

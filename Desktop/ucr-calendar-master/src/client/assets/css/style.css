@@ -11,8 +11,10 @@ h1 {
 h4 {
   color: black; }
 
-.input {
-  width: 200px; }
+.form-control {
+  width: 300px;
+  text-align: center;
+  margin: auto; }
 
 ul {
   list-style-type: none; }
