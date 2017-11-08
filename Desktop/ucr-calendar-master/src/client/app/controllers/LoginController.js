@@ -7,8 +7,8 @@ angular.module('LoginController', ['ngCookies']).controller('LoginController', f
             $window.location.href = '/calendar';
         }, function(err) {
             // show a message on the screen saying that there is an error.
-            document.getElementById('password_message').style.color = 'red';
-            document.getElementById('password_message').innerHTML = 'Incorrect password.';
+            document.getElementById('password_message').style.color = 'black';
+            document.getElementById('password_message').innerHTML = 'Incorrect password';
             console.log(err);
         });
     }
