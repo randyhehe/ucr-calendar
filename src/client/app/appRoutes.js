@@ -1,4 +1,25 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('appRoutes', ['ui.router'])
+// .config(function($stateProvider) {
+//     let calendarState = {
+//         name: 'calendar',
+//         url: '/calendar',
+//         templateUrl: 'app/views/app.html',
+//         controller: 'AppController'
+//     }
+
+//     let feedState = {
+//         name: 'feed',
+//         url: '/feed',
+//         templateUrl: 'app/views/app.html',
+//         controller: 'AppController'
+//     }
+
+//     $stateProvider.state(calendarState);
+//     $stateProvider.state(feedState);
+// });
+
+
+.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'app/views/home.html',
@@ -13,13 +34,18 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'RegisterController'
         })
         .when('/calendar', {
-            templateUrl: 'app/views/calendar.html',
-            controller: 'CalendarController'
-         })
-         .when('/feed', {
-            templateUrl: 'app/views/feed.html',
-            controller: 'FeedController'
+            templateUrl: 'app/views/app.html',
+            controller: 'AppController',
+            reloadOnSearch: false
+        })
+        .when('/feed', {
+            templateUrl: 'app/views/app.html',
+            controller: 'AppController',
+            reloadOnSearch: false
          });
+        // //  .otherwise({
+        // //      redirectTo: '/'
+        // //  })
 
     $locationProvider.html5Mode(true);  
 }]);

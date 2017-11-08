@@ -2,6 +2,9 @@
   font-family: 'avenir-next';
   src: url("../fonts/avenir-next-regular.woff") format("woff"), url("../fonts/avenir-next-regular.tff") format("truetype"); }
 
+body {
+  background-color: initial; }
+
 .container {
   padding-right: 30px;
   padding-left: 30px;
@@ -35,12 +38,68 @@
       overflow: hidden;
       outline: none; }
     .header-partial .right-header .dropdown-menu {
-      margin: 10px -120 0; }
+      margin: 10px -120 0;
+      font-family: avenir-next; }
       .header-partial .right-header .dropdown-menu li a:hover {
         border: none; }
+    .header-partial .right-header .notif-dropdown-menu:before {
+      position: absolute;
+      top: -7px;
+      left: 280px;
+      display: inline-block;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid #ccc;
+      border-left: 7px solid transparent;
+      border-bottom-color: rgba(0, 0, 0, 0.2);
+      content: ''; }
+    .header-partial .right-header .notif-dropdown-menu:after {
+      position: absolute;
+      top: -6px;
+      left: 281px;
+      display: inline-block;
+      border-right: 6px solid transparent;
+      border-bottom: 6px solid #ffffff;
+      border-left: 6px solid transparent;
+      content: ''; }
+    .header-partial .right-header .notif-dropdown-menu {
+      padding: 0px;
+      width: 380px;
+      margin: 10px -270 0; }
+      .header-partial .right-header .notif-dropdown-menu .no-notif-menu {
+        margin-top: 7px;
+        margin-left: 7px;
+        margin-right: 7px;
+        margin-bottom: 7px;
+        font-size: 16px;
+        text-align: center; }
+      .header-partial .right-header .notif-dropdown-menu .delete-notif-btn, .header-partial .right-header .notif-dropdown-menu .confirm-notif-btn {
+        float: right; }
+      .header-partial .right-header .notif-dropdown-menu li {
+        display: flex;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        padding-top: 5px;
+        padding-bottom: 5px; }
+        .header-partial .right-header .notif-dropdown-menu li span {
+          flex: 1;
+          padding: 1em; }
+        .header-partial .right-header .notif-dropdown-menu li .confirm-notif-btn {
+          right: 8px; }
+        .header-partial .right-header .notif-dropdown-menu li .delete-notif-btn, .header-partial .right-header .notif-dropdown-menu li .confirm-notif-btn {
+          text-transform: none;
+          font-weight: 700;
+          float: right; }
     .header-partial .right-header .fa-lg {
       line-height: initial;
       font-size: 1.5em; }
+    .header-partial .right-header .notif-num {
+      background-color: #fa3e3e;
+      border-radius: 2px;
+      color: white;
+      padding: 1px 3px;
+      position: absolute;
+      right: 118px;
+      top: 22px;
+      font-size: 10px; }
 
 #create-event-dialog .toText {
   position: relative;
@@ -246,3 +305,24 @@ body {
   .friends-list md-card-content {
     padding-top: 0px;
     padding-bottom: 0px; }
+  .friends-list md-list-item .md-focused {
+    background-color: transparent; }
+  .friends-list .md-button {
+    width: inherit;
+    text-align: left;
+    height: 48px;
+    text-transform: none;
+    padding-left: 10px;
+    margin: 0px; }
+  .friends-list md-list-item, .friends-list md-list-item .md-list-item-inner {
+    padding: 0px; }
+  .friends-list md-menu {
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available; }
+
+.md-open-menu-container .md-button:not([disabled]).md-focused {
+  background-color: transparent !important; }
+
+.md-open-menu-container md-menu-content {
+  padding: 0px; }

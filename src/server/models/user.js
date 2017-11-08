@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 let bcrypt = require('bcrypt');
 let CalendarEventSchema = require('./calendarevent.js').schema;
+let FriendRequestSchema = require('./friendrequest.js').schema;
 
 let UserSchema = new mongoose.Schema({
     email: {
@@ -18,6 +19,9 @@ let UserSchema = new mongoose.Schema({
         required: false
     }, friends: {
         type: [String],
+        required: false
+    }, friendRequests: {
+        type: [FriendRequestSchema],
         required: false
     }
 }, {minimize: false});

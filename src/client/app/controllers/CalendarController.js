@@ -1,5 +1,5 @@
-angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial', 'ngMessages', 'ui.timepicker', 'btford.socket-io'])
-.config(function($mdDateLocaleProvider) {
+angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial', 'ngMessages', 'ui.timepicker'])
+.config(($mdDateLocaleProvider) => {
     // Overwrites the default format with 'l' -> MM/DD/YYYY' flexible (month/day can have one digit)
     $mdDateLocaleProvider.parseDate = function(dateString) {
         let format = 'l';
@@ -7,6 +7,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         return m.isValid() ? m.toDate() : new Date(NaN);
     }
 })
+<<<<<<< HEAD
 .controller('CalendarController', function($scope, $cookies, $window, UserService, CalendarEventService, FriendService, HeaderService, SocketService, $mdDialog, $mdToast, socket) {
     $scope.calendarPage = true;
     $scope.signOut = HeaderService.signOut;
@@ -30,6 +31,11 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
     }, function(err) {
         $window.location.href = "/";
     });
+=======
+.controller('CalendarController', CalendarController);
+>>>>>>> 4717025f0c973b5d905c8774c9dfb6fb20d153b8
+
+function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
 
     $scope.createEvent = function(ev) {
         $mdDialog.show({
@@ -39,16 +45,16 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
           targetEvent: ev,
           clickOutsideToClose:true,
           focusOnOpen: false,
-          fullscreen: $scope.customFullscreen
+          fullscreen: $scope.customFullscreen,
+          token: $scope.token
         });
     };
 
-    function CreateEventController($scope, $mdDialog) {
+    function CreateEventController($scope, $mdDialog, token) {
         $scope.timePickerOptions = {
             scrollDefault: 'now',
             asMoment: true
         }
-
         $scope.eventName = "Untitled Event";
 
         let currDate = new Date();
@@ -152,7 +158,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
             return moment;
         }
     }
-
+    
     $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
     $scope.yearDate = moment().format('YYYY');
     $scope.currentDate = moment(); // used to highlight current date
@@ -255,3 +261,5 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 // }, function(err) {
 //     console.log(err); // email is same as current account, or email is already their friend
 // });
+
+}

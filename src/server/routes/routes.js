@@ -57,7 +57,8 @@ router.post('/api/users', function(req, res) {
                 username: req.body.username,
                 password: hash,
                 events: [],
-                friends: []
+                friends: [],
+                friendRequests: []
             };
             User.create(userData, function(err, user) {
                 if (err) {
@@ -157,7 +158,6 @@ router.post('/api/events', jwtAuthenticator, function(req, res) {
     }
 });
 
-// Add friend... later add another API to request before being able to add immediately.
 router.post('/api/friends', jwtAuthenticator, function(req, res) {
     if (req.body.username && (req.body.username !== req.decoded.username)) {
         User.findOne({
@@ -175,11 +175,28 @@ router.post('/api/friends', jwtAuthenticator, function(req, res) {
                         return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});   
                     } else {
                         currUser.friends.push(req.body.username);
+
+                        for (let i = 0; i < currUser.friendRequests.length; i++) {
+                            if (currUser.friendRequests[i].receiver === currUser.username && currUser.friendRequests[i].sender === req.body.username) {
+                                currUser.friendRequests.splice(i, 1);
+                                break;
+                            }
+                        }
+
                         currUser.save(function(err) {
                             if (err) {
                                 res.status(500).send({success: false, message: "Unable to add friend."});
                             } else {
                                 otherUser.friends.push(req.decoded.username);
+
+                                for (let i = 0; i < otherUser.friendRequests.length; i++) {
+                                    if (otherUser.friendRequests[i].receiver === req.decoded.username && otherUser.friendRequests[i].sender === req.body.username) {
+                                        otherUser.friendRequests.splice(i, 1);
+                                        break;
+                                    }
+                                }
+
+
                                 otherUser.save(function(err) {
                                     if (err) {
                                         res.status(500).send({success: false, message: "Unable to add friend."});
@@ -200,6 +217,134 @@ router.post('/api/friends', jwtAuthenticator, function(req, res) {
     }
 });
 
+// Add friend request
+router.post('/api/friendRequests', jwtAuthenticator, function(req,res) {
+    if (req.body.username && (req.body.username !== req.decoded.username)) {
+        User.findOne({
+            username: req.decoded.username
+        }, function(err, currUser) {
+            if (err || currUser === null) {
+                return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});                
+            } else if (currUser.friends.includes(req.body.username)) {
+                return res.status(400).send({success: false, message: 'Cannot request to add existing friend.'});
+            }
+            for (let i = 0; i < currUser.friendRequests.length; i++) {
+                if (currUser.friendRequests[i].receiver === req.body.username) {
+                    return res.status(400).send({success: false, message: 'Already requested to add specified friend'});
+                }
+            }
+
+            User.findOne({
+                username: req.body.username
+            }, function(err, otherUser) {
+                if (err || otherUser == null) {
+                    return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});                
+                } else {
+                    let newFriendRequest = {receiver: req.body.username, sender: req.decoded.username}
+                    currUser.friendRequests.push(newFriendRequest);
+                    currUser.save(function(err) {
+                        if (err) {
+                            return res.status(500).send({success: false, message: "Unable to add friend request."});
+                        }
+                        otherUser.friendRequests.push(newFriendRequest);
+                        otherUser.save(function(err) {
+                            if (err) {
+                                return res.status(500).send({success: false, message: "Unable to add friend request."});
+                            } else {
+                                return res.json({success: true});
+                            }
+                        });
+                    });
+                }
+            });
+        });
+    } else if (req.body.username && (req.body.username === req.decoded.username)) {
+        return res.status(400).send({success: false, message:  'Cannot request to add own account as friend.'});
+    } else {
+        return res.status(400).send({success: false, message: 'Invalid body.'});
+    }
+});
+
+router.delete('/api/friends', jwtAuthenticator, function(req, res) {
+    if (!req.body.username) {
+        return res.status(400).send({success: false, message: 'Invalid body.'});
+    }
+    User.findOne({
+        username: req.decoded.username
+    }, function(err, currUser) {
+        if (err || currUser == null)
+            return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});                            
+        else if (!currUser.friends.includes(req.body.username))
+            return res.status(400).send({success: false, message: 'Cannot delete nonexistant friend.'});
+
+        User.findOne({
+           username: req.body.username 
+        }, function(err, otherUser) {
+            if (err || otherUser == null) 
+                return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});                            
+            else if (!otherUser.friends.includes(req.decoded.username)) 
+                return res.status(400).send({success: false, message: 'Cannot delete nonexistant friend.'});            
+
+            for (let i = 0; i < currUser.friends.length; i++) {
+                if (currUser.friends[i] === req.body.username) {
+                    currUser.friends.splice(i, 1);
+                    break;
+                }
+            }
+            currUser.save(function(err) {
+                if (err) return res.status(500).send({success: false, message: "Unable to delete friend."});
+
+                for (let i = 0; i < otherUser.friends.length; i++) {
+                    if (otherUser.friends[i] === req.decoded.username) {
+                        otherUser.friends.splice(i, 1);
+                        break;
+                    }
+                }
+                otherUser.save(function(err) {
+                    if (err) res.status(500).send({success: false, message: "Unable to delete friend."});
+                    else res.json({success: true});
+                });  
+            })
+        });
+    });
+});
+
+router.delete('/api/friendRequests', jwtAuthenticator, function(req, res) {
+    if (!req.body.username) {
+        return res.status(400).send({success: false, message: 'Invalid body.'});
+    }
+    User.findOne({
+        username: req.decoded.username
+    }, function(err, currUser) {
+        if (err || currUser == null)
+            return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});                            
+        User.findOne({
+            username: req.body.username
+        }, function(err, otherUser) {
+            // have to find the request to delete
+            for (let i = 0; i < currUser.friendRequests.length; i++) {
+                if (currUser.friendRequests[i].sender === req.body.username) {
+                    currUser.friendRequests.splice(i, 1);
+                    break;
+                }
+            }
+            currUser.save(function(err) {
+                if (err) return res.status(500).send({success: false, message: "Unable to delete friend request."});
+                for (let i = 0; i < otherUser.friendRequests.length; i++) {
+                    if (otherUser.friendRequests[i].receiver === req.decoded.username) {
+                        otherUser.friendRequests.splice(i, 1);
+                        break;
+                    }
+                }
+                otherUser.save(function(err) {
+                    if (err) res.status(500).send({success: false, message: "Unable to delete friend request."});
+                    else return res.json({success: true});
+                });
+            });
+        });
+    });
+});
+
 router.get('/api/friends/me', jwtAuthenticator, function(req, res) {
     User.findOne({
         username: req.decoded.username
@@ -208,6 +353,18 @@ router.get('/api/friends/me', jwtAuthenticator, function(req, res) {
             return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});
         } else {
             return res.json({success: true, friends: user.friends});
+        }
+    });
+});
+
+router.get('/api/friendRequests/me', jwtAuthenticator, function(req, res) {
+    User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err || user === null) {
+            return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});
+        } else {
+            return res.json({success: true, friendRequests: user.friendRequests});
         }
     });
 });
