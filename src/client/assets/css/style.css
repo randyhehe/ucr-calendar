@@ -92,6 +92,7 @@ body {
 .month {
   padding: 25px 25px;
   width: 100%;
+  height: 10%;
   background: #1abc9c;
   text-align: center; }
 
@@ -109,6 +110,7 @@ body {
 /* Previous button inside month header */
 .month .prev {
   float: left;
+  height: 11%;
   background: #1abc9c;
   color: #fff;
   padding-top: 10px; }
@@ -120,6 +122,7 @@ body {
 /* Next button */
 .month .next {
   float: right;
+  height: 11%;
   background: #1abc9c;
   color: #fff;
   padding-top: 10px; }
@@ -147,13 +150,14 @@ body {
 .days {
   float: left;
   padding: 10px 0;
-  margin: 0;
-  width: 100%; }
+  margin: 0 auto;
+  width: 100%;
+  height: 70%; }
 
 .days td {
   display: block;
   float: left;
-  padding: 10px;
+  padding: 10px 6px;
   width: 14.35%;
   box-sizing: border-box;
   border: 1px solid #ccc;
@@ -176,6 +180,18 @@ body {
   color: #2693ff;
   background: #e1e1e1;
   border-top: 1px solid #d0d0d0; }
+
+@media (max-width: 768px) {
+  #calendar .weekdays {
+    display: none; }
+  #calendar td {
+    height: auto !important;
+    border: 1px solid #ededed;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: -1px; }
+  #calendar .date {
+    float: none; } }
 
 .feed-card {
   margin-top: 40px;

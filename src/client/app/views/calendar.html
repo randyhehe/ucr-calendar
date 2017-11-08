@@ -1,8 +1,9 @@
 <ng-include src="'app/views/header.html'"></ng-include>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <p>{{ tagline }}</p>
 
-<div class ="clendar">
+<div id ="calendar">
   <div class="month">
   <ul>
   <li> <a href="#" ng-click="previous()" class="prev">&#10094; </a> </li>
@@ -24,7 +25,7 @@
 
   </ul>
 
-  <table class ="days">
+  <table class ="days" style="overflow-x:auto;">
       <tr class="row0">
         <td id="col0"></td>
         <td id="col1"></td>
@@ -80,7 +81,6 @@
         <td id="col41"></td>
       </tr>
   </table>
-
 </div>
 
 <md-button class="md-primary md-raised" ng-click="createEvent($event)">
