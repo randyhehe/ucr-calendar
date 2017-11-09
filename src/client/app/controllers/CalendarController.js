@@ -185,8 +185,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         rowPosition = "col" + tempFirstDay;
         tempFirstDay = tempFirstDay + 1;
 
-
-
         if (i == $scope.currentDate.format('D') && currMoment.format("M")
         == $scope.currentDate.format("M") &&
         currMoment.format("YY") == $scope.currentDate.format("YY")) {
@@ -207,7 +205,16 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
         tempFirstDay = tempFirstDay + 1;
          document.getElementById(rowPosition).innerHTML = "<span class=notRealMonth>" + i + "</span>";
       }
+      //text
+    CalendarEventService.getEvents(token).then(function(res) {
+        console.log(res.data.events);
+        if (typeof res.data.events == 'string'){
+            console.log('231');
+        }
 
+    }, function(err) {
+        console.log(err);
+    });
     }
 
     $scope.next = function(){ // next toggle button
