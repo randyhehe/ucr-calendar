@@ -5,9 +5,13 @@ angular.module('RegisterController', []).controller('RegisterController', functi
         let emailError = 0;
         let firstPass = 0;
         let secondPass = 0;
+
+
         if (username === undefined || username === '') {
             // userrname is empty, output error onto screen
             console.log("username is empty");
+            //document.getElementById('username_message').style.color = 'black';
+            //document.getElementById('username_message').innerHTML = 'Username is empty.';
             numErrors++;
         }
 
@@ -106,12 +110,20 @@ angular.module('RegisterController', []).controller('RegisterController', functi
         email = email.toLowerCase();
 
         UserService.userExists(username).then(function(exists) {
-            if (exists) throw new Error("Username exists!");
-            document.getElementById('email_message').style.color = 'black';
-            document.getElementById('email_message').innerHTML = 'Email is already in use!';
+            if (exists){ //throw new Error("Username exists!");
+            document.getElementById('username_message').style.color = 'black';
+            document.getElementById('username_message').innerHTML = 'User name is already in use!';
+            throw new Error("Username exists!")
+          }
+
             return UserService.userExists(email);
         }).then(function(exists) {
-            if (exists) throw new Error("Email exists!");
+            if (exists){ //throw new Error("Email exists!");
+            document.getElementById('email_message').style.color = 'black';
+            document.getElementById('email_message').innerHTML = 'Email is already in use!';
+            throw new Error("Email exists!");
+          }
+
             return UserService.createUser(email, username, password);
         }).then(function(res) {
             $window.location.href = '/';
