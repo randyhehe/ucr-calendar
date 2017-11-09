@@ -10,7 +10,87 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 .controller('CalendarController', CalendarController);
 
 function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
-    
+
+    $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
+    $scope.yearDate = moment().format('YYYY');
+    $scope.currentDate = moment(); // used to highlight current date
+    var currMoment = moment();
+
+    render(currMoment) // init render of current month
+
+   function render(currMoment) {
+
+     var lastMonth = currMoment.subtract(1,'months').endOf('month').format('DD');
+     var nextMonth = currMoment.add(1,'months').endOf('month').format('DD');
+
+     var firstDay = currMoment.startOf('month').day(); // Returns the first day of the month
+     firstDay = parseInt(firstDay);
+     var lastDay = currMoment.endOf('month').day(); // Returns the last day of the month
+     lastDay = parseInt(lastDay);
+
+     var numberOfDays = currMoment.daysInMonth(); // Returns number of days
+     var i,tempFirstDay;
+     var x = lastMonth;
+
+      //  for (i = firstDay - 1; i >= 0; i--) {
+      //    var rowPosition = 'col' + i;
+      //    $scope[rowPosition] = x;
+      //    x--;
+      //  }
+      //  $scope.test = true;
+
+       for (i = firstDay - 1; i >= 0; i--) {
+        var rowPosition = 'col' + i;
+        $scope[rowPosition] = x;
+        $scope[rowPosition + 'IsPrevMonth'] = true;
+        x--;
+       }
+       tempFirstDay = firstDay;
+
+
+       for (i = 1; i <= numberOfDays; i++) {
+         rowPosition = "col" + tempFirstDay;
+         tempFirstDay = tempFirstDay + 1;
+
+         if (i == $scope.currentDate.format('D') && currMoment.format("M")
+         == $scope.currentDate.format("M") &&
+         currMoment.format("YY") == $scope.currentDate.format("YY")) {
+
+           $scope[rowPosition] = i;
+           $scope[rowPosition + 'IsActiveDay'] = true;
+
+         }
+         else {
+            $scope[rowPosition] = i;
+         }
+
+       }
+
+       for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) {
+         rowPosition = "col" + tempFirstDay;
+         tempFirstDay = tempFirstDay + 1;
+         $scope[rowPosition] = i;
+       }
+     }
+
+     $scope.next = function(){ // next toggle button
+       $scope.monthName = currMoment.add(1,'months').startOf("month").format('MMMM');
+       if ($scope.monthName == "January") {
+         $scope.yearDate = currMoment.add(0,'years').format('YYYY');
+       }
+       render(currMoment)
+     }
+
+     $scope.previous = function(){ // prev toggle button
+       $scope.monthName = currMoment.subtract(1,'months').startOf("month").format('MMMM');
+       if ($scope.monthName == "December") {
+         $scope.yearDate = currMoment.subtract(0,'years').format('YYYY');
+       }
+       render(currMoment)
+     }
+
+     $scope.calendarPage = true;
+
     $scope.createEvent = function(ev) {
         $mdDialog.show({
           controller: CreateEventController,
@@ -66,20 +146,20 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             let eventDescription =  angular.element(document.querySelector('.eventdescription textarea')).val();
 
             // check validity
-            const format = 'l';    
-            let error = false;            
+            const format = 'l';
+            let error = false;
 
             $scope.createEventError = '';
             if (!moment(startDate, format, true).isValid() || !moment(endDate, format, true).isValid()) {
                 if (!error) $scope.createEventError = "Invalid calendar date.";
                 error = true;
-            } 
+            }
             // check empty name
             if (eventName === '') {
-                if (!error) $scope.createEventError = "Empty event name.";                
+                if (!error) $scope.createEventError = "Empty event name.";
                 error = true;
             }
-            
+
             // make sure the events are in the right other
             let startMoment = moment(startDate + ' ' + startTime, 'MM/DD/YYYY h:mma');
             let endMoment = moment(endDate + ' ' + endTime, 'MM/DD/YYYY h:mma');
@@ -97,7 +177,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
                     $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('top right'));
                     $mdDialog.cancel();
 
-                    return UserService.getUser(token);         
+                    return UserService.getUser(token);
                 }).then(function(user) {
                     let event = {
                         eventName: eventName,
@@ -132,4 +212,6 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             return moment;
         }
     }
+
+
 }

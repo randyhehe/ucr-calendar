@@ -24,58 +24,58 @@
 
   <table class ="days" style="overflow-x:auto;">
       <tr class="row0">
-        <td id="col0"></td>
-        <td id="col1"></td>
-        <td id="col2"></td>
-        <td id="col3"></td>
-        <td id="col4"></td>
-        <td id="col5"></td>
-        <td id="col6"></td>
+        <td ng-class="(col0IsPrevMonth ? 'notRealMonth' : '') + '' + (col0IsActiveDay ? 'active' : '') ">{{col0}}</td>
+        <td ng-class="(col1IsPrevMonth) ? 'notRealMonth' : ''">{{col1}}</td>
+        <td ng-class="(col2IsPrevMonth) ? 'notRealMonth' : ''">{{col2}}</td>
+        <td ng-class="(col3IsPrevMonth) ? 'notRealMonth' : ''">{{col3}}</td>
+        <td ng-class="(col4IsPrevMonth) ? 'notRealMonth' : ''">{{col4}}</td>
+        <td ng-class="(col5IsPrevMonth) ? 'notRealMonth' : ''">{{col5}}</td>
+        <td ng-class="(col6IsActiveDay) ? 'active' : ''">{{col6}}</td>
       </tr>
       <tr class="row1">
-        <td id="col7"></td>
-        <td id="col8"></td>
-        <td id="col9"></td>
-        <td id="col10"></td>
-        <td id="col11"></td>
-        <td id="col12"></td>
-        <td id="col13"></td>
+        <td ng-class="(col7IsActiveDay) ? 'active' : ''">{{col7}}</td>
+        <td ng-class="(col8IsActiveDay) ? 'active' : ''">{{col8}}</td>
+        <td ng-class="(col9IsActiveDay) ? 'active' : ''">{{col9}}</td>
+        <td ng-class="(col10IsActiveDay) ? 'active' : ''">{{col10}}</td>
+        <td ng-class="(col11IsActiveDay) ? 'active' : ''">{{col11}}</td>
+        <td ng-class="(col12IsActiveDay) ? 'active' : ''">{{col12}}</td>
+        <td ng-class="(col13IsActiveDay) ? 'active' : ''">{{col13}}</td>
       </tr>
       <tr class="row2">
-        <td id="col14"></td>
-        <td id="col15"></td>
-        <td id="col16"></td>
-        <td id="col17"></td>
-        <td id="col18"></td>
-        <td id="col19"></td>
-        <td id="col20"></td>
+        <td ng-class="(col14IsActiveDay) ? 'active' : ''">{{col14}}</td>
+        <td ng-class="(col15IsActiveDay) ? 'active' : ''">{{col15}}</td>
+        <td ng-class="(col16IsActiveDay) ? 'active' : ''">{{col16}}</td>
+        <td ng-class="(col17IsActiveDay) ? 'active' : ''">{{col17}}</td>
+        <td ng-class="(col18IsActiveDay) ? 'active' : ''">{{col18}}</td>
+        <td ng-class="(col19IsActiveDay) ? 'active' : ''">{{col19}}</td>
+        <td ng-class="(col20IsActiveDay) ? 'active' : ''">{{col20}}</td>
       </tr>
       <tr class="row3">
-        <td id="col21"></td>
-        <td id="col22"></td>
-        <td id="col23"></td>
-        <td id="col24"></td>
-        <td id="col25"></td>
-        <td id="col26"></td>
-        <td id="col27"></td>
+        <td ng-class="(col21IsActiveDay) ? 'active' : ''">{{col21}}</td>
+        <td ng-class="(col22IsActiveDay) ? 'active' : ''">{{col22}}</td>
+        <td ng-class="(col23IsActiveDay) ? 'active' : ''">{{col23}}</td>
+        <td ng-class="(col24IsActiveDay) ? 'active' : ''">{{col24}}</td>
+        <td ng-class="(col25IsActiveDay) ? 'active' : ''">{{col25}}</td>
+        <td ng-class="(col26IsActiveDay) ? 'active' : ''">{{col26}}</td>
+        <td ng-class="(col27IsActiveDay) ? 'active' : ''">{{col27}}</td>
       </tr>
       <tr class="row4">
-        <td id="col28"></td>
-        <td id="col29"></td>
-        <td id="col30"></td>
-        <td id="col31"></td>
-        <td id="col32"></td>
-        <td id="col33"></td>
-        <td id="col34"></td>
+        <td>{{col28}}</td>
+        <td>{{col29}}</td>
+        <td>{{col30}}</td>
+        <td>{{col31}}</td>
+        <td>{{col32}}</td>
+        <td>{{col33}}</td>
+        <td>{{col34}}</td>
       </tr>
       <tr class="row4">
-        <td id="col35"></td>
-        <td id="col36"></td>
-        <td id="col37"></td>
-        <td id="col38"></td>
-        <td id="col39"></td>
-        <td id="col40"></td>
-        <td id="col41"></td>
+        <td ng-class="(col35IsNextMonth) ? 'notRealMonth' : ''">{{col35}}</td>
+        <td ng-class="(col36IsNextMonth) ? 'notRealMonth' : ''">{{col36}}</td>
+        <td ng-class="(col37IsNextMonth) ? 'notRealMonth' : ''">{{col37}}</td>
+        <td ng-class="(col38IsNextMonth) ? 'notRealMonth' : ''">{{col38}}</td>
+        <td ng-class="(col39IsNextMonth) ? 'notRealMonth' : ''">{{col39}}</td>
+        <td ng-class="(col40IsNextMonth) ? 'notRealMonth' : ''">{{col40}}</td>
+        <td ng-class="(col41IsNextMonth) ? 'notRealMonth' : ''">{{col41}}</td>
       </tr>
   </table>
 </div>
