@@ -1,3 +1,85 @@
+<p>{{ tagline }}</p>
+
+<div id ="calendar">
+  <div class="month">
+  <ul>
+  <li> <a href="#" ng-click="previous()" class="prev">&#10094; </a> </li>
+  <li> <a href="#" ng-click="next()" class="next">&#10095; </a> </li>
+  <li>
+    {{monthName}} {{yearDate}}
+  </li>
+  </ul>
+  </div>
+
+  <ul class="weekdays">
+  <li>Sunday</li>
+  <li>Monday</li>
+  <li>Tuesday</li>
+  <li>Wednesday</li>
+  <li>Thursday</li>
+  <li>Friday</li>
+  <li>Saturday</li>
+
+  </ul>
+
+  <table class ="days" style="overflow-x:auto;">
+      <tr class="row0">
+        <td id="col0"></td>
+        <td id="col1"></td>
+        <td id="col2"></td>
+        <td id="col3"></td>
+        <td id="col4"></td>
+        <td id="col5"></td>
+        <td id="col6"></td>
+      </tr>
+      <tr class="row1">
+        <td id="col7"></td>
+        <td id="col8"></td>
+        <td id="col9"></td>
+        <td id="col10"></td>
+        <td id="col11"></td>
+        <td id="col12"></td>
+        <td id="col13"></td>
+      </tr>
+      <tr class="row2">
+        <td id="col14"></td>
+        <td id="col15"></td>
+        <td id="col16"></td>
+        <td id="col17"></td>
+        <td id="col18"></td>
+        <td id="col19"></td>
+        <td id="col20"></td>
+      </tr>
+      <tr class="row3">
+        <td id="col21"></td>
+        <td id="col22"></td>
+        <td id="col23"></td>
+        <td id="col24"></td>
+        <td id="col25"></td>
+        <td id="col26"></td>
+        <td id="col27"></td>
+      </tr>
+      <tr class="row4">
+        <td id="col28"></td>
+        <td id="col29"></td>
+        <td id="col30"></td>
+        <td id="col31"></td>
+        <td id="col32"></td>
+        <td id="col33"></td>
+        <td id="col34"></td>
+      </tr>
+      <tr class="row4">
+        <td id="col35"></td>
+        <td id="col36"></td>
+        <td id="col37"></td>
+        <td id="col38"></td>
+        <td id="col39"></td>
+        <td id="col40"></td>
+        <td id="col41"></td>
+      </tr>
+  </table>
+</div>
+
 <md-button class="md-primary md-raised" ng-click="createEvent($event)">
     create event
 </md-button>
@@ -14,7 +96,7 @@
               </md-button>
             </div>
         </md-toolbar>
-      
+
         <md-dialog-content>
             <form name="eventNameForm">
                 <md-input-container class="eventnameform">
@@ -25,7 +107,7 @@
                     </div>
                 </md-input-container>
             </form>
-                    
+
             <div class="eventtimeform">
                 <form name="startDateForm" class="dateform">
                     <md-input-container>
@@ -55,7 +137,7 @@
                     <input class="timepicker" ui-timepicker="timePickerOptions" ng-model="endTime" ng-change="endTimeChange()">
                 </form>
             </div>
-                    
+
             <md-input-container class="md-block eventdescription">
                 <label>Event Description</label>
                 <textarea ng-model="description" md-maxlength="1000" rows="4" md-select-on-focus=""></textarea>
@@ -63,7 +145,7 @@
 
             <div class="create-event-error">{{createEventError}}</div>
         </md-dialog-content>
-      
+
         <md-dialog-actions layout="row">
             <md-button ng-click="cancel()">
                 close
