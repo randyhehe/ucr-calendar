@@ -80,8 +80,7 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         socket.emit('subscribe', user.username);
     
         socket.on('addFriendRequest', function(friendName) {
-            $scope.notifications.push(friendName);
-            // $scope.$apply();            
+            $scope.notifications.push(friendName);          
         });
 
         $scope.$on('$destroy', () => {
@@ -90,7 +89,8 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
     }
 
     function redirectUser(err) {
-        $cookies.remove('token');
+        console.log(err);
+        // $cookies.remove('token');
         $window.location.href = "/";
     }
 }

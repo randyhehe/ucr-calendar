@@ -11,36 +11,42 @@ body {
 }
 
 .container {
-    padding-right:30px;
-    padding-left: 30px;
-    margin-right: 0px;
-    margin-left: 0px;
+    padding-right:0px;
+    padding-left: 0px;
     width: initial;
 }
 
 // HEADER STYLES
 .header-partial {
-    margin-top: 25px;
+    padding-top: 20px;
+    // padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.10);
 
-    .page a {
+    .calendar a, .feed a {
         font-family: avenir-next;
+        font-weight: 600;
         font-size: 18px;
-        color: rgba(0, 0, 0, 0.6);
+        color: rgba(0, 0, 0, 0.35);
         text-decoration: none;
+        padding: 10px;
     }
-    .page a:hover {
+
+    .calendar a:hover, .feed a:hover {
         text-decoration: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+        border-radius: 30px;
+        background-color: rgba(0,0,0,0.1);
     }
-    .page .selected a {
+
+    .calendar.selected a, .feed.selected a {
         color: black;
-        border-bottom: 1px solid #000;
     }
 
     .right-header {
         margin-right: 40px;
         margin-top: 1px;
         float:right;
+        position: relative;
+        bottom: 20px;
 
         .header-btn {
             margin-right: 10px;        
@@ -50,11 +56,15 @@ body {
             cursor: pointer;
             overflow: hidden;
             outline: none;
+            position: relative;
+            bottom: -10px;
+            padding: 0px;
         }
 
         .dropdown-menu {
-            margin: 10px -120 0;
-            font-family: avenir-next;     
+            margin: 23px -120 0;
+            font-family: avenir-next;
+            font-size: 16px;   
     
             li a:hover {
                 border: none;
@@ -83,12 +93,13 @@ body {
             border-left: 6px solid transparent;
             content: '';
         }
+
           
 
         .notif-dropdown-menu {
             padding: 0px;
             width: 380px;
-            margin: 10px -270 0;
+            margin: 23px -267 0;
 
             .no-notif-menu {
                 margin-top: 7px;
@@ -129,6 +140,12 @@ body {
         .fa-lg {
             line-height: initial;
             font-size: 1.5em;
+            padding: 10px;
+        }
+
+        .fa-lg:hover {
+            border-radius: 30px;
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         .notif-num {
@@ -195,13 +212,17 @@ body {
 
 // FEED PAGE STYLES
 .feed-card {
-    margin-top: 40px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+    margin-left: 30px;
+
     display:inline-block;
-    width: calc(100vw - 400px);
+    width: calc(100vw - 315px);
     font-family: avenir-next;
 
     .scrollable {
-        max-height: calc(95vh - 96px);
+        max-height: calc(100vh - 87px);
         overflow: scroll;
         word-wrap: break-word;
         background-color: white;
@@ -248,9 +269,10 @@ body {
 
 .friends-list {
     font-family: avenir-next;
-    width: 276px;
-    margin-top: 40px;
+    width: 240px;
+    margin-top: 20px;
     float: right;
+    margin-right: 30px;
 
     .scrollable {
         background-color: white;
