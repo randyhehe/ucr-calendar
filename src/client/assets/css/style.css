@@ -9,6 +9,9 @@ body {
   padding-right: 0px;
   padding-left: 0px;
   width: initial; }
+  .container .row {
+    margin-right: 0px;
+    margin-left: 0px; }
 
 .header-partial {
   padding-top: 20px;
@@ -176,7 +179,7 @@ body {
   width: calc(100vw - 315px);
   font-family: avenir-next; }
   .feed-card .scrollable {
-    max-height: calc(100vh - 87px);
+    max-height: calc(100vh - 83px);
     overflow: scroll;
     word-wrap: break-word;
     background-color: white; }
