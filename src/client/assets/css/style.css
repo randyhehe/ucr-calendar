@@ -227,7 +227,7 @@ body {
   color: #1abc9c; }
 
 .days td.notRealMonth {
-  color: #808080; }
+  background-color: #808080; }
 
 .days td:hover {
   color: #2693ff;

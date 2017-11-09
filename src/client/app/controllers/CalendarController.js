@@ -70,6 +70,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
          rowPosition = "col" + tempFirstDay;
          tempFirstDay = tempFirstDay + 1;
          $scope[rowPosition] = i;
+         $scope[rowPosition + 'IsNextMonth'] = true;
        }
      }
 
