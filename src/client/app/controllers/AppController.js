@@ -1,7 +1,7 @@
 angular.module('AppController', ['ngCookies', 'btford.socket-io']).controller('AppController', AppController);
 
 function AppController($scope, $window, $location, $cookies, $route, $mdToast, UserService, FriendService, socket) {
-    init();
+    init();    
 
     $scope.goToCalendar = function() {
         $location.path('/calendar');
@@ -19,7 +19,7 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         FriendService.addFriend(friendName, $scope.token)
         .then(() => {
             UserService.getUser($scope.token).then(initNotifications).catch(redirectUser);            
-            $mdToast.show($mdToast.simple().textContent('Friend added.').position('top right'));
+            $mdToast.show($mdToast.simple().textContent('Friend added.').position('bottom left'));
             if ($scope.showFeedPage) {
                 $scope.$broadcast('acceptFriendRequest');
             }
@@ -33,7 +33,7 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         FriendService.deleteFriendRequest(friendName, $scope.token)
         .then(() => {
             UserService.getUser($scope.token).then(initNotifications).catch(redirectUser);   
-            $mdToast.show($mdToast.simple().textContent('Friend request removed.').position('top right'));
+            $mdToast.show($mdToast.simple().textContent('Friend request removed.').position('bottom left'));
         }).catch((err) => {
             console.log(err);
             // handle error
