@@ -10,7 +10,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 .controller('CalendarController', CalendarController);
 
 function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
-    
+
     $scope.createEvent = function(ev) {
         $mdDialog.show({
           controller: CreateEventController,
@@ -96,20 +96,6 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
                     console.log(res);
                     $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('top right'));
                     $mdDialog.cancel();
-
-                    return UserService.getUser(token);         
-                }).then(function(user) {
-                    let event = {
-                        eventName: eventName,
-                        user: user.username,
-                        startTime: startMoment.valueOf(),
-                        endTime: endMoment.valueOf(),
-                        description: eventDescription,
-                        public: public
-                    }
-                    console.log(event);
-                    socket.emit('event', event);
-
                 }).catch(function(err) {
                     console.log(err);
                 });

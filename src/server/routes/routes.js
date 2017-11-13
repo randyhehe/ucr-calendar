@@ -127,34 +127,66 @@ router.get('/api/events/me', jwtAuthenticator, function(req, res) {
 });
 
 // Create event and assign it to the user specified by the token
-router.post('/api/events', jwtAuthenticator, function(req, res) {
-    if (req.body.name, req.body.startTime, req.body.endTime, req.body.description, req.body.public) {
+router.post('/api/events', jwtAuthenticator, function(req, res) {     
+    User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err || user === null) {
+            return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});
+        } else {
+            let newEvent = new CalendarEvent({
+                name: req.body.name,
+                user: user.username,
+                startTime: req.body.startTime,
+                endTime: req.body.endTime,
+                description: req.body.desc,
+                public: req.body.public,
+                notify: true
+            });
+            user.events.push(newEvent);
+            user.save(function(err) {
+                if (err) {
+                    return res.status(500).send({success: false, message: 'Unable to add event.'});
+                } else {
+                    return res.json({success: true});
+                }
+            });
+        }
+    });
+});
+
+router.post('/api/events/removeNotif', jwtAuthenticator, function(req, res) {
+    if (req.body.eventId) {
         User.findOne({
             username: req.decoded.username
-        }, function(err, user) {
-            if (err || user === null) {
-                return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});
+        }, function(err, currUser) {
+            if (err || currUser === null) {
+                return res.status(400).send({success: false, message: 'Unable to find user with the specified username.'});                                
             } else {
-                let newEvent = new CalendarEvent({
-                    name: req.body.name,
-                    user: user.username,
-                    startTime: req.body.startTime,
-                    endTime: req.body.endTime,
-                    description: req.body.description,
-                    public: req.body.public,
-                });
-                user.events.push(newEvent);
-                user.save(function(err) {
-                    if (err) {
-                        res.status(500).send({success: false, message: 'Unable to add event.'});
-                    } else {
-                        res.json({success: true});
+                let indexFound;
+                for (let i = 0; i < currUser.events.length; i++) {
+                    if (currUser.events[i]._id == req.body.eventId) {
+                        indexFound = i;
+                        break;
                     }
-                });
+                }
+
+                if (indexFound !== undefined) {
+                    currUser.events[indexFound].notify = false;
+                    currUser.save(function(err) {
+                        if (err) {
+                            return res.status(500).send({success: false, message: 'Unable to remove notification property from event.'});
+                        } else {
+                            return res.json({success: true});
+                        }
+                    });
+                } else {
+                    return res.status(500).send({success: false, message: 'Unable to find event with the provided eventId.'});             
+                }
             }
         });
     } else {
-        return res.send(400).send({success: false, message: 'Invalid body.'});
+        return res.status(400).send({success: false, message: 'Invalid body.'});
     }
 });
 

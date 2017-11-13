@@ -7,7 +7,6 @@ module.exports = function(server) {
 
     io.on('connection', function(socket) {
         socket.on('subscribe', function(username) {
-            console.log(username);
             socket.join(username);
         });
 

@@ -19,6 +19,9 @@ let CalendarEventSchema = new mongoose.Schema({
     }, public: {
         type: Boolean,
         required: true
+    }, notify: {
+        type: Boolean,
+        required: true
     }
 }, {
     timestamps: true
