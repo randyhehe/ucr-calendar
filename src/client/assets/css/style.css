@@ -12,6 +12,11 @@ body {
   .container .row {
     margin-right: 0px;
     margin-left: 0px; }
+  .container ::-webkit-scrollbar {
+    width: 4px; }
+  .container ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-border-radius: 1ex; }
 
 .header-partial {
   padding-top: 20px;
@@ -180,7 +185,8 @@ body {
   font-family: avenir-next; }
   .feed-card .scrollable {
     max-height: calc(100vh - 83px);
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     word-wrap: break-word;
     background-color: white; }
   .feed-card .has-description {
@@ -212,9 +218,12 @@ body {
   margin-top: 20px;
   float: right;
   margin-right: 30px; }
+  .friends-list md-card-content {
+    padding: 0px 12px 0px 16px; }
   .friends-list .scrollable {
     background-color: white;
-    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     height: calc(100vh - 180px); }
   .friends-list .add-friend-footer {
     padding-left: 10px; }
