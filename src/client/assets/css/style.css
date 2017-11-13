@@ -200,7 +200,8 @@ body {
     font-size: 14px;
     color: darkslategray; }
   .feed-card .feed-item-user {
-    font-weight: 600; }
+    font-weight: 600;
+    color: #3f51b5; }
   .feed-card .feed-item-name {
     overflow: initial;
     word-wrap: break-word !important;
@@ -220,13 +221,15 @@ body {
   margin-top: 20px;
   float: right;
   margin-right: 30px; }
+  .friends-list .blue-font {
+    color: #3f51b5; }
   .friends-list ::-webkit-scrollbar {
     width: 4px; }
   .friends-list ::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.4);
     -webkit-border-radius: 1ex; }
   .friends-list md-card-content {
-    padding: 0px 12px 0px 16px; }
+    padding: 0px 0px 0px 16px; }
   .friends-list .scrollable {
     background-color: white;
     overflow-y: auto;
@@ -250,7 +253,9 @@ body {
     text-transform: none;
     padding-left: 10px;
     margin: 0px; }
-  .friends-list md-list-item, .friends-list md-list-item .md-list-item-inner {
+  .friends-list md-list-item {
+    padding-right: 15px; }
+  .friends-list md-list-item .md-list-item-inner {
     padding: 0px; }
   .friends-list md-menu {
     width: 100%;

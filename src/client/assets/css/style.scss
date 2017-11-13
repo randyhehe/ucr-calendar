@@ -285,6 +285,7 @@ body {
     
     .feed-item-user {
         font-weight: 600;
+        color: rgb(63,81,181);
     }
     
     .feed-item-name {
@@ -309,6 +310,10 @@ body {
 }
 
 .friends-list {
+    .blue-font {
+        color: rgb(63,81,181);
+    }
+
     ::-webkit-scrollbar {
         width: 4px;
     }
@@ -325,7 +330,7 @@ body {
     margin-right: 30px;
 
     md-card-content {
-        padding: 0px 12px 0px 16px;
+        padding: 0px 0px 0px 16px;
     }
 
     .scrollable {
@@ -363,7 +368,11 @@ body {
         margin: 0px;
     }
     
-    md-list-item, md-list-item .md-list-item-inner {
+    md-list-item {
+        padding-right: 15px;
+    }
+    
+    md-list-item .md-list-item-inner {
         padding: 0px;
     }
 
