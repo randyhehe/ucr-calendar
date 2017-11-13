@@ -9,8 +9,26 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 })
 .controller('CalendarController', CalendarController);
 
+
+
 function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
 
+
+    // function checkForEvent() {
+    //     let token = $cookies.get('token');
+    //     let x = []
+    //     CalendarEventService.getEvents(token).then(function(res) {
+    //         // x = res.data.events
+    //         x.push('2');
+    //         x.push('123123');
+    //         console.log(x);
+
+    //     })
+    //     // x.push('1')
+    //     // x.push('123')
+    //     // console.log(x)
+    //     return x;
+    // }
     $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
     $scope.yearDate = moment().format('YYYY');
     $scope.currentDate = moment(); // used to highlight current date
@@ -31,31 +49,70 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
      var numberOfDays = currMoment.daysInMonth(); // Returns number of days
      var i,tempFirstDay;
      var x = lastMonth;
+     let token = $cookies.get('token');
 
-      //  for (i = firstDay - 1; i >= 0; i--) {
-      //    var rowPosition = 'col' + i;
-      //    $scope[rowPosition] = x;
-      //    x--;
-      //  }
-      //  $scope.test = true;
+       CalendarEventService.getEvents(token).then(function(res) {
+        console.log(res.data.events);
+        // // console.log(moment(parseInt(res.data.events[8].startTime)).format('D'));
+        // console.log(parseInt(moment(parseInt(res.data.events[8].startTime)).format('D')));
+        // // console.log(moment(parseInt(res.data.events[8].startTime)).format('Y'));
+        // // console.log(moment(parseInt(res.data.events[8].startTime)).format('DD'));
 
-       for (i = firstDay - 1; i >= 0; i--) {
+        // console.log(currMoment.format('D'));
+        // console.log(currMoment.format('M'));
+        // console.log(currMoment.format('Y'));
+        // // console.log(res.data.events.length)
+        // // console.log(currMoment.subtract(1,'months').endOf('month').format('MM'));
+        // let a = checkForEvent();
+        // console.log(a)
+
+        // console.log(currMoment.format('M'));
+        // tempX = currMoment;
+        // tempX.add(2,'months');
+
+        // console.log(currMoment.format('M'))
+
+
+
+       for (i = firstDay - 1; i >= 0; i--) { //prev month
         var rowPosition = 'col' + i;
         $scope[rowPosition] = x;
         $scope[rowPosition + 'IsPrevMonth'] = true;
+        let prevMonth = parseInt(currMoment.format('M'));
+        let prevYear = parseInt(currMoment.format('Y'));
+        // console.log(prevMonth,prevYear)
+        if ( prevMonth == 1 ) { //if curr month is january
+            prevMonth = 12;
+            prevYear--;
+        }
+        else {
+            prevMonth--;
+        }
+         for (j = 0; j < res.data.events.length; ++j) {
+            let eventDay = parseInt(moment(parseInt(res.data.events[j].startTime)).format('D'));
+            let eventMonth = parseInt(moment(parseInt(res.data.events[j].startTime)).format('M'));
+            let eventYear = parseInt(moment(parseInt(res.data.events[j].startTime)).format('Y'));
+            // console.log(eventDay,eventMonth,eventYear);
+            // console.log(x ,prevMonth,prevYear);
+            if ( eventMonth == prevMonth && eventYear == prevYear &&
+                  eventDay == x ){
+                console.log(moment(parseInt(res.data.events[j].startTime)).format("MMM Do YY"));
+            $scope[rowPosition] = res.data.events[j].description;
+                }
+         }
         x--;
        }
        tempFirstDay = firstDay;
 
 
-       for (i = 1; i <= numberOfDays; i++) {
+       for (i = 1; i <= numberOfDays; i++) { //curr month
          rowPosition = "col" + tempFirstDay;
          tempFirstDay = tempFirstDay + 1;
+
 
          if (i == $scope.currentDate.format('D') && currMoment.format("M")
          == $scope.currentDate.format("M") &&
          currMoment.format("YY") == $scope.currentDate.format("YY")) {
-
            $scope[rowPosition] = i;
            $scope[rowPosition + 'IsActiveDay'] = true;
 
@@ -63,15 +120,49 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
          else {
             $scope[rowPosition] = i;
          }
+        for (j = 0; j < res.data.events.length; ++j) {
+            let eventDay = parseInt(moment(parseInt(res.data.events[j].startTime)).format('D'));
+            let eventMonth = parseInt(moment(parseInt(res.data.events[j].startTime)).format('M'));
+            let eventYear = parseInt(moment(parseInt(res.data.events[j].startTime)).format('Y'));
 
+            if ( eventMonth == currMoment.format('M') && eventYear == currMoment.format('Y') &&
+                  eventDay == i ){
+
+                // console.log(res.data.events[j].description);
+                console.log(moment(parseInt(res.data.events[j].startTime)).format("MMM Do YY"));
+                $scope[rowPosition] = res.data.events[j].description;
+                // console.log(res.data.events[j])
+            }
+         }
        }
 
-       for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) {
+       for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) { //nxt month
          rowPosition = "col" + tempFirstDay;
          tempFirstDay = tempFirstDay + 1;
          $scope[rowPosition] = i;
          $scope[rowPosition + 'IsNextMonth'] = true;
+        let nxtMonth = parseInt(currMoment.format('M'));
+        let nxtYear = parseInt(currMoment.format('Y'));
+        if ( nxtMonth == 12 ) { //if curr month is january
+            nxtMonth = 1;
+            nxtYear++;
+        }
+        else {
+            nxtMonth++;
+         }
+         for (j = 0; j < res.data.events.length; ++j) {
+            let eventDay = parseInt(moment(parseInt(res.data.events[j].startTime)).format('D'));
+            let eventMonth = parseInt(moment(parseInt(res.data.events[j].startTime)).format('M'));
+            let eventYear = parseInt(moment(parseInt(res.data.events[j].startTime)).format('Y'));
+            if ( eventMonth == nxtMonth && eventYear == nxtYear &&
+                  eventDay == i ){
+                console.log(moment(parseInt(res.data.events[j].startTime)).format("MMM Do YY"));
+                $scope[rowPosition] = res.data.events[j].description;
+            }
+         }
        }
+
+       })
      }
 
      $scope.next = function(){ // next toggle button
@@ -102,6 +193,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
           focusOnOpen: false,
           fullscreen: $scope.customFullscreen,
           token: $scope.token
+
         });
     };
 
@@ -213,6 +305,5 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             return moment;
         }
     }
-
 
 }

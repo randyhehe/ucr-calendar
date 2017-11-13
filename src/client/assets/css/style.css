@@ -227,12 +227,33 @@ body {
   color: #1abc9c; }
 
 .days td.notRealMonth {
-  background-color: #808080; }
+  background-color: #C0C0C0; }
 
 .days td:hover {
   color: #2693ff;
   background: #e1e1e1;
   border-top: 1px solid #d0d0d0; }
+
+.event {
+  clear: both;
+  display: block;
+  font-size: 13px;
+  border-radius: 4px;
+  padding: 5px;
+  line-height: 14px;
+  background: #e4f2f2;
+  border: 1px solid #b5dbdc;
+  color: #009aaf;
+  text-decoration: none; }
+
+.event-desc {
+  color: #666;
+  margin: 3px 0 7px 0;
+  text-overflow: ellipsis;
+  width: 10em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-decoration: none; }
 
 @media (max-width: 768px) {
   #calendar .weekdays {
