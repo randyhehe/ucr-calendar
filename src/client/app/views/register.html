@@ -1,23 +1,30 @@
-<div class="jumbotron text-center">
-    <h1>Register</h1>
-    <form>
-	    <div class="form-group">
-		    <label>Username</label>
-		    <input type="text" class="form-control" ng-model="username">
-	    </div>
-	    <div class="form-group">
-		    <label>Email</label>
-		    <input type="email" class="form-control" ng-model="email">
-	    </div>
-	    <div class="form-group">
-		    <label>Password</label>
-		    <input type="password" class="form-control" ng-model="firstPassword">
-	    </div>
-	    <div class="form-group">
-		    <label>Verify Password</label>
-		    <input type="password" class="form-control" ng-model="secondPassword">
-        </div>
-	    <button type="submit" ng-click="register(username, email, firstPassword, secondPassword)" class="btn btn-warning btn-lg">Sign up!</button>
-    </form>
-    <a href="/login">Already have an account?</a>
+<div class="register">
+	<i class="fa fa-calendar fa-4x" ng-click="redirectHome()" aria-hidden="true"></i>				
+	<h1>Sign Up</h1>
+	<md-card>
+		<form>
+			<div class="form-group">
+				<label>Username</label>
+				<input type="text" class="form-control" ng-model="username">
+				<span class ="error-text" ng-show="showUsernameError">{{usernameError}}</span>
+			</div>
+			<div class="form-group">
+				<label>Email</label>
+				<input type="email" class="form-control" ng-model="email">
+				<span class="error-text" ng-show='showEmailError'>{{emailError}}</span>
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" class="form-control" ng-model="firstPassword">
+				<span class="error-text" ng-show='showFirstPasswordError'>Password cannot be empty.</span>
+			</div>
+			<div class="form-group">
+				<label>Verify Password</label>
+				<input type="password" class="form-control" ng-model="secondPassword">
+				<span class="error-text" ng-show='showSecondPasswordError'>{{secondPasswordError}}</span>
+			</div>
+			<md-button type="submit" ng-click="register(username, email, firstPassword, secondPassword)" class="md-primary md-raised"><span>Sign up</span></md-button>
+		</form>
+	</md-card>
+	<p>Already have an account? Login <a href="/login">here</a>.</p>
 </div>
