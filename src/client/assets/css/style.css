@@ -267,7 +267,7 @@ body {
   height: 100%;
   width: 100%;
   background-size: cover;
-  position: absolute;
+  position: fixed;
   background-image: url("../img/pineapple.jpg");
   opacity: 0.3;
   background-color: silver;
