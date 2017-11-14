@@ -289,7 +289,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
                 CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, public, token)
                  .then(function(res) {
                     console.log(res);
-                    $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('top right'));
+                    $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('bottom left'));
                     $mdDialog.cancel();
                 }).catch(function(err) {
                     console.log(err);
