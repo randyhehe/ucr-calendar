@@ -1,7 +1,7 @@
 angular.module('AppController', ['ngCookies', 'btford.socket-io']).controller('AppController', AppController);
 
 function AppController($scope, $window, $location, $cookies, $route, $mdToast, UserService, FriendService, socket) {
-    init();    
+    init();
 
     $scope.goToCalendar = function() {
         $location.path('/calendar');
@@ -44,6 +44,7 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         $scope.token = $cookies.get('token');
         UserService.getUser($scope.token)
         .then(initNotifications)
+        .then(initSettings)
         .then(initSocket)
         .then(routeHandler) // handle route if authentication is successful
         .catch(redirectUser); // redirect user out of the app if authentication fail
@@ -78,6 +79,11 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
             }
             $scope.notifications = incomingRequests;
         });
+        return user;
+    }
+
+    function initSettings(user) {
+        $scope.username = user.username;
         return user;
     }
 
