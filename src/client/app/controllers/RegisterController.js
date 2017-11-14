@@ -3,7 +3,7 @@ angular.module('RegisterController', ['ngCookies']).controller('RegisterControll
     UserService.getUser(token)
     .then(redirectUser)
     .catch((err) => {
-        // keep user on page
+        $scope.show = true;
     });
 
     $scope.register = function(username, email, firstPassword, secondPassword) {

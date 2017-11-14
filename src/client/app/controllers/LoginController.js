@@ -3,7 +3,7 @@ angular.module('LoginController', ['ngCookies']).controller('LoginController', f
     UserService.getUser(token)
     .then(redirectUser)
     .catch((err) => {
-        // keep user on page
+        $scope.show = true;
     });
     
     $scope.login = function(user, password) {        

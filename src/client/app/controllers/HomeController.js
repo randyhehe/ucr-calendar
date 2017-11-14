@@ -5,6 +5,7 @@ function HomeController($scope, $window, $cookies, UserService) {
     UserService.getUser(token)
     .then(redirectUser)
     .catch((err) => {
+        $scope.show = true;
         // keep user on page
     });
 

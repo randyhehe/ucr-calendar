@@ -55,7 +55,8 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         $(document).on('click', '.dropdown .notif-dropdown-menu', (e) => {e.stopPropagation()});
     }
 
-    function routeHandler() {        
+    function routeHandler() {
+        $scope.show = true;    
         $scope.showCalendarPage = ($location.path() === '/calendar');
         $scope.showFeedPage = ($location.path() === '/feed');
 
