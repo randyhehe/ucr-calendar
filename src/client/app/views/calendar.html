@@ -1,28 +1,91 @@
-<p>{{ tagline }}</p>
+<div class="calendar-page">
+    <table class="calendar-table">
+        <tr class="table-header">
+            <td class="left-caret"><span ng-click="previous()">&#10094</span></td>
+            <td class="month" colspan="5">{{monthName}} {{yearDate}}</td>
+            <td class="right-caret"><span ng-click="next()">&#10095</span></td>
+        </tr>
+        <tr class="table-days-row">
+            <td class="table-days">Sun</td>
+            <td class="table-days">Mon</td>
+            <td class="table-days">Tue</td>
+            <td class="table-days">Wed</td>
+            <td class="table-days">Thu</td>
+            <td class="table-days">Fri</td>
+            <td class="table-days">Sat</td>
+        </tr>
+        <tr class="table-row">
+            <td class="table-entry" ng-class="(col0IsPrevMonth ? 'notRealMonth' : '') + '' + (col0IsActiveDay ? 'active' : '')">
+                <div class="date">{{col0}}</div>
+                <ul class="scrollable">
+                    <li ng-repeat="item in todos" class="events-list">
+                        <div class="event-desc">{{item.title}}</div>
+                    </li>
+                </ul>
+            </td>
+            <td class="table-entry" ng-class="(col1IsPrevMonth ? 'notRealMonth' : '') + '' + (col1IsActiveDay ? 'active' : '')"><div class="date">{{col1}}</div></td>
+            <td class="table-entry" ng-class="(col2IsPrevMonth ? 'notRealMonth' : '') + '' + (col2IsActiveDay ? 'active' : '')"><div class="date">{{col2}}</div></td>
+            <td class="table-entry" ng-class="(col3IsPrevMonth ? 'notRealMonth' : '') + '' + (col3IsActiveDay ? 'active' : '')"><div class="date">{{col3}}</div></td>
+            <td class="table-entry" ng-class="(col4IsPrevMonth ? 'notRealMonth' : '') + '' + (col4IsActiveDay ? 'active' : '')"><div class="date">{{col4}}</div></td>
+            <td class="table-entry" ng-class="(col5IsPrevMonth ? 'notRealMonth' : '') + '' + (col5IsActiveDay ? 'active' : '')"><div class="date">{{col5}}</div></td>
+            <td class="table-entry" ng-class="(col6IsActiveDay ? 'active' : '')"><div class="date">{{col6}}</div></td>
+        </tr>
+        <tr class="table-row">
+            <td class="table-entry" ng-class="(col7IsActiveDay ? 'active' : '')"><div class="date">{{col7}}</div></td>
+            <td class="table-entry" ng-class="(col8IsActiveDay ? 'active' : '')"><div class="date">{{col8}}</div></td>
+            <td class="table-entry" ng-class="(col9IsActiveDay ? 'active' : '')"><div class="date">{{col9}}</div></td>
+            <td class="table-entry" ng-class="(col10IsActiveDay ? 'active' : '')"><div class="date">{{col10}}</div></td>
+            <td class="table-entry" ng-class="(col11IsActiveDay ? 'active' : '')"><div class="date">{{col11}}</div></td>
+            <td class="table-entry" ng-class="(col12IsActiveDay ? 'active' : '')"><div class="date">{{col12}}</div></td>
+            <td class="table-entry" ng-class="(col13IsActiveDay ? 'active' : '')"><div class="date">{{col13}}</div></td>
+        </tr>
+        <tr class="table-row">
+            <td class="table-entry" ng-class="(col14IsActiveDay ? 'active' : '')"><div class="date">{{col14}}</div></td>
+            <td class="table-entry" ng-class="(col15IsActiveDay ? 'active' : '')"><div class="date">{{col15}}</div></td>
+            <td class="table-entry" ng-class="(col16IsActiveDay ? 'active' : '')"><div class="date">{{col16}}</div></td>
+            <td class="table-entry" ng-class="(col17IsActiveDay ? 'active' : '')"><div class="date">{{col17}}</div></td>
+            <td class="table-entry" ng-class="(col18IsActiveDay ? 'active' : '')"><div class="date">{{col18}}</div></td>
+            <td class="table-entry" ng-class="(col19IsActiveDay ? 'active' : '')"><div class="date">{{col19}}</div></td>
+            <td class="table-entry" ng-class="(col20IsActiveDay ? 'active' : '')"><div class="date">{{col20}}</div></td>
+        </tr>
+        <tr class="table-row">
+            <td class="table-entry" ng-class="(col21IsActiveDay ? 'active' : '')"><div class="date">{{col21}}</div></td>
+            <td class="table-entry" ng-class="(col22IsActiveDay ? 'active' : '')"><div class="date">{{col22}}</div></td>
+            <td class="table-entry" ng-class="(col23IsActiveDay ? 'active' : '')"><div class="date">{{col23}}</div></td>
+            <td class="table-entry" ng-class="(col24IsActiveDay ? 'active' : '')"><div class="date">{{col24}}</div></td>
+            <td class="table-entry" ng-class="(col25IsActiveDay ? 'active' : '')"><div class="date">{{col25}}</div></td>
+            <td class="table-entry" ng-class="(col26IsActiveDay ? 'active' : '')"><div class="date">{{col26}}</div></td>
+            <td class="table-entry" ng-class="(col27IsActiveDay ? 'active' : '')"><div class="date">{{col27}}</div></td>
+        </tr>
+        <tr class="table-row">
+            <td class="table-entry" ng-class="(col28IsNextMonth ? 'notRealMonth' : '') + '' + (col28IsActiveDay ? 'active' : '')"><div class="date">{{col28}}</div></td>
+            <td class="table-entry" ng-class="(col29IsNextMonth ? 'notRealMonth' : '') + '' + (col29IsActiveDay ? 'active' : '')"><div class="date">{{col29}}</div></td>
+            <td class="table-entry" ng-class="(col30IsNextMonth ? 'notRealMonth' : '') + '' + (col30IsActiveDay ? 'active' : '')"><div class="date">{{col30}}</div></td>
+            <td class="table-entry" ng-class="(col31IsNextMonth ? 'notRealMonth' : '') + '' + (col31IsActiveDay ? 'active' : '')"><div class="date">{{col31}}</div></td>
+            <td class="table-entry" ng-class="(col32IsNextMonth ? 'notRealMonth' : '') + '' + (col32IsActiveDay ? 'active' : '')"><div class="date">{{col32}}</div></td>
+            <td class="table-entry" ng-class="(col33IsNextMonth ? 'notRealMonth' : '') + '' + (col33IsActiveDay ? 'active' : '')"><div class="date">{{col33}}</div></td>
+            <td class="table-entry" ng-class="(col34IsNextMonth ? 'notRealMonth' : '') + '' + (col34IsActiveDay ? 'active' : '')"><div class="date">{{col34}}</div></td>
+        </tr>
+        <tr class="table-row">
+            <td class="table-entry" ng-class="(col35IsNextMonth ? 'notRealMonth' : '') + '' + (col35IsActiveDay ? 'active' : '')"><div class="date">{{col35}}</div></td>
+            <td class="table-entry" ng-class="(col36IsNextMonth ? 'notRealMonth' : '') + '' + (col36IsActiveDay ? 'active' : '')"><div class="date">{{col36}}</div></td>
+            <td class="table-entry" ng-class="(col37IsNextMonth) ? 'notRealMonth' : ''"><div class="date">{{col37}}</div></td>
+            <td class="table-entry" ng-class="(col38IsNextMonth) ? 'notRealMonth' : ''"><div class="date">{{col38}}</div></td>
+            <td class="table-entry" ng-class="(col39IsNextMonth) ? 'notRealMonth' : ''"><div class="date">{{col39}}</div></td>
+            <td class="table-entry" ng-class="(col40IsNextMonth) ? 'notRealMonth' : ''"><div class="date">{{col40}}</div></td>
+            <td class="table-entry" ng-class="(col41IsNextMonth) ? 'notRealMonth' : ''"><div class="date">{{col41}}</div></td>
+        </tr>
+    </table>
 
-<div id ="calendar">
-  <div class="month">
-  <ul>
-  <li> <a href="#" ng-click="previous()" class="prev">&#10094; </a> </li>
-  <li> <a href="#" ng-click="next()" class="next">&#10095; </a> </li>
-  <li>
-    {{monthName}} {{yearDate}}
-  </li>
-  </ul>
-  </div>
+    <md-button class="md-primary md-raised" ng-click="createEvent($event)">
+        create event
+    </md-button>
+</div>
 
-  <ul class="weekdays">
-  <li>Sunday</li>
-  <li>Monday</li>
-  <li>Tuesday</li>
-  <li>Wednesday</li>
-  <li>Thursday</li>
-  <li>Friday</li>
-  <li>Saturday</li>
-
-  </ul>
+<!-- 
 
   <table class ="days" style="overflow-x:auto;">
+      
       <tr class="row0">
         <td ng-class="(col0IsPrevMonth ? 'notRealMonth' : '') + '' + (col0IsActiveDay ? 'active' : '') ">
             <div class="month-day">{{col0}}</div>
@@ -32,14 +95,6 @@
                     <div class="event-desc">{{item.title}}</div>
                 </li>
             </ul>
-
-            <!-- <md-list>
-
-
-                <md-list-item ng-repeat="item in todos">
-                    {{item.title}}
-                </md-list-item>
-            </md-list> -->
         </td>
         <td ng-class="(col1IsPrevMonth ? 'notRealMonth' : '') + '' + (col1IsActiveDay ? 'active' : '') ">{{col1}}</td>
         <td ng-class="(col2IsPrevMonth ? 'notRealMonth' : '') + '' + (col2IsActiveDay ? 'active' : '') ">{{col2}}</td>
@@ -95,11 +150,7 @@
         <td ng-class="(col41IsNextMonth) ? 'notRealMonth' : ''">{{col41}}</td>
       </tr>
   </table>
-</div>
-
-<md-button class="md-primary md-raised" ng-click="createEvent($event)">
-    create event
-</md-button>
+</div> -->
 
 <script type="text/ng-template" id="create-event-dialog.html">
     <md-dialog aria-label="Create Event" id="create-event-dialog">

@@ -14,7 +14,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
 
     $scope.todos = [];
-
     $scope.todos.push({
         title: 'ghtgtgbthththtrhththtrehriuguhrgreuhigeruihg'
     });
@@ -31,8 +30,6 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
         title: 'test'
     });
 
-
-
     // function checkForEvent() {
     //     let token = $cookies.get('token');
     //     let x = []
@@ -48,24 +45,26 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
     //     // console.log(x)
     //     return x;
     // }
-    $scope.monthName = moment().startOf("month").format('MMMM'); // string output of current month
-    $scope.yearDate = moment().format('YYYY');
-    $scope.currentDate = moment(); // used to highlight current date
-    var currMoment = moment();
+    
+    $scope.currMoment = moment(); // used to keep track of current month UI
+    $scope.currentDate = moment(); // used to keep track of current date
 
-    render(currMoment) // init render of current month
+    render(); // init render of current month
 
-   function render(currMoment) {
+    function render() {
+        $scope.monthName = $scope.currMoment.startOf("month").format('MMMM');
+        $scope.yearDate = $scope.currMoment.format('YYYY');
+        
+        
+     var lastMonth = $scope.currMoment.subtract(1,'months').endOf('month').format('DD');
+     var nextMonth = $scope.currMoment.add(1,'months').endOf('month').format('DD');
 
-     var lastMonth = currMoment.subtract(1,'months').endOf('month').format('DD');
-     var nextMonth = currMoment.add(1,'months').endOf('month').format('DD');
-
-     var firstDay = currMoment.startOf('month').day(); // Returns the first day of the month
+     var firstDay = $scope.currMoment.startOf('month').day(); // Returns the first day of the month
      firstDay = parseInt(firstDay);
-     var lastDay = currMoment.endOf('month').day(); // Returns the last day of the month
+     var lastDay = $scope.currMoment.endOf('month').day(); // Returns the last day of the month
      lastDay = parseInt(lastDay);
 
-     var numberOfDays = currMoment.daysInMonth(); // Returns number of days
+     var numberOfDays = $scope.currMoment.daysInMonth(); // Returns number of days
      var i,tempFirstDay;
      var x = lastMonth;
      let token = $cookies.get('token');
@@ -92,13 +91,20 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
         // console.log(currMoment.format('M'))
 
 
+        for (let i = 0; i < 42; i++) {
+            let rowPosition = 'col' + i;
+            $scope[rowPosition + 'IsNextMonth'] = false;
+            $scope[rowPosition + 'IsPrevMonth'] = false;
+            $scope[rowPosition + 'IsActiveDay'] = false;
+        }
+
 
        for (i = firstDay - 1; i >= 0; i--) { //prev month
         var rowPosition = 'col' + i;
         $scope[rowPosition] = x;
         $scope[rowPosition + 'IsPrevMonth'] = true;
-        let prevMonth = parseInt(currMoment.format('M'));
-        let prevYear = parseInt(currMoment.format('Y'));
+        let prevMonth = parseInt($scope.currMoment.format('M'));
+        let prevYear = parseInt($scope.currMoment.format('Y'));
         // console.log(prevMonth,prevYear)
         if ( prevMonth == 1 ) { //if curr month is january
             prevMonth = 12;
@@ -129,9 +135,9 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
          tempFirstDay = tempFirstDay + 1;
 
 
-         if (i == $scope.currentDate.format('D') && currMoment.format("M")
+         if (i == $scope.currentDate.format('D') && $scope.currMoment.format("M")
          == $scope.currentDate.format("M") &&
-         currMoment.format("YY") == $scope.currentDate.format("YY")) {
+         $scope.currMoment.format("YY") == $scope.currentDate.format("YY")) {
            $scope[rowPosition] = i;
            $scope[rowPosition + 'IsActiveDay'] = true;
 
@@ -144,7 +150,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             let eventMonth = parseInt(moment(parseInt(res.data.events[j].startTime)).format('M'));
             let eventYear = parseInt(moment(parseInt(res.data.events[j].startTime)).format('Y'));
 
-            if ( eventMonth == currMoment.format('M') && eventYear == currMoment.format('Y') &&
+            if ( eventMonth == $scope.currMoment.format('M') && eventYear == $scope.currMoment.format('Y') &&
                   eventDay == i ){
 
                 // console.log(res.data.events[j].description);
@@ -160,8 +166,8 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
          tempFirstDay = tempFirstDay + 1;
          $scope[rowPosition] = i;
          $scope[rowPosition + 'IsNextMonth'] = true;
-        let nxtMonth = parseInt(currMoment.format('M'));
-        let nxtYear = parseInt(currMoment.format('Y'));
+        let nxtMonth = parseInt($scope.currMoment.format('M'));
+        let nxtYear = parseInt($scope.currMoment.format('Y'));
         if ( nxtMonth == 12 ) { //if curr month is january
             nxtMonth = 1;
             nxtYear++;
@@ -184,21 +190,15 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
        })
      }
 
-     $scope.next = function(){ // next toggle button
-       $scope.monthName = currMoment.add(1,'months').startOf("month").format('MMMM');
-       if ($scope.monthName == "January") {
-         $scope.yearDate = currMoment.add(0,'years').format('YYYY');
-       }
-       render(currMoment)
-     }
+    $scope.next = function(){ // next toggle button
+        $scope.currMoment.add(1, 'months');
+        render();
+    }
 
-     $scope.previous = function(){ // prev toggle button
-       $scope.monthName = currMoment.subtract(1,'months').startOf("month").format('MMMM');
-       if ($scope.monthName == "December") {
-         $scope.yearDate = currMoment.subtract(0,'years').format('YYYY');
-       }
-       render(currMoment)
-     }
+    $scope.previous = function(){ // prev toggle button
+        $scope.currMoment.subtract(1, 'months');
+        render();
+    }
 
      $scope.calendarPage = true;
 

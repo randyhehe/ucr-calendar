@@ -192,179 +192,283 @@ body {
     }
 }
 
-ul {list-style-type: none;}
-body {font-family: Verdana, sans-serif;}
+.calendar-page {
+    .calendar-table {
+        margin: auto;
+        border-collapse: collapse;
+        font-family: avenir-next;
+        margin-top: 30px;
+        
+        .table-header {
+            background-color: rgb(63,81,181);
+            border: 1px solid rgb(63,81,181);
+            color:white;
+            height: 70px;
+        
+            .month {
+                text-align: center;
+                font-size: 25px;
+            }
+        
+            .left-caret {
+                padding-left: 40px;
+            }
+        
+            .right-caret {
+                text-align: right;
+                padding-right: 40px;
+            }
+        }
+    
+        .table-days-row {
+            height: 30px;
+            background-color: gainsboro;
+            border: 1px solid gray;
+        }
+        
+        .table-days, .table-entry {
+            width: 13.5vw; // each entry takes up 13.5% of the view, 13.5 * 7 = 95% of the screen
+        }
+        
+        .table-days {
+            text-align: center;
+        }
+        
+        .table-entry {
+            border: 1px solid black; 
+            vertical-align: top;
+            .date {
+                margin-top: 5px;
+                margin-left: 5px;
+                width:25px;
+                height:25px;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 25px;
+            }
+            &.active .date {
+                color: white;
+                background-color: rgba(55,104,179, 1);
+                font-weight: 600;
+            }
+            &.notRealMonth {
+                background-color:	rgba(220,220,220, 0.3);
+            }
+            &:hover {
+                background-color: rgba(220,220,220, 0.6);
+            }
 
-.button {
-  outline: none;
-  border: none;
-}
+            .scrollable {
+                overflow-y: scroll;
+                height: calc(((100vh - 63.33px) / 8) - 34px);
+                margin-top: 3px;
+                margin-bottom: 0px;
+                padding: 0px;
+                width: 13.5vw;
 
-.month-day {
-    margin-left: 5px;
-}
+                .events-list {
+                    display: block;
+                    background: #7788C9;
+                    border-radius: 4px;
+                    margin-bottom: 3px;
+                    margin-right: 5px;
 
-/* Month header */
-.month {
-    padding: 25px 25px;
-    width: 100%;
-    height: 10%;
-    background: #1abc9c;
-    text-align: center;
-}
-
-/* Month list */
-.month ul {
-    margin: 0;
-    padding: 0;
-}
-
-.month ul li {
-    color: white;
-    font-size: 20px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
-
-/* Previous button inside month header */
-.month .prev {
-    float: left;
-    height:11%;
-    background: #1abc9c;
-    color:#fff;
-    padding-top: 10px;
-}
-
-.month .prev:hover {
-  background-color: #1abc9c;
-  color: black;
-}
-
-/* Next button */
-.month .next {
-    float: right;
-    height:11%;
-    background: #1abc9c;
-    color:#fff;
-    padding-top: 10px;
-}
-
-.month .next:hover {
-  background-color: #1abc9c;
-  color: black;
-}
-
-/* Weekdays (Mon-Sun) */
-.weekdays {
-    margin: 0;
-    padding: 10px 0;
-    height: 40px;
-    background-color:#ddd;
-}
-
-.weekdays li {
-    // display: inline-block;
-    // width: 13.6%;
-    // color: #666;
-    // text-align: center;
-    display: inline-block;
-    text-align: center;
-    width: 13.6%;
-    padding: 10px 6px;
-    color: #666;
-    font-size: 13px;
-}
-
-/* Days (1-31) */
-.days {
-    float: left;
-    padding: 10px 0;
-    margin: 0 auto;
-    width: 100%;
-    height: 70%;
-}
-
-.days td {
-    display: block;
-    float: left;
-    padding: 10px 6px 10px 0px;
-    width:14.35%;
-    box-sizing:border-box;
-    border: 1px solid #ccc;
-    margin-right: -1px;
-    margin-bottom: -1px;
-    height: 95px;
-
-}
-
-/* Highlight the "current" day */
-.days td.active {
-    padding: 5px;
-    color: #1abc9c;
-}
-
-.days td.notRealMonth {
-  // margin: 0;
-  // padding: 0;
-  background-color:	rgba(220,220,220, 0.3);
-}
-
-.days td:hover {
-  color: #2693ff;
-  background: rgba(220,220,220, 0.4);
-  border-top: 1px solid #d0d0d0;
-}
-
-.event {
-	clear: both;
-	display: block;
-	font-size: 12px;
-	border-radius: 4px;
-	line-height: 13px;
-	background: lightblue;
-	border: 1px solid transparent;
-    text-decoration: none;
-    margin-bottom: 3px;
-    font-weight: 700;
-    font-family: avenir-next;
-}
-
-.event-desc {
-	color: #666;
-	margin: 3px 0 3px 5px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-	text-decoration: none;
-}
-
-@media(max-width: 768px) {
-
-    #calendar .weekdays{
-        display: none;
-    }
-
-    #calendar td {
-        height: auto !important;
-        border: 1px solid #ededed;
-        width: 100%;
-        padding: 10px;
-        margin-bottom: -1px;
-    }
-
-    #calendar .date {
-        float: none;
+                    .event-desc {
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow-x: hidden;
+                        text-decoration: none;
+                        color: #F8FCFF;
+                        font-size: 13px;
+                        padding-top: 3px;
+                        padding-bottom: 3px;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+        
+        .table-row {
+            height: calc((100vh - 63.33px) / 8); // subtract height of header, and allocate height into 8 pieces
+        }
     }
 }
 
-#calendar {
-    .scrollable {
-        overflow-y: scroll;
-        height: 60px;
-        margin-top: 5px;
-        padding:0px;
-    }
-}
+// ul {list-style-type: none;}
+// body {font-family: Verdana, sans-serif;}
+
+// .button {
+//   outline: none;
+//   border: none;
+// }
+
+// .month-day {
+//     margin-left: 5px;
+// }
+
+// /* Month header */
+// .month {
+//     padding: 25px 25px;
+//     width: 100%;
+//     height: 10%;
+//     background: #1abc9c;
+//     text-align: center;
+// }
+
+// /* Month list */
+// .month ul {
+//     margin: 0;
+//     padding: 0;
+// }
+
+// .month ul li {
+//     color: white;
+//     font-size: 20px;
+//     text-transform: uppercase;
+//     letter-spacing: 3px;
+// }
+
+// /* Previous button inside month header */
+// .month .prev {
+//     float: left;
+//     height:11%;
+//     background: #1abc9c;
+//     color:#fff;
+//     padding-top: 10px;
+// }
+
+// .month .prev:hover {
+//   background-color: #1abc9c;
+//   color: black;
+// }
+
+// /* Next button */
+// .month .next {
+//     float: right;
+//     height:11%;
+//     background: #1abc9c;
+//     color:#fff;
+//     padding-top: 10px;
+// }
+
+// .month .next:hover {
+//   background-color: #1abc9c;
+//   color: black;
+// }
+
+// /* Weekdays (Mon-Sun) */
+// .weekdays {
+//     margin: 0;
+//     padding: 10px 0;
+//     height: 40px;
+//     background-color:#ddd;
+// }
+
+// .weekdays li {
+//     // display: inline-block;
+//     // width: 13.6%;
+//     // color: #666;
+//     // text-align: center;
+//     display: inline-block;
+//     text-align: center;
+//     width: 13.6%;
+//     padding: 10px 6px;
+//     color: #666;
+//     font-size: 13px;
+// }
+
+// /* Days (1-31) */
+// .days {
+//     float: left;
+//     padding: 10px 0;
+//     margin: 0 auto;
+//     width: 100%;
+//     height: 70%;
+// }
+
+// .days td {
+//     display: block;
+//     float: left;
+//     padding: 10px 6px 10px 0px;
+//     width:14.35%;
+//     box-sizing:border-box;
+//     border: 1px solid #ccc;
+//     margin-right: -1px;
+//     margin-bottom: -1px;
+//     height: 95px;
+
+// }
+
+// /* Highlight the "current" day */
+// .days td.active {
+//     padding: 5px;
+//     color: #1abc9c;
+// }
+
+// .days td.notRealMonth {
+//   // margin: 0;
+//   // padding: 0;
+//   background-color:	rgba(220,220,220, 0.3);
+// }
+
+// .days td:hover {
+//   color: #2693ff;
+//   background: rgba(220,220,220, 0.4);
+//   border-top: 1px solid #d0d0d0;
+// }
+
+// .event {
+// 	clear: both;
+// 	display: block;
+// 	font-size: 12px;
+// 	border-radius: 4px;
+// 	line-height: 13px;
+// 	background: lightblue;
+// 	border: 1px solid transparent;
+//     text-decoration: none;
+//     margin-bottom: 3px;
+//     font-weight: 700;
+//     font-family: avenir-next;
+// }
+
+// .event-desc {
+// 	color: #666;
+// 	margin: 3px 0 3px 5px;
+//     text-overflow: ellipsis;
+//     overflow: hidden;
+//     white-space: nowrap;
+// 	text-decoration: none;
+// }
+
+// @media(max-width: 768px) {
+
+//     #calendar .weekdays{
+//         display: none;
+//     }
+
+//     #calendar td {
+//         height: auto !important;
+//         border: 1px solid #ededed;
+//         width: 100%;
+//         padding: 10px;
+//         margin-bottom: -1px;
+//     }
+
+//     #calendar .date {
+//         float: none;
+//     }
+// }
+
+// #calendar {
+//     .scrollable {
+//         overflow-y: scroll;
+//         height: 60px;
+//         margin-top: 5px;
+//         padding:0px;
+//     }
+// }
 
 // CREATE EVENT STYLES
 #create-event-dialog {
@@ -417,15 +521,6 @@ body {font-family: Verdana, sans-serif;}
 
 // FEED PAGE STYLES
 .feed-card {
-    ::-webkit-scrollbar {
-        width: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background-color: rgba(0,0,0,0.4);
-        -webkit-border-radius: 1ex;
-    }
-
     margin-right: 0px;
     margin-bottom: 0px;
     margin-top: 20px;
@@ -434,6 +529,15 @@ body {font-family: Verdana, sans-serif;}
     display:inline-block;
     width: calc(100vw - 315px);
     font-family: avenir-next;
+
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(0,0,0,0.4);
+        -webkit-border-radius: 1ex;
+    }
 
     .scrollable {
         max-height: calc(100vh - 83px);
