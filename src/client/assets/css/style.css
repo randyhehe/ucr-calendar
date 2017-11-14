@@ -141,7 +141,8 @@ body {
   margin: auto;
   border-collapse: collapse;
   font-family: avenir-next;
-  margin-top: 30px; }
+  margin-top: 30px;
+  box-shadow: 1px 1px 10px 1px #ccc; }
   .calendar-page .calendar-table .table-header {
     background-color: #3f51b5;
     border: 1px solid #3f51b5;
