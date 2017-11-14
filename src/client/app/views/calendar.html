@@ -1,3 +1,102 @@
+<p>{{ tagline }}</p>
+
+<div id ="calendar">
+  <div class="month">
+  <ul>
+  <li> <a href="#" ng-click="previous()" class="prev">&#10094; </a> </li>
+  <li> <a href="#" ng-click="next()" class="next">&#10095; </a> </li>
+  <li>
+    {{monthName}} {{yearDate}}
+  </li>
+  </ul>
+  </div>
+
+  <ul class="weekdays">
+  <li>Sunday</li>
+  <li>Monday</li>
+  <li>Tuesday</li>
+  <li>Wednesday</li>
+  <li>Thursday</li>
+  <li>Friday</li>
+  <li>Saturday</li>
+
+  </ul>
+
+  <table class ="days" style="overflow-x:auto;">
+      <tr class="row0">
+        <td ng-class="(col0IsPrevMonth ? 'notRealMonth' : '') + '' + (col0IsActiveDay ? 'active' : '') ">
+            <div class="month-day">{{col0}}</div>
+            
+            <ul class="scrollable">
+                <li ng-repeat="item in todos" class="event">
+                    <div class="event-desc">{{item.title}}</div>
+                </li>
+            </ul>
+
+            <!-- <md-list>
+
+
+                <md-list-item ng-repeat="item in todos">
+                    {{item.title}}
+                </md-list-item>
+            </md-list> -->
+        </td>
+        <td ng-class="(col1IsPrevMonth ? 'notRealMonth' : '') + '' + (col1IsActiveDay ? 'active' : '') ">{{col1}}</td>
+        <td ng-class="(col2IsPrevMonth ? 'notRealMonth' : '') + '' + (col2IsActiveDay ? 'active' : '') ">{{col2}}</td>
+        <td ng-class="(col3IsPrevMonth ? 'notRealMonth' : '') + '' + (col3IsActiveDay ? 'active' : '') ">{{col3}}</td>
+        <td ng-class="(col4IsPrevMonth ? 'notRealMonth' : '') + '' + (col4IsActiveDay ? 'active' : '') ">{{col4}}</td>
+        <td ng-class="(col5IsPrevMonth ? 'notRealMonth' : '') + '' + (col5IsActiveDay ? 'active' : '') ">{{col5}}</td>
+        <td ng-class="(col6IsActiveDay ? 'active' : '') ">{{col6}}
+        </td>
+      </tr>
+      <tr class="row1">
+        <td ng-class="(col7IsActiveDay) ? 'active' : ''">{{col7}}</td>
+        <td ng-class="(col8IsActiveDay) ? 'active' : ''">{{col8}}</td>
+        <td ng-class="(col9IsActiveDay) ? 'active' : ''">{{col9}}</td>
+        <td ng-class="(col10IsActiveDay) ? 'active' : ''">{{col10}}</td>
+        <td ng-class="(col11IsActiveDay) ? 'active' : ''">{{col11}}</td>
+        <td ng-class="(col12IsActiveDay) ? 'active' : ''">{{col12}}</td>
+        <td ng-class="(col13IsActiveDay) ? 'active' : ''">{{col13}}</td>
+      </tr>
+      <tr class="row2">
+        <td ng-class="(col14IsActiveDay) ? 'active' : ''">{{col14}}</td>
+        <td ng-class="(col15IsActiveDay) ? 'active' : ''">{{col15}}</td>
+        <td ng-class="(col16IsActiveDay) ? 'active' : ''">{{col16}}</td>
+        <td ng-class="(col17IsActiveDay) ? 'active' : ''">{{col17}}</td>
+        <td ng-class="(col18IsActiveDay) ? 'active' : ''">{{col18}}</td>
+        <td ng-class="(col19IsActiveDay) ? 'active' : ''">{{col19}}</td>
+        <td ng-class="(col20IsActiveDay) ? 'active' : ''">{{col20}}</td>
+      </tr>
+      <tr class="row3">
+        <td ng-class="(col21IsActiveDay) ? 'active' : ''">{{col21}}</td>
+        <td ng-class="(col22IsActiveDay) ? 'active' : ''">{{col22}}</td>
+        <td ng-class="(col23IsActiveDay) ? 'active' : ''">{{col23}}</td>
+        <td ng-class="(col24IsActiveDay) ? 'active' : ''">{{col24}}</td>
+        <td ng-class="(col25IsActiveDay) ? 'active' : ''">{{col25}}</td>
+        <td ng-class="(col26IsActiveDay) ? 'active' : ''">{{col26}}</td>
+        <td ng-class="(col27IsActiveDay) ? 'active' : ''">{{col27}}</td>
+      </tr>
+      <tr class="row4">
+        <td ng-class="(col28IsNextMonth ? 'notRealMonth' : '') + '' + (col28IsActiveDay ? 'active' : '') ">{{col28}}</td>
+        <td ng-class="(col29IsNextMonth ? 'notRealMonth' : '') + '' + (col29IsActiveDay ? 'active' : '') ">{{col29}}</td>
+        <td ng-class="(col30IsNextMonth ? 'notRealMonth' : '') + '' + (col30IsActiveDay ? 'active' : '') ">{{col30}}</td>
+        <td ng-class="(col31IsNextMonth ? 'notRealMonth' : '') + '' + (col31IsActiveDay ? 'active' : '') ">{{col31}}</td>
+        <td ng-class="(col32IsNextMonth? 'notRealMonth' : '') + '' + (col32IsActiveDay ? 'active' : '') ">{{col32}}</td>
+        <td ng-class="(col33IsNextMonth ? 'notRealMonth' : '') + '' + (col33IsActiveDay ? 'active' : '') ">{{col33}}</td>
+        <td ng-class="(col34IsNextMonth ? 'notRealMonth' : '') + '' + (col34IsActiveDay ? 'active' : '') ">{{col34}}</td>
+      </tr>
+      <tr class="row4">
+        <td ng-class="(col35IsNextMonth ? 'notRealMonth' : '') + '' + (col35IsActiveDay ? 'active' : '') ">{{col35}}</td>
+        <td ng-class="(col36IsNextMonth ? 'notRealMonth' : '') + '' + (col36IsActiveDay ? 'active' : '') ">{{col36}}</td>
+        <td ng-class="(col37IsNextMonth) ? 'notRealMonth' : ''">{{col37}}</td>
+        <td ng-class="(col38IsNextMonth) ? 'notRealMonth' : ''">{{col38}}</td>
+        <td ng-class="(col39IsNextMonth) ? 'notRealMonth' : ''">{{col39}}</td>
+        <td ng-class="(col40IsNextMonth) ? 'notRealMonth' : ''">{{col40}}</td>
+        <td ng-class="(col41IsNextMonth) ? 'notRealMonth' : ''">{{col41}}</td>
+      </tr>
+  </table>
+</div>
+
 <md-button class="md-primary md-raised" ng-click="createEvent($event)">
     create event
 </md-button>
@@ -14,7 +113,7 @@
               </md-button>
             </div>
         </md-toolbar>
-      
+
         <md-dialog-content>
             <form name="eventNameForm">
                 <md-input-container class="eventnameform">
@@ -25,7 +124,7 @@
                     </div>
                 </md-input-container>
             </form>
-                    
+
             <div class="eventtimeform">
                 <form name="startDateForm" class="dateform">
                     <md-input-container>
@@ -55,7 +154,7 @@
                     <input class="timepicker" ui-timepicker="timePickerOptions" ng-model="endTime" ng-change="endTimeChange()">
                 </form>
             </div>
-                    
+
             <md-input-container class="md-block eventdescription">
                 <label>Event Description</label>
                 <textarea ng-model="description" md-maxlength="1000" rows="4" md-select-on-focus=""></textarea>
@@ -63,7 +162,7 @@
 
             <div class="create-event-error">{{createEventError}}</div>
         </md-dialog-content>
-      
+
         <md-dialog-actions layout="row">
             <md-button ng-click="cancel()">
                 close

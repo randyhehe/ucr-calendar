@@ -14,7 +14,7 @@ body {
     padding-right:0px;
     padding-left: 0px;
     width: initial;
-    
+
     .row {
         margin-right: 0px;
         margin-left: 0px;
@@ -57,7 +57,7 @@ body {
         bottom: 20px;
 
         .header-btn {
-            margin-right: 10px;        
+            margin-right: 10px;
             background-color: transparent;
             background-repeat: no-repeat;
             border:none;
@@ -72,8 +72,8 @@ body {
         .dropdown-menu {
             margin: 23px -120 0;
             font-family: avenir-next;
-            font-size: 16px;   
-    
+            font-size: 16px;
+
             li a:hover {
                 border: none;
             }
@@ -90,7 +90,7 @@ body {
             border-bottom-color: rgba(0, 0, 0, 0.2);
             content: '';
         }
-          
+
         .profile-dropdown-menu:after {
             position: absolute;
             top: -6px;
@@ -113,7 +113,7 @@ body {
             border-bottom-color: rgba(0, 0, 0, 0.2);
             content: '';
         }
-          
+
         .notif-dropdown-menu:after {
             position: absolute;
             top: -6px;
@@ -125,7 +125,7 @@ body {
             content: '';
         }
 
-          
+
 
         .notif-dropdown-menu {
             padding: 0px;
@@ -167,7 +167,7 @@ body {
                 }
             }
         }
-        
+
         .fa-lg {
             line-height: initial;
             font-size: 1.5em;
@@ -192,6 +192,180 @@ body {
     }
 }
 
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+.button {
+  outline: none;
+  border: none;
+}
+
+.month-day {
+    margin-left: 5px;
+}
+
+/* Month header */
+.month {
+    padding: 25px 25px;
+    width: 100%;
+    height: 10%;
+    background: #1abc9c;
+    text-align: center;
+}
+
+/* Month list */
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+    float: left;
+    height:11%;
+    background: #1abc9c;
+    color:#fff;
+    padding-top: 10px;
+}
+
+.month .prev:hover {
+  background-color: #1abc9c;
+  color: black;
+}
+
+/* Next button */
+.month .next {
+    float: right;
+    height:11%;
+    background: #1abc9c;
+    color:#fff;
+    padding-top: 10px;
+}
+
+.month .next:hover {
+  background-color: #1abc9c;
+  color: black;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    height: 40px;
+    background-color:#ddd;
+}
+
+.weekdays li {
+    // display: inline-block;
+    // width: 13.6%;
+    // color: #666;
+    // text-align: center;
+    display: inline-block;
+    text-align: center;
+    width: 13.6%;
+    padding: 10px 6px;
+    color: #666;
+    font-size: 13px;
+}
+
+/* Days (1-31) */
+.days {
+    float: left;
+    padding: 10px 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 70%;
+}
+
+.days td {
+    display: block;
+    float: left;
+    padding: 10px 6px 10px 0px;
+    width:14.35%;
+    box-sizing:border-box;
+    border: 1px solid #ccc;
+    margin-right: -1px;
+    margin-bottom: -1px;
+    height: 95px;
+
+}
+
+/* Highlight the "current" day */
+.days td.active {
+    padding: 5px;
+    color: #1abc9c;
+}
+
+.days td.notRealMonth {
+  // margin: 0;
+  // padding: 0;
+  background-color:	rgba(220,220,220, 0.3);
+}
+
+.days td:hover {
+  color: #2693ff;
+  background: rgba(220,220,220, 0.4);
+  border-top: 1px solid #d0d0d0;
+}
+
+.event {
+	clear: both;
+	display: block;
+	font-size: 12px;
+	border-radius: 4px;
+	line-height: 13px;
+	background: lightblue;
+	border: 1px solid transparent;
+    text-decoration: none;
+    margin-bottom: 3px;
+    font-weight: 700;
+    font-family: avenir-next;
+}
+
+.event-desc {
+	color: #666;
+	margin: 3px 0 3px 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+	text-decoration: none;
+}
+
+@media(max-width: 768px) {
+
+    #calendar .weekdays{
+        display: none;
+    }
+
+    #calendar td {
+        height: auto !important;
+        border: 1px solid #ededed;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: -1px;
+    }
+
+    #calendar .date {
+        float: none;
+    }
+}
+
+#calendar {
+    .scrollable {
+        overflow-y: scroll;
+        height: 60px;
+        margin-top: 5px;
+        padding:0px;
+    }
+}
+
 // CREATE EVENT STYLES
 #create-event-dialog {
     .toText {
@@ -200,7 +374,7 @@ body {
         margin-left: 13px;
         margin-right: 13px;
     }
-    
+
     .eventnameform {
         margin-left: 20px;
         margin-right: 20px;
@@ -208,23 +382,23 @@ body {
         width: auto;
         display: block;
     }
-    
+
     .eventtimeform {
         margin-left: 20px;
         margin-right: 20px;
-        
+
         .timepicker {
             margin-left: 20px;
             position: relative;
             top: -8px;
             width: 90px;
         }
-    
+
         .dateform {
             display: inline-block;
         }
     }
-    
+
     .eventdescription {
         margin-left: 20px;
         margin-right: 20px;
@@ -273,40 +447,40 @@ body {
         padding-top: 15px;
         padding-bottom: 13px;
     }
-    
+
     .list-item {
         margin-bottom: 0px !important;
     }
-    
+
     .feed-item-createdtime {
         font-size: 14px;
         color: darkslategray;
     }
-    
+
     .feed-item-user {
         font-weight: 600;
         color: rgb(63,81,181);
     }
-    
+
     .feed-item-name {
         overflow: initial;
         word-wrap: break-word !important;
         white-space: normal !important;
         font-size: 20px !important;
     }
-    
+
     .feed-item-eventtime {
         font-size: 14px !important;
         color: darkslategray !important;
     }
-    
+
     .feed-item-description {
         font-size: 16px !important;
     }
 
     .no-padding {
         padding: 0px;
-    }    
+    }
 }
 
 .friends-list {
@@ -378,7 +552,7 @@ body {
 
     md-menu {
         width: 100%;
-        width: -moz-available;     
+        width: -moz-available;
         width: -webkit-fill-available;
     }
 }
@@ -387,7 +561,7 @@ body {
     .md-button:not([disabled]).md-focused {
         background-color: transparent !important;
     }
-    
+
     md-menu-content {
         padding: 0px;
     }
