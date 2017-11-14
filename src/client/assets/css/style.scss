@@ -294,181 +294,31 @@ body {
             height: calc((100vh - 63.33px) / 8); // subtract height of header, and allocate height into 8 pieces
         }
     }
+
+    .md-button {
+        background-color: rgba(219, 68, 55, 1);
+        top: -40px;
+        float: right;
+    }
+
+    .md-button:not([disabled]):hover {
+        background-color: rgba(219, 68, 55, 0.7);
+        // color: rgba(44, 65, 164, 0.96);
+        transition: 0.3s;
+    }
 }
 
-// ul {list-style-type: none;}
-// body {font-family: Verdana, sans-serif;}
+md-dialog {
+    font-family: avenir-next;
 
-// .button {
-//   outline: none;
-//   border: none;
-// }
+    .md-toolbar-tools h1, .md-toolbar-tools h2, .md-toolbar-tools h3 {
+        font-weight: 700;
+    }
+}
 
-// .month-day {
-//     margin-left: 5px;
-// }
-
-// /* Month header */
-// .month {
-//     padding: 25px 25px;
-//     width: 100%;
-//     height: 10%;
-//     background: #1abc9c;
-//     text-align: center;
-// }
-
-// /* Month list */
-// .month ul {
-//     margin: 0;
-//     padding: 0;
-// }
-
-// .month ul li {
-//     color: white;
-//     font-size: 20px;
-//     text-transform: uppercase;
-//     letter-spacing: 3px;
-// }
-
-// /* Previous button inside month header */
-// .month .prev {
-//     float: left;
-//     height:11%;
-//     background: #1abc9c;
-//     color:#fff;
-//     padding-top: 10px;
-// }
-
-// .month .prev:hover {
-//   background-color: #1abc9c;
-//   color: black;
-// }
-
-// /* Next button */
-// .month .next {
-//     float: right;
-//     height:11%;
-//     background: #1abc9c;
-//     color:#fff;
-//     padding-top: 10px;
-// }
-
-// .month .next:hover {
-//   background-color: #1abc9c;
-//   color: black;
-// }
-
-// /* Weekdays (Mon-Sun) */
-// .weekdays {
-//     margin: 0;
-//     padding: 10px 0;
-//     height: 40px;
-//     background-color:#ddd;
-// }
-
-// .weekdays li {
-//     // display: inline-block;
-//     // width: 13.6%;
-//     // color: #666;
-//     // text-align: center;
-//     display: inline-block;
-//     text-align: center;
-//     width: 13.6%;
-//     padding: 10px 6px;
-//     color: #666;
-//     font-size: 13px;
-// }
-
-// /* Days (1-31) */
-// .days {
-//     float: left;
-//     padding: 10px 0;
-//     margin: 0 auto;
-//     width: 100%;
-//     height: 70%;
-// }
-
-// .days td {
-//     display: block;
-//     float: left;
-//     padding: 10px 6px 10px 0px;
-//     width:14.35%;
-//     box-sizing:border-box;
-//     border: 1px solid #ccc;
-//     margin-right: -1px;
-//     margin-bottom: -1px;
-//     height: 95px;
-
-// }
-
-// /* Highlight the "current" day */
-// .days td.active {
-//     padding: 5px;
-//     color: #1abc9c;
-// }
-
-// .days td.notRealMonth {
-//   // margin: 0;
-//   // padding: 0;
-//   background-color:	rgba(220,220,220, 0.3);
-// }
-
-// .days td:hover {
-//   color: #2693ff;
-//   background: rgba(220,220,220, 0.4);
-//   border-top: 1px solid #d0d0d0;
-// }
-
-// .event {
-// 	clear: both;
-// 	display: block;
-// 	font-size: 12px;
-// 	border-radius: 4px;
-// 	line-height: 13px;
-// 	background: lightblue;
-// 	border: 1px solid transparent;
-//     text-decoration: none;
-//     margin-bottom: 3px;
-//     font-weight: 700;
-//     font-family: avenir-next;
-// }
-
-// .event-desc {
-// 	color: #666;
-// 	margin: 3px 0 3px 5px;
-//     text-overflow: ellipsis;
-//     overflow: hidden;
-//     white-space: nowrap;
-// 	text-decoration: none;
-// }
-
-// @media(max-width: 768px) {
-
-//     #calendar .weekdays{
-//         display: none;
-//     }
-
-//     #calendar td {
-//         height: auto !important;
-//         border: 1px solid #ededed;
-//         width: 100%;
-//         padding: 10px;
-//         margin-bottom: -1px;
-//     }
-
-//     #calendar .date {
-//         float: none;
-//     }
-// }
-
-// #calendar {
-//     .scrollable {
-//         overflow-y: scroll;
-//         height: 60px;
-//         margin-top: 5px;
-//         padding:0px;
-//     }
-// }
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+    background-color: lightslategray;
+}
 
 // CREATE EVENT STYLES
 #create-event-dialog {
@@ -509,8 +359,9 @@ body {
         top: -35px;
     }
 
-    .create-button {
+    button {
         margin-right: 15px;
+        font-weight: 700;
     }
 
     .create-event-error {

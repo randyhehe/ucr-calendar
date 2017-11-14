@@ -209,6 +209,23 @@ body {
   .calendar-page .calendar-table .table-row {
     height: calc((100vh - 63.33px) / 8); }
 
+.calendar-page .md-button {
+  background-color: #db4437;
+  top: -40px;
+  float: right; }
+
+.calendar-page .md-button:not([disabled]):hover {
+  background-color: rgba(219, 68, 55, 0.7);
+  transition: 0.3s; }
+
+md-dialog {
+  font-family: avenir-next; }
+  md-dialog .md-toolbar-tools h1, md-dialog .md-toolbar-tools h2, md-dialog .md-toolbar-tools h3 {
+    font-weight: 700; }
+
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
+  background-color: lightslategray; }
+
 #create-event-dialog .toText {
   position: relative;
   top: -8px;
@@ -238,8 +255,9 @@ body {
   margin-right: 20px;
   top: -35px; }
 
-#create-event-dialog .create-button {
-  margin-right: 15px; }
+#create-event-dialog button {
+  margin-right: 15px;
+  font-weight: 700; }
 
 #create-event-dialog .create-event-error {
   text-align: center;
