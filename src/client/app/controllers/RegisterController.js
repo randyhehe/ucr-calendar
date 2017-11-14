@@ -1,4 +1,11 @@
-angular.module('RegisterController', []).controller('RegisterController', function($scope, $window, UserService) {
+angular.module('RegisterController', ['ngCookies']).controller('RegisterController', function($scope, $window, $cookies, UserService) {
+    let token = $cookies.get('token');
+    UserService.getUser(token)
+    .then(redirectUser)
+    .catch((err) => {
+        // keep user on page
+    });
+
     $scope.register = function(username, email, firstPassword, secondPassword) {
         let numErrors = 0;
 
@@ -75,5 +82,9 @@ angular.module('RegisterController', []).controller('RegisterController', functi
         }).catch(function(err) {
             console.log(err.message);
         });
+    }
+
+    function redirectUser(user) {
+        $window.location.href = "/calendar";
     }
 });

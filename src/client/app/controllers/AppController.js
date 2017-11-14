@@ -41,10 +41,13 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
     }
 
     function init() {
-        routeHandler();
         $scope.token = $cookies.get('token');
-        UserService.getUser($scope.token).then(initNotifications).catch(redirectUser);
-        UserService.getUser($scope.token).then(initSocket).catch(redirectUser);
+        UserService.getUser($scope.token)
+        .then(initNotifications)
+        .then(initSocket)
+        .then(routeHandler) // handle route if authentication is successful
+        .catch(redirectUser); // redirect user out of the app if authentication fail
+
         $scope.signOut = redirectUser;
         $scope.$on('addFriendRequest', (ev, friendName, username) => {
             socket.emit('addFriendRequest', friendName, username);
@@ -63,7 +66,7 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         });
     }
 
-    function initNotifications(user) {
+    function initNotifications(user) {        
         $scope.notifications = [];
         FriendService.getFriendRequests($scope.token).then((friendRequests) => {
             let incomingRequests = [];
@@ -74,6 +77,7 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
             }
             $scope.notifications = incomingRequests;
         });
+        return user;
     }
 
     function initSocket(user) {
@@ -86,11 +90,16 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         $scope.$on('$destroy', () => {
             socket.removeAllListeners();
         });
+        return user;
     }
 
     function redirectUser(err) {
-        console.log(err);
-        // $cookies.remove('token');
-        $window.location.href = "/";
+        // when 'sign out' button is clicked or unsuccessful auth
+        if (err === undefined || (err !== undefined && !err.data.success && err.status === 403)) {
+            $cookies.remove('token');
+            $window.location.href = '/';
+        } else {
+            // if another unhandled error... redirect or do nothing?
+        }
     }
 }

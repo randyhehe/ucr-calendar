@@ -10,6 +10,14 @@ body {
     background-color: initial;
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.test {
+    height: 56px;
+}
+
 .container {
     padding-right:0px;
     padding-left: 0px;

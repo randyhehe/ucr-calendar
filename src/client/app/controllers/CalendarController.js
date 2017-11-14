@@ -9,8 +9,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 })
 .controller('CalendarController', CalendarController);
 
-
-
 function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
 
     $scope.todos = [];
