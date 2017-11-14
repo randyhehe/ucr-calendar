@@ -1,0 +1,23 @@
+<div class="login">
+	<i class="fa fa-calendar fa-4x" ng-click="redirectHome()" aria-hidden="true"></i>		
+	<h1>Sign In</h1>
+	<md-card>
+		<form>
+			<div class="form-group">
+				<label>Email/Username</label>
+				<input type="text" class="form-control" ng-model="email">
+			</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input type="password" class="form-control" ng-model="password" id="myInput">
+				<span id='password_message' ></span>
+				<!-- An element to toggle between password visibility -->
+				<input type="checkbox" ng-click="showPassword()"> Show Password
+			</div>
+			<div class="error-text" ng-if="invalid">Incorrect username or password.</div>
+
+			<md-button type="submit" ng-click="login(email, password)" class="md-primary md-raised"><span>Login</span></md-button>
+		</form>
+	</md-card>
+	<p>Need an account? Register <a href="/register">here</a>.</p>
+</div>
