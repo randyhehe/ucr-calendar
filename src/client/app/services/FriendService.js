@@ -52,7 +52,7 @@ angular.module('FriendService', []).factory('FriendService', ['$http', function(
             });
         },
 
-        deleteFriendRequest: function(username, token) {
+        deleteIncomingFriendRequest: function(username, token) {
             let data = {
                 username: username
             };
@@ -60,7 +60,25 @@ angular.module('FriendService', []).factory('FriendService', ['$http', function(
 
             return $http({
                 method: 'DELETE',
-                url: '/api/friendRequests',
+                url: '/api/friendRequests/incoming',
+                data: data,
+                timeout: 4000,
+                headers: {
+                    'x-access-token': token,
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+        },
+
+        deleteOutgoingFriendRequest: function(username, token) {
+            let data = {
+                username: username
+            };
+            data = JSON.stringify(data);
+
+            return $http({
+                method: 'DELETE',
+                url: '/api/friendRequests/outgoing',
                 data: data,
                 timeout: 4000,
                 headers: {

@@ -1,7 +1,7 @@
 angular.module('AppController', ['ngCookies', 'btford.socket-io']).controller('AppController', AppController);
 
 function AppController($scope, $window, $location, $cookies, $route, $mdToast, UserService, FriendService, socket) {
-    init();    
+    init();
 
     $scope.goToCalendar = function() {
         $location.path('/calendar');
@@ -24,27 +24,33 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
                 $scope.$broadcast('acceptFriendRequest');
             }
         }).catch((err) => {
-            console.log(err);
-            // handle error
+            if (err.data.message) {
+                $mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));                            
+            }
         });
     }
 
-    $scope.deleteFriendRequest = function(friendName) {
-        FriendService.deleteFriendRequest(friendName, $scope.token)
+    $scope.deleteIncomingFriendRequest = function(friendName) {
+        FriendService.deleteIncomingFriendRequest(friendName, $scope.token)
         .then(() => {
             UserService.getUser($scope.token).then(initNotifications).catch(redirectUser);   
             $mdToast.show($mdToast.simple().textContent('Friend request removed.').position('bottom left'));
         }).catch((err) => {
-            console.log(err);
-            // handle error
+            if (err.data.message) {
+                $mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));                            
+            }
         })
     }
 
     function init() {
-        routeHandler();
         $scope.token = $cookies.get('token');
-        UserService.getUser($scope.token).then(initNotifications).catch(redirectUser);
-        UserService.getUser($scope.token).then(initSocket).catch(redirectUser);
+        UserService.getUser($scope.token)
+        .then(initNotifications)
+        .then(initSettings)
+        .then(initSocket)
+        .then(routeHandler) // handle route if authentication is successful
+        .catch(redirectUser); // redirect user out of the app if authentication fail
+
         $scope.signOut = redirectUser;
         $scope.$on('addFriendRequest', (ev, friendName, username) => {
             socket.emit('addFriendRequest', friendName, username);
@@ -52,7 +58,8 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         $(document).on('click', '.dropdown .notif-dropdown-menu', (e) => {e.stopPropagation()});
     }
 
-    function routeHandler() {        
+    function routeHandler() {
+        $scope.show = true;    
         $scope.showCalendarPage = ($location.path() === '/calendar');
         $scope.showFeedPage = ($location.path() === '/feed');
 
@@ -63,7 +70,7 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         });
     }
 
-    function initNotifications(user) {
+    function initNotifications(user) {        
         $scope.notifications = [];
         FriendService.getFriendRequests($scope.token).then((friendRequests) => {
             let incomingRequests = [];
@@ -74,6 +81,12 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
             }
             $scope.notifications = incomingRequests;
         });
+        return user;
+    }
+
+    function initSettings(user) {
+        $scope.username = user.username;
+        return user;
     }
 
     function initSocket(user) {
@@ -86,11 +99,16 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         $scope.$on('$destroy', () => {
             socket.removeAllListeners();
         });
+        return user;
     }
 
     function redirectUser(err) {
-        console.log(err);
-        // $cookies.remove('token');
-        $window.location.href = "/";
+        // when 'sign out' button is clicked or unsuccessful auth
+        if (err === undefined || (err !== undefined && !err.data.success && err.status === 403)) {
+            $cookies.remove('token');
+            $window.location.href = '/';
+        } else {
+            // if another unhandled error... redirect or do nothing?
+        }
     }
 }

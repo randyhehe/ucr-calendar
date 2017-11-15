@@ -9,8 +9,6 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 })
 .controller('CalendarController', CalendarController);
 
-
-
 function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
 
     var masterEvent = [];
@@ -89,8 +87,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
        }
        tempFirstDay = firstDay;
 
-       for (i = 1; i <= numberOfDays; i++) { //curr month
-         
+       for (i = 1; i <= numberOfDays; i++) { //curr month         
          rowPosition = "col" + tempFirstDay;
          tempFirstDay = tempFirstDay + 1;
          $scope[rowPosition] = i;
@@ -147,7 +144,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
          dayCnt++
        }
 
-       })
+       });
      }
 
     $scope.next = function(){ // next toggle button
@@ -246,7 +243,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
                 CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, public, token)
                  .then(function(res) {
                     console.log(res);
-                    $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('top right'));
+                    $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('bottom left'));
                     $mdDialog.cancel();
                     render()
                 }).catch(function(err) {
