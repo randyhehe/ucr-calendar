@@ -23,12 +23,16 @@
             <md-list>
                 <md-list-item ng-repeat="friend in friends">
                     <md-menu>
-                        <button class="md-button md-ink-ripple friend-item" type="button" ng-click="$mdMenu.open($event)">
+                        <button class="md-button md-ink-ripple friend-item" ng-class="(outgoingRequests[friend]) ? 'friend-request-item' : ''" type="button" ng-click="$mdMenu.open($event)">
+                            <i ng-if="outgoingRequests[friend]" class="fa fa-circle-o-notch" aria-hidden="true"></i>                                
                             {{friend}}
                         </button>
 
                         <md-menu-content>
-                            <md-menu-item><md-button ng-click="removeFriend(friend)">Remove Friend</md-button></md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-if="!outgoingRequests[friend]" ng-click="removeFriend(friend)">Remove Friend</md-button>
+                                <md-button ng-if="outgoingRequests[friend]" ng-click="deleteOutgoingFriendRequest(friend)">Remove Friend Request</md-button>                                
+                            </md-menu-item>
                         </md-menu-content>
                     </md-menu>
                 </md-list-item>

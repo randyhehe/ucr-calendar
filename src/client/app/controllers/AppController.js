@@ -24,19 +24,21 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
                 $scope.$broadcast('acceptFriendRequest');
             }
         }).catch((err) => {
-            console.log(err);
-            // handle error
+            if (err.data.message) {
+                $mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));                            
+            }
         });
     }
 
-    $scope.deleteFriendRequest = function(friendName) {
-        FriendService.deleteFriendRequest(friendName, $scope.token)
+    $scope.deleteIncomingFriendRequest = function(friendName) {
+        FriendService.deleteIncomingFriendRequest(friendName, $scope.token)
         .then(() => {
             UserService.getUser($scope.token).then(initNotifications).catch(redirectUser);   
             $mdToast.show($mdToast.simple().textContent('Friend request removed.').position('bottom left'));
         }).catch((err) => {
-            console.log(err);
-            // handle error
+            if (err.data.message) {
+                $mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));                            
+            }
         })
     }
 

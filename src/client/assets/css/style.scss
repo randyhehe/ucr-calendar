@@ -97,6 +97,7 @@ body {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 padding: 3px 10px;
+                font-weight: 700;
             }
 
             &:before {
@@ -534,6 +535,10 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
         margin: 0px;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    .friend-request-item {
+        color:gray
     }
     
     md-list-item {

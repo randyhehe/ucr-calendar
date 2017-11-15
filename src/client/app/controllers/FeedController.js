@@ -6,8 +6,9 @@ function FeedController($scope, UserService, FriendService, $mdToast) {
     $scope.addFriendRequest = function() {
         const friendName = $scope.addFriendInput;
         $scope.addFriendInput = '';
-        FriendService.addFriendRequest(friendName, $scope.token).then(() => { 
+        FriendService.addFriendRequest(friendName, $scope.token).then(() => {
             $mdToast.show($mdToast.simple().textContent('Requested to add ' + friendName + '.').position('bottom left'));
+            FriendService.getFriends($scope.token).then(populateFriends).then(populateFriendRequests).catch(errHandler);            
             return UserService.getUser($scope.token);
         }).then((user) => {
             $scope.$emit('addFriendRequest', friendName, user.username);
@@ -23,10 +24,23 @@ function FeedController($scope, UserService, FriendService, $mdToast) {
         }).then(() => {
             // can optimize this later if necessary
             FriendService.getEvents($scope.token).then(populateEvents).catch(errHandler);
-            FriendService.getFriends($scope.token).then((friends) => $scope.friends = friends).catch(errHandler);            
+            FriendService.getFriends($scope.token).then(populateFriends).then(populateFriendRequests).catch(errHandler);
         })
         .catch((err) => {
             $mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));
+        });
+    }
+
+    $scope.deleteOutgoingFriendRequest = function(friendName) {
+        FriendService.deleteOutgoingFriendRequest(friendName, $scope.token)
+        .then((res) => {
+            console.log('res');
+            console.log(res);
+            FriendService.getFriends($scope.token).then(populateFriends).then(populateFriendRequests).catch(errHandler);
+        }).catch((err) => {
+            if (err.data.message) {
+                $mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));                            
+            }
         });
     }
 
@@ -36,13 +50,35 @@ function FeedController($scope, UserService, FriendService, $mdToast) {
 
     function initFeed(user) {
         FriendService.getEvents($scope.token).then(populateEvents).catch(errHandler);
-        FriendService.getFriends($scope.token).then((friends) => $scope.friends = friends).catch(errHandler);
+        FriendService.getFriends($scope.token).then(populateFriends).then(populateFriendRequests).catch(errHandler);
 
         $scope.$on('acceptFriendRequest', () => {
             FriendService.getEvents($scope.token).then(populateEvents).catch(errHandler);
-            FriendService.getFriends($scope.token).then((friends) => $scope.friends = friends).catch(errHandler);
+            FriendService.getFriends($scope.token).then(populateFriends).then(populateFriendRequests).catch(errHandler);
         });
     }
+
+    function populateFriends(friends) {
+        $scope.friends = friends;
+        return FriendService.getFriendRequests($scope.token).then((friendRequests) => {
+            return friendRequests;
+        });
+    }
+
+    function populateFriendRequests(friendRequests) {
+        $scope.outgoingRequests = {};
+        UserService.getUser($scope.token).then((user) => {
+            for (let i = 0; i < friendRequests.length; i++) {
+                if (friendRequests[i].sender === user.username) {
+                    $scope.friends.push(friendRequests[i].receiver);
+                    $scope.outgoingRequests[friendRequests[i].receiver] = true;
+                }
+            }
+            // console.log($scope.friends);
+            // console.log($scope.outgoingRequests);
+        });
+    }
+
 
     function populateEvents(events) {
         $scope.friendEvents = [];        

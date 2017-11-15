@@ -68,7 +68,8 @@ body {
         border-bottom: 1px solid rgba(0, 0, 0, 0.15);
         overflow: hidden;
         text-overflow: ellipsis;
-        padding: 3px 10px; }
+        padding: 3px 10px;
+        font-weight: 700; }
       .header-partial .right-header .profile-dropdown-menu:before {
         position: absolute;
         top: -7px;
@@ -373,6 +374,8 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
     margin: 0px;
     overflow: hidden;
     text-overflow: ellipsis; }
+  .friends-list .friend-request-item {
+    color: gray; }
   .friends-list md-list-item {
     padding-right: 15px; }
   .friends-list md-list-item .md-list-item-inner {
