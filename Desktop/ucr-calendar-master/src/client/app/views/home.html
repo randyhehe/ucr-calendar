@@ -1,40 +1,23 @@
-
-<!--<div class="jumbotron text-center">-->
-
-<div class="container">
-
-<div class='left-half' style="text-align:center; margin-top:150px;">
-  <img src="../assets/css/images/calendar.jpg" width="50" height="50">
-  <h1>myCalendar</h1>
-  <a href="/register">
-     <button type="submit" class="btn"><span>Sign up</span></button>
-  </a>
-
-  <br />
-  <h4>Already have an account?</h4>
-
-  <a href="/login">
-    <button type="submit" class="btn"><span>Log in</span></button>
-  </a>
-
-
-
-</div>
-
-
-
-<div class='right-half' style="text-align:center;  margin-top:150px;">
-  <h1 style="text-align:left;" color="green">Organize all the events in your life,</h1>
-  <h1 style="text-align:left;">in one convenient place.</h1>
-  <h4 style="text-align:left;">Easy to use interface.</h4>
-
-  <ul class>
-    <li style="text-align:left;">Organize life events with a click of a button</li>
-    <li style="text-align:left;">Search and add friends</li>
-    <li style="text-align:left;">Fuck bitches</li>
-    <li style="text-align:left;">Get money boiiiiiiiii</li>
-  </ul>
-
-
-</div>
+<div ng-if="show">
+    <div ng-cloak class="bg"></div>
+    <div ng-cloak class="home row">
+        <div class="col-xs-0 col-md-1"></div>
+        <div class="col-xs-6 col-md-5 left-half">
+            <i class="fa fa-calendar fa-4x" aria-hidden="true"></i>
+            <h1>Calendar</h1>
+            <md-button type="submit" class="md-primary md-raised" ng-click="redirectSignup()"><span>Sign up</span></md-button>
+            <h4>Already have an account?</h4>
+            <md-button type="submit" class="md-primary md-raised" ng-click="redirectLogin()"><span>Log in</span></md-button>
+        </div>
+        <!-- try both col-sm-6 --> 
+        <div class="col-xs-6 col-md-5 right-half">
+            <h1>Organize all your events in one convenient place</h1>
+            
+            <ul class>
+                <li>Organize your events</li>
+                <li>Add friends and view their activities</li>
+            </ul>
+        </div>
+        <div class="col-xs-0 col-md-1"></div>
+    </div>
 </div>

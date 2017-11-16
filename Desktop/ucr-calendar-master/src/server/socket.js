@@ -7,7 +7,7 @@ module.exports = function(server) {
 
     io.on('connection', function(socket) {
         socket.on('subscribe', function(username) {
-            console.log(username);
+            console.log('hi ' + username);
             socket.join(username);
         });
 
@@ -26,7 +26,15 @@ module.exports = function(server) {
                 }
             });
         });
+
+        socket.on('addFriendRequest', function(friendName, username) {
+            io.in(friendName).emit('addFriendRequest', username);
+        });
     });
+
+    function notifyOnFriendRequest(err, user) {
+        
+    }
 
     // setInterval(function() {
     //     io.in('birdkicker').emit('hi', 'works');

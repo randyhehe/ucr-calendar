@@ -5,7 +5,7 @@ angular.module('CalendarEventService', []).factory('CalendarEventService', ['$ht
                 name: name,
                 startTime: startTime,
                 endTime: endTime,
-                description: description,
+                desc: description,
                 public: public
             };
             data = JSON.stringify(data);
@@ -23,6 +23,23 @@ angular.module('CalendarEventService', []).factory('CalendarEventService', ['$ht
         
         getEvents: function(token) {
             return $http.get('/api/events/me', {headers: {'x-access-token': token}});
+        },
+
+        removeNotif: function(eventId, token) {
+            let data = {
+                eventId: eventId
+            };
+            data = JSON.stringify(data);
+
+            return $http({
+                method: 'POST',
+                url: '/api/events/removeNotif',
+                data: data,
+                timeout: 4000,
+                headers: {
+                    'x-access-token': token
+                }
+            });
         }
     }
 }]);
