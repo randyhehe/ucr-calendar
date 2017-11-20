@@ -12,7 +12,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
 
     var masterEvent = [];
-    
+
     for ( i = 0; i < 42; ++i ) { // initialize all arrays for events
         let todos_i = '$scope.todos' + i;
         eval(todos_i + '= [];');
@@ -33,8 +33,8 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
 
      $scope.monthName = $scope.currMoment.startOf("month").format('MMMM');
      $scope.yearDate = $scope.currMoment.format('YYYY');
-        
-        
+
+
      var lastMonth = $scope.currMoment.subtract(1,'months').endOf('month').format('DD');
      var nextMonth = $scope.currMoment.add(1,'months').endOf('month').format('DD');
 
@@ -49,7 +49,6 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
      let token = $cookies.get('token');
 
        CalendarEventService.getEvents(token).then(function(res) {
-        // console.log(res.data.events);
         let dayCnt = 0;
         for (let i = 0; i < 42; i++) {
             let rowPosition = 'col' + i;
@@ -77,9 +76,9 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             let eventEnd = moment(parseInt(res.data.events[j].endTime))
             let tempCurrDay = moment(prevMonthDay + '/' + prevMonth + '/' + prevYear, "DD-MM-YYYY")
 
-            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) || 
-                 ( eventStart.format('D') == tempCurrDay.format('D') && 
-                     eventStart.format('M') == tempCurrDay.format('M') &&  
+            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) ||
+                 ( eventStart.format('D') == tempCurrDay.format('D') &&
+                     eventStart.format('M') == tempCurrDay.format('M') &&
                      eventStart.format('Y') == tempCurrDay.format('Y') ) ){
 
                 // console.log(res.data.events[j].description);
@@ -92,7 +91,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
        }
        tempFirstDay = firstDay;
 
-       for (i = 1; i <= numberOfDays; i++) { //curr month         
+       for (i = 1; i <= numberOfDays; i++) { //curr month
          rowPosition = "col" + tempFirstDay;
          tempFirstDay = tempFirstDay + 1;
          $scope[rowPosition] = i;
@@ -108,9 +107,9 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             let eventEnd = moment(parseInt(res.data.events[j].endTime))
             let tempCurrDay = moment(i + '/' + $scope.currMoment.format('M') + '/' + $scope.currMoment.format('Y'), "DD-MM-YYYY")
 
-            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) || 
-                 ( eventStart.format('D') == tempCurrDay.format('D') && 
-                     eventStart.format('M') == tempCurrDay.format('M') &&  
+            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) ||
+                 ( eventStart.format('D') == tempCurrDay.format('D') &&
+                     eventStart.format('M') == tempCurrDay.format('M') &&
                      eventStart.format('Y') == tempCurrDay.format('Y') ) ){
 
                 // console.log(res.data.events[j].description);
@@ -123,7 +122,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
        }
 
        for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) { //nxt month
-        
+
         rowPosition = "col" + tempFirstDay;
         tempFirstDay = tempFirstDay + 1;
         $scope[rowPosition + 'IsNextMonth'] = true;
@@ -142,9 +141,9 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             let eventEnd = moment(parseInt(res.data.events[j].endTime))
             let tempCurrDay = moment(i + '/' + nxtMonth + '/' + nxtYear, "DD-MM-YYYY")
 
-            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) || 
-                 ( eventStart.format('D') == tempCurrDay.format('D') && 
-                     eventStart.format('M') == tempCurrDay.format('M') &&  
+            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) ||
+                 ( eventStart.format('D') == tempCurrDay.format('D') &&
+                     eventStart.format('M') == tempCurrDay.format('M') &&
                      eventStart.format('Y') == tempCurrDay.format('Y') ) ){
 
                 // console.log(res.data.events[j].description);
@@ -167,7 +166,11 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
         render();
     }
 
-     $scope.calendarPage = true;
+    $scope.calendarPage = true;
+
+    $scope.eventStatusPrivate = 'Private';
+    $scope.eventStatusPublic = "Public";
+    $scope.objStatus = "";
 
     $scope.createEvent = function(ev) {
         $mdDialog.show({
@@ -182,6 +185,35 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
 
         });
     };
+
+    $scope.eventDetails = function(item) {
+      $mdDialog.show({
+          controller: ShowEventController,
+          templateUrl: 'show-event.html',
+          parent: angular.element(document.body),
+          targetEvent: item,
+          clickOutsideToClose:true,
+          focusOnOpen: false,
+          fullscreen: $scope.customFullscreen,
+          token: $scope.token,
+          currentEvent: item
+      });
+
+    };
+
+    function ShowEventController($scope, $mdDialog, token, currentEvent) {
+      $scope.eventName = currentEvent.name;
+      $scope.startDate = moment(parseInt(currentEvent.startTime))
+      $scope.endDate = moment(parseInt(currentEvent.endTime))
+      $scope.startTime = moment(parseInt(currentEvent.startTime))
+      $scope.endTime = moment(parseInt(currentEvent.endTime))
+      $scope.description = currentEvent.description;
+
+      $scope.cancel = function() {
+          $mdDialog.cancel();
+      };
+
+    }
 
     function CreateEventController($scope, $mdDialog, token) {
         $scope.timePickerOptions = {
@@ -210,6 +242,10 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             newMoment.hour(moment($scope.endTime).hour());
             $scope.endDate = $scope.endTime = newMoment;
         }
+
+        $scope.eventStatusPrivate = false;
+        $scope.eventStatusPublic = true;
+        $scope.objStatus = $scope.eventStatusPublic;
 
         $scope.cancel = function() {
             $mdDialog.cancel();
@@ -246,11 +282,11 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
                 if (!error) $scope.createEventError = "Event end date must be after start date.";
                 error =  true;
             }
-            let public = true;
 
             if (!error) {
                 // should have a way to toggle private and public... do this later
-                CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, public, token)
+                console.log($scope.objStatus)
+                CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, $scope.objStatus, token)
                  .then(function(res) {
                     console.log(res);
                     $mdToast.show($mdToast.simple().textContent('Event Successfully Created!').position('bottom left'));

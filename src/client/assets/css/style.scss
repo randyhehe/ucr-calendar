@@ -87,7 +87,7 @@ body {
                 border: none;
             }
         }
-        
+
         .profile-dropdown-menu {
             width: 160px;
 
@@ -226,44 +226,44 @@ body {
         font-family: avenir-next;
         margin-top: 30px;
         box-shadow: 1px 1px 10px 1px #ccc;
-        
+
         .table-header {
             background-color: rgb(63,81,181);
             border: 1px solid rgb(63,81,181);
             color:white;
             height: 70px;
-        
+
             .month {
                 text-align: center;
                 font-size: 25px;
             }
-        
+
             .left-caret {
                 padding-left: 40px;
             }
-        
+
             .right-caret {
                 text-align: right;
                 padding-right: 40px;
             }
         }
-    
+
         .table-days-row {
             height: 30px;
             background-color: gainsboro;
             border: 1px solid gray;
         }
-        
+
         .table-days, .table-entry {
             width: 13.5vw; // each entry takes up 13.5% of the view, 13.5 * 7 = 95% of the screen
         }
-        
+
         .table-days {
             text-align: center;
         }
-        
+
         .table-entry {
-            border: 1px solid black; 
+            border: 1px solid black;
             vertical-align: top;
             .date {
                 margin-top: 5px;
@@ -317,7 +317,7 @@ body {
                 }
             }
         }
-        
+
         .table-row {
             height: calc((100vh - 63.33px) / 8); // subtract height of header, and allocate height into 8 pieces
         }
@@ -397,6 +397,16 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
         text-align: center;
         color: $error-color;
     }
+
+    .radioGroup {
+      padding: 24px 2px 0;
+    }
+
+    .radioButtons {
+      margin: -10px 30px 0 124px;
+      float: left;
+      text-align: left;
+    }
 }
 
 // FEED PAGE STYLES
@@ -413,7 +423,7 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
     ::-webkit-scrollbar {
         width: 4px;
     }
-    
+
     ::-webkit-scrollbar-thumb {
         background-color: rgba(0,0,0,0.4);
         -webkit-border-radius: 1ex;
@@ -475,7 +485,7 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
     ::-webkit-scrollbar {
         width: 4px;
     }
-    
+
     ::-webkit-scrollbar-thumb {
         background-color: rgba(0,0,0,0.4);
         -webkit-border-radius: 1ex;
@@ -540,11 +550,11 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
     .friend-request-item {
         color:gray
     }
-    
+
     md-list-item {
         padding-right: 15px;
     }
-    
+
     md-list-item .md-list-item-inner {
         padding: 0px;
     }
@@ -617,7 +627,7 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 
 .login, .register {
     font-family: 'avenir-next';
-    
+
     h1 {color:black;}
     h4 {color:black;}
 
@@ -690,21 +700,21 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
         display: inline-block;
         font-size: 18px;
         padding: 5px;
-        width: 310px; 
+        width: 310px;
         transition: all 0.2s;
         cursor: pointer;
         margin: 5px;
         border-radius: 50px;
         max-width: 90%;
     }
-      
+
     .md-primary span {
         cursor: pointer;
         display: inline-block;
         position: relative;
         transition: 0.2s;
     }
-      
+
     .md-primary span:after {
         content: '\00bb';
         position: absolute;
@@ -713,14 +723,13 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
         right: -20px;
         transition: 0.2s;
     }
-      
+
     .md-primary:hover span {
         padding-right: 25px;
     }
-      
+
     .md-primary:hover span:after {
         opacity: 1;
         right: 0;
     }
 }
-
