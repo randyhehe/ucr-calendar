@@ -49,8 +49,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
      let token = $cookies.get('token');
 
        CalendarEventService.getEvents(token).then(function(res) {
-        console.log(res.data.events);
-        // // console.log(moment(parseInt(res.data.events[8].startTime)).format('D'));
+        // console.log(res.data.events);
         let dayCnt = 0;
         for (let i = 0; i < 42; i++) {
             let rowPosition = 'col' + i;
@@ -71,14 +70,20 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
         else {
             prevMonth--;
         }
-         for (j = 0; j < res.data.events.length; ++j) {
-            let eventDay = parseInt(moment(parseInt(res.data.events[j].startTime)).format('D'));
-            let eventMonth = parseInt(moment(parseInt(res.data.events[j].startTime)).format('M'));
-            let eventYear = parseInt(moment(parseInt(res.data.events[j].startTime)).format('Y'));
 
-            if ( eventMonth == prevMonth && eventYear == prevYear &&
-                  eventDay == prevMonthDay ){
-                //console.log(moment(parseInt(res.data.events[j].startTime)).format("MMM Do YY"));
+         for (j = 0; j < res.data.events.length; ++j) {//check if event is on that day
+
+            let eventStart = moment(parseInt(res.data.events[j].startTime))
+            let eventEnd = moment(parseInt(res.data.events[j].endTime))
+            let tempCurrDay = moment(prevMonthDay + '/' + prevMonth + '/' + prevYear, "DD-MM-YYYY")
+
+            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) || 
+                 ( eventStart.format('D') == tempCurrDay.format('D') && 
+                     eventStart.format('M') == tempCurrDay.format('M') &&  
+                     eventStart.format('Y') == tempCurrDay.format('Y') ) ){
+
+                // console.log(res.data.events[j].description);
+                // console.log(moment(parseInt(res.data.events[j].startTime)).format("MMM Do YY"));
                 masterEvent[dayCnt].push(res.data.events[j])
             }
          }
@@ -97,23 +102,26 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
            $scope[rowPosition + 'IsActiveDay'] = true;
          }
 
-        for (j = 0; j < res.data.events.length; ++j) {
-            let eventDay = parseInt(moment(parseInt(res.data.events[j].startTime)).format('D'));
-            let eventMonth = parseInt(moment(parseInt(res.data.events[j].startTime)).format('M'));
-            let eventYear = parseInt(moment(parseInt(res.data.events[j].startTime)).format('Y'));
+        for (j = 0; j < res.data.events.length; ++j) {//check if event is on that day
 
-            if ( eventMonth == $scope.currMoment.format('M') && eventYear == $scope.currMoment.format('Y') &&
-                  eventDay == i ){
+            let eventStart = moment(parseInt(res.data.events[j].startTime))
+            let eventEnd = moment(parseInt(res.data.events[j].endTime))
+            let tempCurrDay = moment(i + '/' + $scope.currMoment.format('M') + '/' + $scope.currMoment.format('Y'), "DD-MM-YYYY")
+
+            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) || 
+                 ( eventStart.format('D') == tempCurrDay.format('D') && 
+                     eventStart.format('M') == tempCurrDay.format('M') &&  
+                     eventStart.format('Y') == tempCurrDay.format('Y') ) ){
 
                 // console.log(res.data.events[j].description);
-                console.log(moment(parseInt(res.data.events[j].startTime)).format("MMM Do YY"));
-                //$scope[rowPosition] = res.data.events[j].description;
-                // console.log(res.data.events[j])
+                // console.log(moment(parseInt(res.data.events[j].startTime)).format("MMM Do YY"));
                 masterEvent[dayCnt].push(res.data.events[j])
             }
+
          }
          dayCnt++
        }
+
        for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) { //nxt month
         
         rowPosition = "col" + tempFirstDay;
@@ -129,21 +137,23 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
         else {
             nxtMonth++;
          }
-         for (j = 0; j < res.data.events.length; ++j) {
-            let eventDay = parseInt(moment(parseInt(res.data.events[j].startTime)).format('D'));
-            let eventMonth = parseInt(moment(parseInt(res.data.events[j].startTime)).format('M'));
-            let eventYear = parseInt(moment(parseInt(res.data.events[j].startTime)).format('Y'));
+         for (j = 0; j < res.data.events.length; ++j) { //check if event is on that day
+            let eventStart = moment(parseInt(res.data.events[j].startTime))
+            let eventEnd = moment(parseInt(res.data.events[j].endTime))
+            let tempCurrDay = moment(i + '/' + nxtMonth + '/' + nxtYear, "DD-MM-YYYY")
 
-            if ( eventMonth == nxtMonth && eventYear == nxtYear &&
-                  eventDay == i ){
-                console.log(moment(parseInt(res.data.events[j].startTime)).format("MMM Do YY"));
-                //$scope[rowPosition] = res.data.events[j].description;
+            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) || 
+                 ( eventStart.format('D') == tempCurrDay.format('D') && 
+                     eventStart.format('M') == tempCurrDay.format('M') &&  
+                     eventStart.format('Y') == tempCurrDay.format('Y') ) ){
+
+                // console.log(res.data.events[j].description);
+                // console.log(moment(parseInt(res.data.events[j].startTime)).format("MMM Do YY"));
                 masterEvent[dayCnt].push(res.data.events[j])
             }
          }
          dayCnt++
        }
-
        });
      }
 
