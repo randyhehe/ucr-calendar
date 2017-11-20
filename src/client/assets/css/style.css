@@ -284,6 +284,21 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
   text-align: center;
   color: #dd2c00; }
 
+.no-feed-message {
+  height: calc(100vh - 83px);
+  width: calc(100vw - 310px);
+  display: inline-block;
+  margin-right: 0px;
+  margin-left: 17px;
+  font-family: avenir-next;
+  font-size: 20px;
+  text-align: center;
+  overflow: hidden; }
+  .no-feed-message span {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+
 .feed-card {
   margin-right: 0px;
   margin-bottom: 0px;

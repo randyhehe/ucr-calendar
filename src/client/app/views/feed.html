@@ -1,4 +1,8 @@
-<md-card class="feed-card">
+<div class="no-feed-message" ng-if="friendEvents.length === 0">
+    <span>There are no events to display.</span>
+</div>
+
+<md-card class="feed-card" ng-if="friendEvents.length !== 0">
     <md-card-content class="no-padding">
         <md-content class="scrollable">
                 <md-list class="no-padding">
