@@ -12,6 +12,12 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
 
     var masterEvent = [];
+    var masterCalendar = [];
+    var dateObject = {
+      month: "month",
+      day: 0,
+      year: 2017
+    }
 
     for ( i = 0; i < 42; ++i ) { // initialize all arrays for events
         let todos_i = '$scope.todos' + i;
@@ -88,6 +94,16 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
          }
         prevMonthDay++;
         dayCnt++
+
+        var dateObject = {
+          month: "month",
+          day: 0,
+          year: 2017
+        }
+        dateObject.month = String(prevMonth);
+        dateObject.day = String(prevMonthDay - 1);
+        dateObject.year = String(prevYear);
+        masterCalendar.push(dateObject);
        }
        tempFirstDay = firstDay;
 
@@ -119,6 +135,16 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
 
          }
          dayCnt++
+
+         var dateObject = {
+           month: "month",
+           day: 0,
+           year: 2017
+         }
+         dateObject.month = $scope.currMoment.format('M');
+         dateObject.day = String(i);
+         dateObject.year = $scope.currMoment.format('Y');
+         masterCalendar.push(dateObject);
        }
 
        for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) { //nxt month
@@ -152,17 +178,30 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             }
          }
          dayCnt++
+
+         var dateObject = {
+           month: "month",
+           day: 0,
+           year: 2017
+         }
+         dateObject.month = String(nxtMonth);
+         dateObject.day = String(i);
+         dateObject.year = String(nxtYear);
+
+         masterCalendar.push(dateObject);
        }
        });
      }
 
     $scope.next = function(){ // next toggle button
         $scope.currMoment.add(1, 'months');
+        masterCalendar =[];
         render();
     }
 
     $scope.previous = function(){ // prev toggle button
         $scope.currMoment.subtract(1, 'months');
+        masterCalendar= [];
         render();
     }
 
@@ -173,6 +212,10 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
     $scope.objStatus = "";
 
     $scope.createEvent = function(ev) {
+
+      $scope.startDate = $scope.startTime = roundNext15Min(moment());
+      $scope.endDate = $scope.endTime = roundNext15Min(moment().add('30', 'm'));
+
         $mdDialog.show({
           controller: CreateEventController,
           templateUrl: 'create-event-dialog.html',
@@ -215,7 +258,47 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
 
     }
 
-    function CreateEventController($scope, $mdDialog, token) {
+    $scope.createEventBoxClick = function(ev, clickDayIndex) {
+
+      //console.log(currentDayIndex);
+      //console.log(clickDayIndex);
+
+      console.log(masterCalendar);
+
+      let d = masterCalendar[clickDayIndex].day;
+      let m = masterCalendar[clickDayIndex].month;
+      let y = masterCalendar[clickDayIndex].year;
+
+      console.log(m + '/' + d + '/' + y);
+
+      $scope.startDate = moment({year: y, month: m - 1, day: d});
+      $scope.startTime = moment({hour: 12, minute: 0});
+      $scope.endDate = moment({year: y, month: m - 1, day: d});
+      $scope.endTime = moment({hour: 12, minute: 30});
+      //console.log(moment.format(month + '/' + day + '/' + year, "MMM Do YYYY"));
+
+      $mdDialog.show({
+        controller: CreateEventController,
+        templateUrl: 'create-event-dialog.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        focusOnOpen: false,
+        fullscreen: $scope.customFullscreen,
+        token: $scope.token,
+        startDate: $scope.startDate,
+        startTime: $scope.startTime,
+        endDate: $scope.endDate,
+        endTime: $scope.endTime
+      });
+    }
+
+    function CreateEventController($scope, $mdDialog, token, startDate, startTime, endDate, endTime) {
+        $scope.startDate = startDate;
+        $scope.startTime = startTime;
+        $scope.endDate = endDate;
+        $scope.endTime = endTime;
+
         $scope.timePickerOptions = {
             scrollDefault: 'now',
             asMoment: true
@@ -226,8 +309,8 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
         $scope.minDate = new Date(currDate.getFullYear() -  1000, currDate.getMonth(), currDate.getDate());
         $scope.maxDate = new Date(currDate.getFullYear() +  1000, currDate.getMonth(), currDate.getDate());
 
-        $scope.startDate = $scope.startTime = roundNext15Min(moment());
-        $scope.endDate = $scope.endTime = roundNext15Min(moment().add('30', 'm'));
+        //$scope.startDate = $scope.startTime = roundNext15Min(moment());
+        //$scope.endDate = $scope.endTime = roundNext15Min(moment().add('30', 'm'));
 
         $scope.startTimeChange = function() {
             let newMoment = new moment($scope.startDate);
@@ -300,6 +383,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             }
         }
 
+        /*
         function roundNext15Min(moment) {
             var intervals = Math.floor(moment.minutes() / 15);
             if (moment.minutes() % 15 != 0) {
@@ -312,7 +396,21 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
                 moment.seconds(0);
             }
             return moment;
+            */
         }
+
+        function roundNext15Min(moment) {
+            var intervals = Math.floor(moment.minutes() / 15);
+            if (moment.minutes() % 15 != 0) {
+                intervals++;
+                if (intervals == 4) {
+                    moment.add(1, 'hours');
+                    intervals = 0;
+                }
+                moment.minutes(intervals * 15);
+                moment.seconds(0);
+            }
+            return moment;
     }
 
 }
