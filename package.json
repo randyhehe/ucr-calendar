@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular-web-notification": "^1.2.26",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "express": "^4.16.1",
@@ -18,6 +19,7 @@
     "jsonwebtoken": "^8.1.0",
     "method-override": "^2.3.10",
     "mongoose": "^4.12.0",
+    "node-schedule": "^1.2.5",
     "socket.io": "^2.0.4"
   }
 }

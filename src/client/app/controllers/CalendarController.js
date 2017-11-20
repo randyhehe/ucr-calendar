@@ -12,7 +12,7 @@ angular.module('CalendarController', ['ngCookies', 'angularMoment', 'ngMaterial'
 function CalendarController($scope, $cookies, $window, UserService, CalendarEventService, FriendService, $mdDialog, $mdToast) {
 
     var masterEvent = [];
-    
+
     for ( i = 0; i < 42; ++i ) { // initialize all arrays for events
         let todos_i = '$scope.todos' + i;
         eval(todos_i + '= [];');
@@ -33,8 +33,8 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
 
      $scope.monthName = $scope.currMoment.startOf("month").format('MMMM');
      $scope.yearDate = $scope.currMoment.format('YYYY');
-        
-        
+
+
      var lastMonth = $scope.currMoment.subtract(1,'months').endOf('month').format('DD');
      var nextMonth = $scope.currMoment.add(1,'months').endOf('month').format('DD');
 
@@ -77,9 +77,9 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             let eventEnd = moment(parseInt(res.data.events[j].endTime))
             let tempCurrDay = moment(prevMonthDay + '/' + prevMonth + '/' + prevYear, "DD-MM-YYYY")
 
-            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) || 
-                 ( eventStart.format('D') == tempCurrDay.format('D') && 
-                     eventStart.format('M') == tempCurrDay.format('M') &&  
+            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) ||
+                 ( eventStart.format('D') == tempCurrDay.format('D') &&
+                     eventStart.format('M') == tempCurrDay.format('M') &&
                      eventStart.format('Y') == tempCurrDay.format('Y') ) ){
 
                 // console.log(res.data.events[j].description);
@@ -92,7 +92,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
        }
        tempFirstDay = firstDay;
 
-       for (i = 1; i <= numberOfDays; i++) { //curr month         
+       for (i = 1; i <= numberOfDays; i++) { //curr month
          rowPosition = "col" + tempFirstDay;
          tempFirstDay = tempFirstDay + 1;
          $scope[rowPosition] = i;
@@ -108,9 +108,9 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             let eventEnd = moment(parseInt(res.data.events[j].endTime))
             let tempCurrDay = moment(i + '/' + $scope.currMoment.format('M') + '/' + $scope.currMoment.format('Y'), "DD-MM-YYYY")
 
-            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) || 
-                 ( eventStart.format('D') == tempCurrDay.format('D') && 
-                     eventStart.format('M') == tempCurrDay.format('M') &&  
+            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) ||
+                 ( eventStart.format('D') == tempCurrDay.format('D') &&
+                     eventStart.format('M') == tempCurrDay.format('M') &&
                      eventStart.format('Y') == tempCurrDay.format('Y') ) ){
 
                 // console.log(res.data.events[j].description);
@@ -123,7 +123,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
        }
 
        for (i = 1; i <= 42 - numberOfDays - firstDay; ++i) { //nxt month
-        
+
         rowPosition = "col" + tempFirstDay;
         tempFirstDay = tempFirstDay + 1;
         $scope[rowPosition + 'IsNextMonth'] = true;
@@ -142,9 +142,9 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             let eventEnd = moment(parseInt(res.data.events[j].endTime))
             let tempCurrDay = moment(i + '/' + nxtMonth + '/' + nxtYear, "DD-MM-YYYY")
 
-            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) || 
-                 ( eventStart.format('D') == tempCurrDay.format('D') && 
-                     eventStart.format('M') == tempCurrDay.format('M') &&  
+            if ( (eventStart <= tempCurrDay && eventEnd >= tempCurrDay) ||
+                 ( eventStart.format('D') == tempCurrDay.format('D') &&
+                     eventStart.format('M') == tempCurrDay.format('M') &&
                      eventStart.format('Y') == tempCurrDay.format('Y') ) ){
 
                 // console.log(res.data.events[j].description);
@@ -261,6 +261,7 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
                 });
             } else {
                 // show the error message
+                console.log('why');
             }
         }
 

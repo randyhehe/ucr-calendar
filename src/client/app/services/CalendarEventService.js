@@ -20,7 +20,7 @@ angular.module('CalendarEventService', []).factory('CalendarEventService', ['$ht
                 }
             });
         },
-        
+
         getEvents: function(token) {
             return $http.get('/api/events/me', {headers: {'x-access-token': token}});
         },
