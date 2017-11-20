@@ -224,7 +224,11 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
           clickOutsideToClose:true,
           focusOnOpen: false,
           fullscreen: $scope.customFullscreen,
-          token: $scope.token
+          token: $scope.token,
+          startDate: $scope.startDate,
+          startTime: $scope.startTime,
+          endDate: $scope.endDate,
+          endTime: $scope.endTime
 
         });
     };
@@ -260,16 +264,9 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
 
     $scope.createEventBoxClick = function(ev, clickDayIndex) {
 
-      //console.log(currentDayIndex);
-      //console.log(clickDayIndex);
-
-      console.log(masterCalendar);
-
       let d = masterCalendar[clickDayIndex].day;
       let m = masterCalendar[clickDayIndex].month;
       let y = masterCalendar[clickDayIndex].year;
-
-      console.log(m + '/' + d + '/' + y);
 
       $scope.startDate = moment({year: y, month: m - 1, day: d});
       $scope.startTime = moment({hour: 12, minute: 0});
