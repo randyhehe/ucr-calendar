@@ -412,16 +412,26 @@
                 <textarea ng-model="description" md-maxlength="" rows="" md-select-on-focus=""></textarea>
             </md-input-container>
 
+            <md-input-container>
+              <md-radio-group name="status" id="status" ng-model="objStatus" class="radioGroup" required>
+                <md-radio-button ng-value="eventStatusPublic" class="radioButtons">Public</md-radio-button>
+                <md-radio-button ng-value="eventStatusPrivate" class="radioButtons">Private</md-radio-button>
+              </md-radio-group>
+            </md-input-container>
+
             <div class="create-event-error">{{createEventError}}</div>
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
             <md-button ng-click="cancel()">
-                cancel
+                close
             </md-button>
             <span flex></span>
-            <md-button disabled>
+            <md-button ng-click="removeEvent()">
                 delete
+            </md-button>
+            <md-button ng-click="update()">
+                update
             </md-button>
         </md-dialog-actions>
     </form>
