@@ -55,6 +55,10 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
      let token = $cookies.get('token');
 
        CalendarEventService.getEvents(token).then(function(res) {
+         res.data.events.sort(function(a, b) {
+             return parseInt(a.startTime) - parseInt(b.startTime);
+         });
+
         let dayCnt = 0;
         for (let i = 0; i < 42; i++) {
             let rowPosition = 'col' + i;
@@ -207,8 +211,6 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
 
     $scope.calendarPage = true;
 
-    $scope.eventStatusPrivate = 'Private';
-    $scope.eventStatusPublic = "Public";
     $scope.objStatus = "";
 
     $scope.createEvent = function(ev) {
@@ -250,15 +252,74 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
 
     function ShowEventController($scope, $mdDialog, token, currentEvent) {
       $scope.eventName = currentEvent.name;
-      $scope.startDate = moment(parseInt(currentEvent.startTime))
-      $scope.endDate = moment(parseInt(currentEvent.endTime))
-      $scope.startTime = moment(parseInt(currentEvent.startTime))
-      $scope.endTime = moment(parseInt(currentEvent.endTime))
+      $scope.startTime = moment(currentEvent.startTime, 'x');
+      $scope.startDate = moment(currentEvent.startTime, 'x').format("MM/DD/YYYY");
+      $scope.endDate = moment(currentEvent.endTime, 'x').format("MM/DD/YYYY");
+      $scope.endTime = moment(currentEvent.endTime, 'x');
+      $scope.id = currentEvent._id;
+      $scope.eventStatusPublic = true;
+      $scope.eventStatusPrivate = false;
       $scope.description = currentEvent.description;
+
+      if (currentEvent.public == true) {
+        $scope.objStatus = $scope.eventStatusPublic;
+      }
+      else {
+        $scope.objStatus = $scope.eventStatusPrivate;
+      }
 
       $scope.cancel = function() {
           $mdDialog.cancel();
       };
+
+      $scope.removeEvent = function(){
+        CalendarEventService.deleteEvent($scope.id, token).then((res) => {
+            //$mdToast.show($mdToast.simple().textContent("Removed " + eventName + ".").position('bottom left'));
+            //return UserService.getUser(token);
+            render();
+            $mdDialog.cancel();
+        })
+        .catch((err) => {
+            //$mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));
+        });
+      }
+
+      $scope.update = function() {
+        const format = 'l';
+        let error = false;
+        let $dates = angular.element(document.querySelectorAll('.dateform input'));
+        let startDate = angular.element($dates[0]).val();
+        let startTime = angular.element($dates[1]).val();
+        let endDate = angular.element($dates[2]).val();
+        let endTime = angular.element($dates[3]).val();
+        let startMoment = moment(startDate + ' ' + startTime, 'MM/DD/YYYY h:mma');
+        let endMoment = moment(endDate + ' ' + endTime, 'MM/DD/YYYY h:mma');
+
+        if (endMoment.isSameOrBefore(startMoment)) {
+            if (!error) $scope.createEventError = "Event end date must be after start date.";
+            error =  true;
+        }
+        $scope.createEventError = '';
+        if (!moment($scope.startDate, format, true).isValid() || !moment($scope.endDate, format, true).isValid()) {
+            if (!error) $scope.createEventError = "Invalid calendar date.";
+            error = true;
+        }
+        // check empty name
+        if ($scope.eventName === '') {
+            if (!error) $scope.createEventError = "Empty event name.";
+            error = true;
+        }
+
+        if (!error) {
+          CalendarEventService.updateEvent($scope.id, $scope.eventName, startMoment.valueOf(), endMoment.valueOf(), $scope.description, $scope.objStatus, token).then((res) =>
+          {
+            render()
+            $mdDialog.cancel()
+          })
+        }
+      }
+
+
 
     }
 
@@ -364,8 +425,6 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             }
 
             if (!error) {
-                // should have a way to toggle private and public... do this later
-                console.log($scope.objStatus)
                 CalendarEventService.createEvent(eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, $scope.objStatus, token)
                  .then(function(res) {
                     console.log(res);
