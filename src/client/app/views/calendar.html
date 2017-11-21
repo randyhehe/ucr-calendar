@@ -1,9 +1,9 @@
 <div class="calendar-page">
     <table class="calendar-table">
         <tr class="table-header">
-            <td class="left-caret"><span ng-click="previous()">&#10094</span></td>
+            <td class="left-caret"><span ng-click="previous()">&#10094;</span></td>
             <td class="month" colspan="5">{{monthName}} {{yearDate}}</td>
-            <td class="right-caret"><span ng-click="next()">&#10095</span></td>
+            <td class="right-caret"><span ng-click="next()">&#10095;</span></td>
         </tr>
         <tr class="table-days-row">
             <td class="table-days">Sun</td>
@@ -15,348 +15,348 @@
             <td class="table-days">Sat</td>
         </tr>
         <tr class="table-row">
-            <td class="table-entry" ng-class="(col0IsPrevMonth ? 'notRealMonth' : '') + '' + (col0IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 0)" class="table-entry" ng-class="(col0IsPrevMonth ? 'notRealMonth' : '') + '' + (col0IsActiveDay ? 'active' : '')">
                 <div class="date">{{col0}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos0" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos0" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col1IsPrevMonth ? 'notRealMonth' : '') + '' + (col1IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 1)" class="table-entry" ng-class="(col1IsPrevMonth ? 'notRealMonth' : '') + '' + (col1IsActiveDay ? 'active' : '')">
               <div class="date">{{col1}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos1" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos1" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col2IsPrevMonth ? 'notRealMonth' : '') + '' + (col2IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 2)" class="table-entry" ng-class="(col2IsPrevMonth ? 'notRealMonth' : '') + '' + (col2IsActiveDay ? 'active' : '')">
               <div class="date">{{col2}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos2" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos2" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col3IsPrevMonth ? 'notRealMonth' : '') + '' + (col3IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 3)" class="table-entry" ng-class="(col3IsPrevMonth ? 'notRealMonth' : '') + '' + (col3IsActiveDay ? 'active' : '')">
               <div class="date">{{col3}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos3" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos3" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col4IsPrevMonth ? 'notRealMonth' : '') + '' + (col4IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 4)" class="table-entry" ng-class="(col4IsPrevMonth ? 'notRealMonth' : '') + '' + (col4IsActiveDay ? 'active' : '')">
               <div class="date">{{col4}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos4" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos4" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col5IsPrevMonth ? 'notRealMonth' : '') + '' + (col5IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 5)" class="table-entry" ng-class="(col5IsPrevMonth ? 'notRealMonth' : '') + '' + (col5IsActiveDay ? 'active' : '')">
               <div class="date">{{col5}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos5" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos5" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col6IsPrevMonth ? 'notRealMonth' : '') + '' + (col6IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 6)" class="table-entry" ng-class="(col6IsPrevMonth ? 'notRealMonth' : '') + '' + (col6IsActiveDay ? 'active' : '')">
               <div class="date">{{col6}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos6" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos6" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
         </tr>
         <tr class="table-row">
-            <td class="table-entry" ng-class="(col7IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 7)" class="table-entry" ng-class="(col7IsActiveDay ? 'active' : '')">
             <div class="date">{{col7}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos7" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos7" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col8IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 8)" class="table-entry" ng-class="(col8IsActiveDay ? 'active' : '')">
             <div class="date">{{col8}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos8" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos8" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col9IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 9)" class="table-entry" ng-class="(col9IsActiveDay ? 'active' : '')">
             <div class="date">{{col9}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos9" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos9" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col10IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 10)" class="table-entry" ng-class="(col10IsActiveDay ? 'active' : '')">
             <div class="date">{{col10}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos10" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos10" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col11IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 11)" class="table-entry" ng-class="(col11IsActiveDay ? 'active' : '')">
             <div class="date">{{col11}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos11" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos11" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col12IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 12)" class="table-entry" ng-class="(col12IsActiveDay ? 'active' : '')">
             <div class="date">{{col12}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos12" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos12" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
-            <td class="table-entry" ng-class="(col13IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 13)" class="table-entry" ng-class="(col13IsActiveDay ? 'active' : '')">
             <div class="date">{{col13}}</div>
                 <ul class="scrollable">
-                    <li ng-repeat="item in todos13" class="events-list">
+                    <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos13" class="events-list">
                         <div class="event-desc">{{item.name}}</div>
                     </li>
                 </ul>
             </td>
         </tr>
         <tr class="table-row">
-            <td class="table-entry" ng-class="(col14IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 14)" class="table-entry" ng-class="(col14IsActiveDay ? 'active' : '')">
               <div class="date">{{col14}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos14" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos14" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col15IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 15)" class="table-entry" ng-class="(col15IsActiveDay ? 'active' : '')">
               <div class="date">{{col15}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos15" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos15" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col16IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 16)" class="table-entry" ng-class="(col16IsActiveDay ? 'active' : '')">
               <div class="date">{{col16}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos16" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos16" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col17IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 17)" class="table-entry" ng-class="(col17IsActiveDay ? 'active' : '')">
               <div class="date">{{col17}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos17" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos17" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col18IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 18)" class="table-entry" ng-class="(col18IsActiveDay ? 'active' : '')">
               <div class="date">{{col18}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos18" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos18" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col19IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 19)" class="table-entry" ng-class="(col19IsActiveDay ? 'active' : '')">
               <div class="date">{{col19}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos19" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos19" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col20IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 20)" class="table-entry" ng-class="(col20IsActiveDay ? 'active' : '')">
               <div class="date">{{col20}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos20" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos20" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
         </tr>
         <tr class="table-row">
-            <td class="table-entry" ng-class="(col21IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 21)" class="table-entry" ng-class="(col21IsActiveDay ? 'active' : '')">
               <div class="date">{{col21}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos21" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos21" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col22IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 22)" class="table-entry" ng-class="(col22IsActiveDay ? 'active' : '')">
               <div class="date">{{col22}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos22" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos22" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col23IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 23)" class="table-entry" ng-class="(col23IsActiveDay ? 'active' : '')">
               <div class="date">{{col23}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos23" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos23" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col24IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 24)" class="table-entry" ng-class="(col24IsActiveDay ? 'active' : '')">
               <div class="date">{{col24}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos24" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos24" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col25IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 25)" class="table-entry" ng-class="(col25IsActiveDay ? 'active' : '')">
               <div class="date">{{col25}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos25" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos25" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col26IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 26)" class="table-entry" ng-class="(col26IsActiveDay ? 'active' : '')">
               <div class="date">{{col26}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos26" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos26" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col27IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 27)" class="table-entry" ng-class="(col27IsActiveDay ? 'active' : '')">
               <div class="date">{{col27}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos27" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos27" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
         </tr>
         <tr class="table-row">
-            <td class="table-entry" ng-class="(col28IsNextMonth ? 'notRealMonth' : '') + '' + (col28IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 28)" class="table-entry" ng-class="(col28IsNextMonth ? 'notRealMonth' : '') + '' + (col28IsActiveDay ? 'active' : '')">
               <div class="date">{{col28}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos28" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos28" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col29IsNextMonth ? 'notRealMonth' : '') + '' + (col29IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 29)" class="table-entry" ng-class="(col29IsNextMonth ? 'notRealMonth' : '') + '' + (col29IsActiveDay ? 'active' : '')">
               <div class="date">{{col29}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos29" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos29" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col30IsNextMonth ? 'notRealMonth' : '') + '' + (col30IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 30)" class="table-entry" ng-class="(col30IsNextMonth ? 'notRealMonth' : '') + '' + (col30IsActiveDay ? 'active' : '')">
               <div class="date">{{col30}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos30" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos30" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col31IsNextMonth ? 'notRealMonth' : '') + '' + (col31IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 31)" class="table-entry" ng-class="(col31IsNextMonth ? 'notRealMonth' : '') + '' + (col31IsActiveDay ? 'active' : '')">
               <div class="date">{{col31}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos31" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos31" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col32IsNextMonth ? 'notRealMonth' : '') + '' + (col32IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 32)" class="table-entry" ng-class="(col32IsNextMonth ? 'notRealMonth' : '') + '' + (col32IsActiveDay ? 'active' : '')">
               <div class="date">{{col32}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos32" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos32" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col33IsNextMonth ? 'notRealMonth' : '') + '' + (col33IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 33)" class="table-entry" ng-class="(col33IsNextMonth ? 'notRealMonth' : '') + '' + (col33IsActiveDay ? 'active' : '')">
               <div class="date">{{col33}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos33" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos33" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col34IsNextMonth ? 'notRealMonth' : '') + '' + (col34IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 34)" class="table-entry" ng-class="(col34IsNextMonth ? 'notRealMonth' : '') + '' + (col34IsActiveDay ? 'active' : '')">
               <div class="date">{{col34}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos34" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos34" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
         </tr>
         <tr class="table-row">
-            <td class="table-entry" ng-class="(col35IsNextMonth ? 'notRealMonth' : '') + '' + (col35IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 35)" class="table-entry" ng-class="(col35IsNextMonth ? 'notRealMonth' : '') + '' + (col35IsActiveDay ? 'active' : '')">
               <div class="date">{{col35}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos35" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos35" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col36IsNextMonth ? 'notRealMonth' : '') + '' + (col36IsActiveDay ? 'active' : '')">
+            <td ng-click="createEventBoxClick($event, 36)" class="table-entry" ng-class="(col36IsNextMonth ? 'notRealMonth' : '') + '' + (col36IsActiveDay ? 'active' : '')">
               <div class="date">{{col36}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos36" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos36" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col37IsNextMonth) ? 'notRealMonth' : ''">
+            <td ng-click="createEventBoxClick($event, 37)"  class="table-entry" ng-class="(col37IsNextMonth) ? 'notRealMonth' : ''">
               <div class="date">{{col37}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos37" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos37" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col38IsNextMonth) ? 'notRealMonth' : ''">
+            <td ng-click="createEventBoxClick($event, 38)" class="table-entry" ng-class="(col38IsNextMonth) ? 'notRealMonth' : ''">
               <div class="date">{{col38}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos38" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos38" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col39IsNextMonth) ? 'notRealMonth' : ''">
+            <td ng-click="createEventBoxClick($event, 39)" class="table-entry" ng-class="(col39IsNextMonth) ? 'notRealMonth' : ''">
               <div class="date">{{col39}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos39" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos39" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col40IsNextMonth) ? 'notRealMonth' : ''">
+            <td ng-click="createEventBoxClick($event, 40)" class="table-entry" ng-class="(col40IsNextMonth) ? 'notRealMonth' : ''">
               <div class="date">{{col40}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos40" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos40" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
             </td>
-            <td class="table-entry" ng-class="(col41IsNextMonth) ? 'notRealMonth' : ''">
+            <td ng-click="createEventBoxClick($event, 41)" class="table-entry" ng-class="(col41IsNextMonth) ? 'notRealMonth' : ''">
               <div class="date">{{col41}}</div>
               <ul class="scrollable">
-                  <li ng-repeat="item in todos41" class="events-list">
+                  <li ng-click="eventDetails(item);$event.stopPropagation()" ng-repeat="item in todos41" class="events-list">
                       <div class="event-desc">{{item.name}}</div>
                   </li>
               </ul>
@@ -365,9 +365,78 @@
     </table>
 
     <md-button class="md-fab" ng-click="createEvent($event)">
-            <i class="fa fa-plus" aria-hidden="true"></i>            
+            <i class="fa fa-plus" aria-hidden="true"></i>
     </md-button>
 </div>
+
+<script type="text/ng-template" id="show-event.html">
+    <md-dialog aria-label="Show Event" id="create-event-dialog">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+              <h2>Event Details</h2>
+              <span flex></span>
+              <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="../assets/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+              </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <form name="eventNameForm">
+              <md-input-container class="eventnameform">
+                  <label>Event Name</label>
+                  <input name="eventName" ng-model="eventName">
+              </md-input-container>
+            </form>
+
+            <div class="eventtimeform">
+                <form name="startDateForm" class="dateform">
+                    <md-input-container>
+                        <label> Date </label>
+                        <md-datepicker md-hide-icons="calendar" ng-model="startDate" name="startDate" md-min-date="minDate" md-max-date="maxDate" ng-blur="testFunc()"></md-datepicker>
+                    </md-input-container>
+                    <input class="timepicker" ui-timepicker="timePickerOptions" ng-model="startTime" ng-change="startTimeChange()">
+                </form>
+                <span class="toText">to</span>
+                <form name="endDateForm" class="dateform">
+                    <md-input-container>
+                        <md-datepicker md-hide-icons="calendar" ng-model="endDate" name="endDate" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                    </md-input-container>
+                    <input class="timepicker" ui-timepicker="timePickerOptions" ng-model="endTime" ng-change="endTimeChange()">
+                </form>
+            </div>
+
+            <md-input-container class="md-block eventdescription">
+                <label> Event Description </label>
+                <textarea ng-model="description" md-maxlength="" rows="" md-select-on-focus=""></textarea>
+            </md-input-container>
+
+            <md-input-container>
+              <md-radio-group name="status" id="status" ng-model="objStatus" class="radioGroup" required>
+                <md-radio-button ng-value="eventStatusPublic" class="radioButtons">Public</md-radio-button>
+                <md-radio-button ng-value="eventStatusPrivate" class="radioButtons">Private</md-radio-button>
+              </md-radio-group>
+            </md-input-container>
+
+            <div class="create-event-error">{{createEventError}}</div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()">
+                close
+            </md-button>
+            <span flex></span>
+            <md-button ng-click="removeEvent()">
+                delete
+            </md-button>
+            <md-button ng-click="update()">
+                update
+            </md-button>
+        </md-dialog-actions>
+    </form>
+    </md-dialog>
+</script>
 
 <script type="text/ng-template" id="create-event-dialog.html">
     <md-dialog aria-label="Create Event" id="create-event-dialog">
@@ -428,8 +497,20 @@
                 <textarea ng-model="description" md-maxlength="1000" rows="4" md-select-on-focus=""></textarea>
             </md-input-container>
 
+            <md-input-container>
+              <md-radio-group name="status" id="status" ng-model="objStatus" class="radioGroup" required>
+                <md-radio-button ng-value="eventStatusPublic" class="radioButtons" selected>Public</md-radio-button>
+                <md-radio-button ng-value="eventStatusPrivate" class="radioButtons">Private</md-radio-button>
+              </md-radio-group>
+            </md-input-container>
+
+
             <div class="create-event-error">{{createEventError}}</div>
+
+
         </md-dialog-content>
+
+
 
         <md-dialog-actions layout="row">
             <md-button ng-click="cancel()">

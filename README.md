@@ -14,7 +14,7 @@ npm install
 bower install
 ```
 
-Make sure to do this everytime you get new changes from the master branch, as new dependencie sfrom npm or bower may have been added. When adding your own dependencies from npm and bower, make sure you include --save when installing it (npm install --save package). 
+Make sure to do this everytime you get new changes from the master branch, as new dependencie sfrom npm or bower may have been added. When adding your own dependencies from npm and bower, make sure you include --save when installing it (npm install --save package).
 
 Test to see if app builds by running command 'npm run start' or 'npm run start-watch' in root of the directory. Try accessing http://localhost:8080/ on your browser
 
