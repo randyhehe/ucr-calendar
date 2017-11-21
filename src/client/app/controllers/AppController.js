@@ -1,6 +1,6 @@
 angular.module('AppController', ['ngCookies', 'btford.socket-io']).controller('AppController', AppController);
 
-function AppController($scope, $window, $location, $cookies, $route, $mdToast, UserService, FriendService, socket) {
+function AppController($scope, $window, $location, $cookies, $route, $mdToast, UserService, FriendService, socket, CalendarEventService) {
     init();
 
     $scope.goToCalendar = function() {
@@ -46,6 +46,7 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
         $scope.token = $cookies.get('token');
         UserService.getUser($scope.token)
         .then(initNotifications)
+        .then(initEventNotifications)
         .then(initSettings)
         .then(initSocket)
         .then(routeHandler) // handle route if authentication is successful
@@ -81,6 +82,31 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
             }
             $scope.notifications = incomingRequests;
         });
+        return user;
+    }
+
+    function initEventNotifications(user) {
+        setInterval(function() {
+            CalendarEventService.getEvents($scope.token).then(function(res) {
+                let events = res.data.events;
+                for(let i = 0; i < events.length; i++) {
+                    if(!events[i].notify) continue;
+
+                    let startTime = moment(events[i].startTime, 'x');
+                    let curr = moment().add(30, 'minutes');
+                    if (curr.isAfter(startTime)) {
+                        // display the notification
+                        let title = events[i].name + " " + moment(startTime, 'x').fromNow();
+                        webNotification.showNotification(title, {
+                            body: events[i].description,
+                            autoClose: 5000
+                        });
+                        CalendarEventService.removeNotif(events[i]._id, $scope.token);
+                    }
+                }
+            });
+        }, 10000);
+
         return user;
     }
 
