@@ -370,7 +370,7 @@
 </div>
 
 <script type="text/ng-template" id="show-event.html">
-    <md-dialog aria-label="Show Event" id="create-event-dialog">
+    <md-dialog aria-label="Show Event" class="create-event-dialog">
     <form ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -393,15 +393,28 @@
             <div class="eventtimeform">
                 <form name="startDateForm" class="dateform">
                     <md-input-container>
-                        <label> Date </label>
-                        <md-datepicker md-hide-icons="calendar" ng-model="startDate" name="startDate" md-min-date="minDate" md-max-date="maxDate" ng-blur="testFunc()"></md-datepicker>
+                        <label>Start Date</label>
+                        <md-datepicker md-hide-icons="calendar" ng-model="startDate" name="startDate" md-min-date="minDate" md-max-date="maxDate" ng-blur="testFunc()" required></md-datepicker>                        
+                        <div ng-messages="startDateForm.startDate.$error">
+                            <div ng-message="valid">Invalid date!</div>
+                            <div ng-message="required">This date is required!</div>
+                            <div ng-message="mindate">Invalid date!</div>
+                            <div ng-message="maxdate">Invalid date!</div>
+                        </div>
                     </md-input-container>
                     <input class="timepicker" ui-timepicker="timePickerOptions" ng-model="startTime" ng-change="startTimeChange()">
                 </form>
                 <span class="toText">to</span>
                 <form name="endDateForm" class="dateform">
                     <md-input-container>
-                        <md-datepicker md-hide-icons="calendar" ng-model="endDate" name="endDate" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                        <label>End Date</label>
+                        <md-datepicker md-hide-icons="calendar" ng-model="endDate" name="endDate" md-min-date="minDate" md-max-date="maxDate" required></md-datepicker>
+                        <div ng-messages="endDateForm.endDate.$error">
+                            <div ng-message="valid">Invalid date!</div>
+                            <div ng-message="required">This date is required!</div>
+                            <div ng-message="mindate">Invalid date!</div>
+                            <div ng-message="maxdate">Invalid date!</div>
+                        </div>
                     </md-input-container>
                     <input class="timepicker" ui-timepicker="timePickerOptions" ng-model="endTime" ng-change="endTimeChange()">
                 </form>
@@ -412,8 +425,8 @@
                 <textarea ng-model="description" md-maxlength="" rows="" md-select-on-focus=""></textarea>
             </md-input-container>
 
-            <md-input-container>
-              <md-radio-group name="status" id="status" ng-model="objStatus" class="radioGroup" required>
+            <md-input-container class="radio-input-container">
+              <md-radio-group layout="row" name="status" id="status" ng-model="objStatus" class="radioGroup" required>
                 <md-radio-button ng-value="eventStatusPublic" class="radioButtons">Public</md-radio-button>
                 <md-radio-button ng-value="eventStatusPrivate" class="radioButtons">Private</md-radio-button>
               </md-radio-group>
@@ -439,7 +452,7 @@
 </script>
 
 <script type="text/ng-template" id="create-event-dialog.html">
-    <md-dialog aria-label="Create Event" id="create-event-dialog">
+    <md-dialog aria-label="Create Event" class="create-event-dialog">
     <form ng-cloak>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -497,8 +510,8 @@
                 <textarea ng-model="description" md-maxlength="1000" rows="4" md-select-on-focus=""></textarea>
             </md-input-container>
 
-            <md-input-container>
-              <md-radio-group name="status" id="status" ng-model="objStatus" class="radioGroup" required>
+            <md-input-container class="radio-input-container">
+              <md-radio-group layout="row" name="status" id="status" ng-model="objStatus" class="radioGroup" required>
                 <md-radio-button ng-value="eventStatusPublic" class="radioButtons" selected>Public</md-radio-button>
                 <md-radio-button ng-value="eventStatusPrivate" class="radioButtons">Private</md-radio-button>
               </md-radio-group>

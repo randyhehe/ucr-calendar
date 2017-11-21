@@ -350,7 +350,7 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 
 // CREATE EVENT STYLES
-#create-event-dialog {
+.create-event-dialog {
     .toText {
         position: relative;
         top: -8px;
@@ -402,10 +402,13 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
       padding: 24px 2px 0;
     }
 
-    .radioButtons {
-      margin: -10px 30px 0 124px;
-      float: left;
-      text-align: left;
+    .radio-input-container {
+        margin-top: -70px;
+        width: 100%;
+        md-radio-group {
+            margin: 0 auto;
+            width: 160px;
+        }
     }
 }
 
@@ -496,6 +499,12 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
 }
 
 .friends-list {
+    font-family: avenir-next;
+    width: 240px;
+    margin-top: 20px;
+    float: right;
+    margin-right: 30px;
+
     .blue-font {
         color: rgb(63,81,181);
     }
@@ -508,12 +517,6 @@ md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolb
         background-color: rgba(0,0,0,0.4);
         -webkit-border-radius: 1ex;
     }
-
-    font-family: avenir-next;
-    width: 240px;
-    margin-top: 20px;
-    float: right;
-    margin-right: 30px;
 
     md-card-content {
         padding: 0px 0px 0px 16px;

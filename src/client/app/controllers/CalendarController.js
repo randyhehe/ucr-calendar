@@ -273,76 +273,90 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
     };
 
     function ShowEventController($scope, $mdDialog, token, currentEvent) {
-      $scope.eventName = currentEvent.name;
-      $scope.startTime = moment(currentEvent.startTime, 'x');
-      $scope.startDate = moment(currentEvent.startTime, 'x').format("MM/DD/YYYY");
-      $scope.endDate = moment(currentEvent.endTime, 'x').format("MM/DD/YYYY");
-      $scope.endTime = moment(currentEvent.endTime, 'x');
-      $scope.id = currentEvent._id;
-      $scope.eventStatusPublic = true;
-      $scope.eventStatusPrivate = false;
-      $scope.description = currentEvent.description;
+        $scope.eventName = currentEvent.name;
+        $scope.startTime = moment(currentEvent.startTime, 'x');
+        $scope.startDate = moment(currentEvent.startTime, 'x').format("MM/DD/YYYY");
+        $scope.endDate = moment(currentEvent.endTime, 'x').format("MM/DD/YYYY");
+        $scope.endTime = moment(currentEvent.endTime, 'x');
+        $scope.id = currentEvent._id;
+        $scope.eventStatusPublic = true;
+        $scope.eventStatusPrivate = false;
+        $scope.description = currentEvent.description;
 
-      if (currentEvent.public == true) {
-        $scope.objStatus = $scope.eventStatusPublic;
-      }
-      else {
-        $scope.objStatus = $scope.eventStatusPrivate;
-      }
+        if (currentEvent.public == true) {
+            $scope.objStatus = $scope.eventStatusPublic;
+        }
+        else {
+            $scope.objStatus = $scope.eventStatusPrivate;
+        }
 
-      $scope.cancel = function() {
-          $mdDialog.cancel();
-      };
-
-      $scope.removeEvent = function(){
-        CalendarEventService.deleteEvent($scope.id, token).then((res) => {
-            //$mdToast.show($mdToast.simple().textContent("Removed " + eventName + ".").position('bottom left'));
-            //return UserService.getUser(token);
-            render();
+        $scope.cancel = function() {
             $mdDialog.cancel();
-        })
-        .catch((err) => {
-            //$mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));
-        });
-      }
+        };
 
-      $scope.update = function() {
-        const format = 'l';
-        let error = false;
-        let $dates = angular.element(document.querySelectorAll('.dateform input'));
-        let startDate = angular.element($dates[0]).val();
-        let startTime = angular.element($dates[1]).val();
-        let endDate = angular.element($dates[2]).val();
-        let endTime = angular.element($dates[3]).val();
-        let startMoment = moment(startDate + ' ' + startTime, 'MM/DD/YYYY h:mma');
-        let endMoment = moment(endDate + ' ' + endTime, 'MM/DD/YYYY h:mma');
-
-        if (endMoment.isSameOrBefore(startMoment)) {
-            if (!error) $scope.createEventError = "Event end date must be after start date.";
-            error =  true;
-        }
-        $scope.createEventError = '';
-        if (!moment($scope.startDate, format, true).isValid() || !moment($scope.endDate, format, true).isValid()) {
-            if (!error) $scope.createEventError = "Invalid calendar date.";
-            error = true;
-        }
-        // check empty name
-        if ($scope.eventName === '') {
-            if (!error) $scope.createEventError = "Empty event name.";
-            error = true;
+        $scope.removeEvent = function(){
+            CalendarEventService.deleteEvent($scope.id, token).then((res) => {
+                //$mdToast.show($mdToast.simple().textContent("Removed " + eventName + ".").position('bottom left'));
+                //return UserService.getUser(token);
+                render();
+                $mdDialog.cancel();
+            })
+            .catch((err) => {
+                //$mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));
+            });
         }
 
-        if (!error) {
-          CalendarEventService.updateEvent($scope.id, $scope.eventName, startMoment.valueOf(), endMoment.valueOf(), $scope.description, $scope.objStatus, token).then((res) =>
-          {
-            render()
-            $mdDialog.cancel()
-          })
+        $scope.update = function() {
+            const format = 'l';
+            let $dates = angular.element(document.querySelectorAll('.dateform input'));
+            let startDate = angular.element($dates[0]).val();
+            let startTime = angular.element($dates[1]).val();
+            let endDate = angular.element($dates[2]).val();
+            let endTime = angular.element($dates[3]).val();
+            let eventName = angular.element(document.querySelector('.eventnameform input')).val();
+            let eventDescription =  angular.element(document.querySelector('.eventdescription textarea')).val();
+
+            let error = false;
+            $scope.createEventError = '';
+
+            let startMoment = moment(startDate + ' ' + startTime, 'MM/DD/YYYY h:mma');
+            let endMoment = moment(endDate + ' ' + endTime, 'MM/DD/YYYY h:mma');
+            if (endMoment.isSameOrBefore(startMoment)) {
+                if (!error) $scope.createEventError = "Event end date must be after start date.";
+                error =  true;
+            }
+            if (!moment(startDate, format, true).isValid() || !moment(endDate, format, true).isValid()) {
+                if (!error) $scope.createEventError = "Invalid calendar date.";
+                error = true;
+            }
+
+            // check empty name
+            if (eventName === '') {
+                if (!error) $scope.createEventError = "Empty event name.";
+                error = true;
+            }
+
+            if (!error) {
+                CalendarEventService.updateEvent($scope.id, eventName, startMoment.valueOf(), endMoment.valueOf(), eventDescription, $scope.objStatus, token).then((res) => {
+                    render();
+                    $mdDialog.cancel();
+                });
+            }
         }
-      }
 
-
-
+        function roundNext15Min(moment) {
+            var intervals = Math.floor(moment.minutes() / 15);
+            if (moment.minutes() % 15 != 0) {
+                intervals++;
+                if (intervals == 4) {
+                    moment.add(1, 'hours');
+                    intervals = 0;
+                }
+                moment.minutes(intervals * 15);
+                moment.seconds(0);
+            }
+            return moment;
+        }
     }
 
     $scope.createEventBoxClick = function(ev, clickDayIndex) {
@@ -461,7 +475,6 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
             }
         }
 
-        /*
         function roundNext15Min(moment) {
             var intervals = Math.floor(moment.minutes() / 15);
             if (moment.minutes() % 15 != 0) {
@@ -474,21 +487,6 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
                 moment.seconds(0);
             }
             return moment;
-            */
         }
-
-        function roundNext15Min(moment) {
-            var intervals = Math.floor(moment.minutes() / 15);
-            if (moment.minutes() % 15 != 0) {
-                intervals++;
-                if (intervals == 4) {
-                    moment.add(1, 'hours');
-                    intervals = 0;
-                }
-                moment.minutes(intervals * 15);
-                moment.seconds(0);
-            }
-            return moment;
     }
-
 }

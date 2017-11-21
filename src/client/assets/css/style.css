@@ -247,50 +247,52 @@ md-dialog {
 md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
   background-color: lightslategray; }
 
-#create-event-dialog .toText {
+.create-event-dialog .toText {
   position: relative;
   top: -8px;
   margin-left: 13px;
   margin-right: 13px; }
 
-#create-event-dialog .eventnameform {
+.create-event-dialog .eventnameform {
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 30px !important;
   width: auto;
   display: block; }
 
-#create-event-dialog .eventtimeform {
+.create-event-dialog .eventtimeform {
   margin-left: 20px;
   margin-right: 20px; }
-  #create-event-dialog .eventtimeform .timepicker {
+  .create-event-dialog .eventtimeform .timepicker {
     margin-left: 20px;
     position: relative;
     top: -8px;
     width: 90px; }
-  #create-event-dialog .eventtimeform .dateform {
+  .create-event-dialog .eventtimeform .dateform {
     display: inline-block; }
 
-#create-event-dialog .eventdescription {
+.create-event-dialog .eventdescription {
   margin-left: 20px;
   margin-right: 20px;
   top: -35px; }
 
-#create-event-dialog button {
+.create-event-dialog button {
   margin-right: 15px;
   font-weight: 700; }
 
-#create-event-dialog .create-event-error {
+.create-event-dialog .create-event-error {
   text-align: center;
   color: #dd2c00; }
 
-#create-event-dialog .radioGroup {
+.create-event-dialog .radioGroup {
   padding: 24px 2px 0; }
 
-#create-event-dialog .radioButtons {
-  margin: -10px 30px 0 124px;
-  float: left;
-  text-align: left; }
+.create-event-dialog .radio-input-container {
+  margin-top: -70px;
+  width: 100%; }
+  .create-event-dialog .radio-input-container md-radio-group {
+    margin: 0 auto;
+    width: 160px; }
 
 .no-feed-message {
   height: calc(100vh - 83px);
