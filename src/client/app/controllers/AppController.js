@@ -95,8 +95,9 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
                     if(!events[i].notify) continue;
 
                     let startTime = moment(events[i].startTime, 'x');
-                    let curr = moment().add(30, 'minutes');
-                    if (curr.isAfter(startTime)) {
+                    let curr = moment();
+                    let notif = moment().add(30, 'minutes');
+                    if (!startTime.isBefore(curr) && notif.isAfter(startTime)) {
                         // display the notification
                         let title = events[i].name + " " + moment(startTime, 'x').fromNow();
                         webNotification.showNotification(title, {

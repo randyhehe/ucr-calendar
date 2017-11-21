@@ -14,11 +14,8 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
     $scope.$on('showEvent', function(ev, event) {
         console.log(event);
 
-        //
         $scope.eventDetails(event);
     });
-
-    // $scope.$on('showEvent', function(test, ))
     
     var masterEvent = [];
     var tempArray = [];
@@ -253,7 +250,6 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
           startTime: $scope.startTime,
           endDate: $scope.endDate,
           endTime: $scope.endTime
-
         });
     };
 
@@ -271,6 +267,20 @@ function CalendarController($scope, $cookies, $window, UserService, CalendarEven
       });
 
     };
+
+    function roundNext15Min(moment) {
+        var intervals = Math.floor(moment.minutes() / 15);
+        if (moment.minutes() % 15 != 0) {
+            intervals++;
+            if (intervals == 4) {
+                moment.add(1, 'hours');
+                intervals = 0;
+            }
+            moment.minutes(intervals * 15);
+            moment.seconds(0);
+        }
+        return moment;
+    }
 
     function ShowEventController($scope, $mdDialog, token, currentEvent) {
         $scope.eventName = currentEvent.name;
