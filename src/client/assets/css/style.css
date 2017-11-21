@@ -185,6 +185,11 @@ body {
   .calendar-page .calendar-table .table-entry {
     border: 1px solid black;
     vertical-align: top; }
+    .calendar-page .calendar-table .table-entry ::-webkit-scrollbar {
+      width: 4px; }
+    .calendar-page .calendar-table .table-entry ::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.4);
+      -webkit-border-radius: 1ex; }
     .calendar-page .calendar-table .table-entry .date {
       margin-top: 5px;
       margin-left: 5px;
@@ -203,6 +208,7 @@ body {
       background-color: rgba(220, 220, 220, 0.6); }
     .calendar-page .calendar-table .table-entry .scrollable {
       overflow-y: scroll;
+      overflow-x: hidden;
       height: calc(((100vh - 63.33px) / 8) - 34px);
       margin-top: 3px;
       margin-bottom: 0px;

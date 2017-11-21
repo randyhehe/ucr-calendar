@@ -156,10 +156,6 @@ router.post('/api/events', jwtAuthenticator, function(req, res) {
 });
 
 router.post('/api/updateEvent', jwtAuthenticator, function(req, res) {
-    // if (!req.body.id) {
-    //     return res.status(400).send({success: false, message: 'Invalid event ID.'});
-    // }
-    //
     User.findOne({
         username: req.decoded.username
     }, function(err, currUser) {
@@ -211,8 +207,7 @@ router.delete('/api/deleteEvent', jwtAuthenticator, function(req, res) {
             currUser.save(function(err) {
                 if (err) return res.status(500).send({success: false, message: "Unable to delete friend."});
                 else res.json({success: true});
-
-            })
+            });
     });
 });
 

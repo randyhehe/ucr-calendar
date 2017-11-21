@@ -263,6 +263,15 @@ body {
         }
 
         .table-entry {
+            ::-webkit-scrollbar {
+                width: 4px;
+            }
+        
+            ::-webkit-scrollbar-thumb {
+                background-color: rgba(0,0,0,0.4);
+                -webkit-border-radius: 1ex;
+            }
+
             border: 1px solid black;
             vertical-align: top;
             .date {
@@ -288,6 +297,7 @@ body {
 
             .scrollable {
                 overflow-y: scroll;
+                overflow-x: hidden;
                 height: calc(((100vh - 63.33px) / 8) - 34px);
                 margin-top: 3px;
                 margin-bottom: 0px;
