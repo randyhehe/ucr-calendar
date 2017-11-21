@@ -3,6 +3,8 @@ angular.module('AppController', ['ngCookies', 'btford.socket-io']).controller('A
 function AppController($scope, $window, $location, $cookies, $route, $mdToast, UserService, FriendService, socket, CalendarEventService) {
     init();
 
+    // window.webkitNotifications.createNotification('ico.gif', 'Title', 'Text')
+
     $scope.goToCalendar = function() {
         $location.path('/calendar');
         $scope.showCalendarPage = true;
@@ -99,8 +101,14 @@ function AppController($scope, $window, $location, $cookies, $route, $mdToast, U
                         let title = events[i].name + " " + moment(startTime, 'x').fromNow();
                         webNotification.showNotification(title, {
                             body: events[i].description,
-                            autoClose: 5000
-                        });
+                            autoClose: false,
+                            onClick: function() {
+                                window.focus();
+                                $scope.goToCalendar();
+                                $scope.$apply();
+                                $scope.$broadcast('showEvent', events[i]);
+                            }
+                        }),
                         CalendarEventService.removeNotif(events[i]._id, $scope.token);
                     }
                 }

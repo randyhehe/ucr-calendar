@@ -8,10 +8,11 @@ function FeedController($scope, UserService, FriendService, $mdToast) {
         $scope.addFriendInput = '';
         FriendService.addFriendRequest(friendName, $scope.token).then(() => {
             $mdToast.show($mdToast.simple().textContent('Requested to add ' + friendName + '.').position('bottom left'));
-            FriendService.getFriends($scope.token).then(populateFriends).then(populateFriendRequests).catch(errHandler);            
+            FriendService.getFriends($scope.token).then(populateFriends).then(populateFriendRequests).catch(errHandler);
             return UserService.getUser($scope.token);
         }).then((user) => {
             $scope.$emit('addFriendRequest', friendName, user.username);
+            
         }).catch((err) => {
             $mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));
         });
@@ -39,7 +40,7 @@ function FeedController($scope, UserService, FriendService, $mdToast) {
             FriendService.getFriends($scope.token).then(populateFriends).then(populateFriendRequests).catch(errHandler);
         }).catch((err) => {
             if (err.data.message) {
-                $mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));                            
+                $mdToast.show($mdToast.simple().textContent(err.data.message).position('bottom left'));
             }
         });
     }
@@ -81,9 +82,10 @@ function FeedController($scope, UserService, FriendService, $mdToast) {
 
 
     function populateEvents(events) {
-        $scope.friendEvents = [];        
+        $scope.friendEvents = [];
         for (let i = events.length - 1; i >= 0; i--) {
             const calEvent = events[i];
+            if (calEvent.public == true) {
             const formattedEvent  = {
                 user: calEvent.user,
                 name: calEvent.name,
@@ -93,10 +95,11 @@ function FeedController($scope, UserService, FriendService, $mdToast) {
                 endTime: moment(calEvent.endTime, 'x').format('MM/DD/YYYY h:mma')
             }
             $scope.friendEvents.push(formattedEvent);
+          }
         }
 
         // setup timer to update 'fromNow' property every minute on the ng-repeated list
-        if ($scope.timerInterval !== undefined) clearInterval($scope.timerInterval); 
+        if ($scope.timerInterval !== undefined) clearInterval($scope.timerInterval);
         $scope.timerInterval = setInterval(eventTimer, 60 * 1000);
         $scope.$on('$destroy', (event) => {
             clearInterval($scope.timerInterval);
